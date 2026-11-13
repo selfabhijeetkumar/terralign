@@ -8,7 +8,7 @@ export type TargetBody = 'moon' | 'mars';
 
 export type ColorMode = 'hypsometric' | 'slope' | 'aspect' | 'raw';
 
-export type DomainFilter = 'all' | 'mechanical' | 'optical' | 'geochemical' | 'environmental';
+export type DomainFilter = 'all' | 'mechanical' | 'optical' | 'geochemical' | 'environmental' | 'operational';
 
 export interface MissionFilters {
   geologyType?: string;
@@ -94,3 +94,4 @@ export interface TerralignAppState {
 }
 
 export type MissionStore = TerralignAppState & MissionStoreActions;
+

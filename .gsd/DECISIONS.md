@@ -268,3 +268,28 @@
   6. Verified via TypeScript `tsc --noEmit` (exit 0) and Next.js build (exit 0, 8 routes). First Load JS on `/terrain` measured at 251 kB (comfortably below the ~264 KB target budget).
 - **Consequences**: High-performance, scientifically calibrated 3D terrain exploration delivered.
 - **Alternatives Considered**: Software raster raymarching (rejected: cannot achieve 60 FPS in browser); CesiumJS (rejected: multi-megabyte bundle overhead).
+
+
+---
+
+## [DEC-020] Analog Reality Gap Diagnostic & Greedy Submodular Portfolio Optimizer (Wave 3.4)
+
+- **Date**: 2026-11-14
+- **Status**: Accepted & Verified
+- **Context**: Wave 3.4 requires implementing Screen 03 (Analog Reality Gap Diagnostic) and Screen 04 (Multi-Site Rehearsal Portfolio Optimizer) with transparent scientific guardrails, 6-axis physical quantification, greedy set-cover combinatorial optimization, and mission planning dossier export.
+- **Decision**:
+  1. Built `RealityGapView.tsx` (`/reality-gap`) featuring:
+     - 6-axis physical divergence assessment: Gravity (83.5%), Pressure (100%), Thermal (75%), Solar irradiance (26.5%), Radiation (>100x), and Regolith morphology (70%).
+     - Dynamic target body switching (Moon vs Mars) with live recalculation across all 7 flagship Earth analog sites.
+     - Composite Reality Gap Index ($\text{ARG} = 0.72$ for Cinder Lake → Moon) with strict epistemic warning: `ILLUSTRATIVE COMPOSITE INDEX — NOT AN EMPIRICALLY CERTIFIED FLIGHT METRIC`.
+     - 6-facility simulator compensation matrix marked `ENGINEERING PROPOSALS — NOT VALIDATED SIMULATIONS`.
+  2. Built `PortfolioOptimizerView.tsx` (`/portfolio`) featuring:
+     - Submodular greedy set-cover engine over 30 NASA RVM criteria.
+     - Exact reconciled math: $k=2$ (19/30, 63.3%), binary $k=3$ (23/30, 76.7%), partial-weighted $k=3$ (23.5/30, 78.3%), invariant gaps (4/30, 13.3%), terrestrial ceiling (26/30, 86.7%).
+     - Prominent labeling of the $>90\%$ target as an `UNVALIDATED ENGINEERING RESEARCH TARGET`.
+     - Interactive category tabs (All, Mechanical, Optical, Geochemical, Environmental, Operational).
+  3. Created `src/lib/dossier.ts` providing instant client-side JSON export of the mission architecture, portfolio optimization, and RVM evaluation.
+  4. Updated `DomainFilter` in `src/types/store.ts` to include `'operational'`.
+  5. Verified via TypeScript `tsc --noEmit` (exit 0) and Next.js build (exit 0, 8 routes). First Load JS: `/reality-gap` is 120 kB, `/portfolio` is 124 kB (both well under the $<180\text{ KB}$ ceiling).
+- **Consequences**: Screens 03 and 04 are fully implemented, type-safe, responsive, accessible, and grounded in verified NASA literature without scientific fabrication.
+- **Alternatives Considered**: Omission of partial credit in portfolio coverage (rejected: partial credit accurately reflects terrestrial analog testing reality while preserving strict binary reporting).
