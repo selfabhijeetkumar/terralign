@@ -75,9 +75,8 @@ updated: "2026-11-12T01:35:00+05:30"
 - **Key Plans:**
   - Plan 3.1: Next.js 15 Scaffold (Task 3.1.1 [x]), ApplicationShell & TopNavBar (Task 3.1.2 [x]), Zustand Store (Task 3.1.3 [x]).
   - Plan 3.2: 7 Flagship Analog Site Database & Filter Engine (`/api/analogs`) (Task 3.2.1 [x], Task 3.2.2 [x], Task 3.2.3 [x]).
-  - Plan 3.3: Interactive 3D Terrain & Lunar South Pole Lighting Canvas (R3F) (In Progress).
-  - Plan 3.3: Interactive 3D Terrain & Lunar South Pole Lighting Canvas (R3F).
-  - Plan 3.4: Analog Reality Gap (ARG) Panel & Portfolio Optimizer.
+  - Plan 3.3: Interactive 3D Terrain & Lunar South Pole Lighting Canvas (Task 3.3.1 [x], Task 3.3.2 [x], Task 3.3.3 [x]).
+  - Plan 3.4: Analog Reality Gap (ARG) Panel & Portfolio Optimizer (In Progress).
 
 ---
 

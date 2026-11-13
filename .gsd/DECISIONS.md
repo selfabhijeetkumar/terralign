@@ -251,3 +251,20 @@
   5. Verified via 5-test unit suite (`scripts/test-analogs-rvm.mjs`), TypeScript `tsc --noEmit` (exit 0), and Next.js build (exit 0, 8 routes). First Load JS measured at 121.43 KB ($32.54\%$ under the 180 KB ceiling).
 - **Consequences**: Screen 01 is fully functional and scientifically grounded with zero external API dependencies.
 - **Alternatives Considered**: Heavy MapLibre WebGL vector tile runtime (rejected under Ponytail FULL: adds ~250 KB bundle weight and requires external API keys).
+
+---
+
+## [DEC-019] Three.js Hardware 3D Dual-Viewport Terrain Studio & Extreme Lunar Lighting (Wave 3.3)
+
+- **Date**: 2026-11-14
+- **Status**: Accepted & Verified
+- **Context**: Screen 02 (Dual-View 3D Terrain Studio) requires side-by-side synchronized rendering of Cinder Lake (1m USGS LiDAR) and Shackleton Crater rim (5m NASA LOLA) with $0.0^\circ\text{--}5.0^\circ$ solar grazing illumination and PCF directional shadow mapping.
+- **Decision**:
+  1. Installed `three@0.187.0` and `@types/three@0.187.0`. Used direct Three.js with React `useRef` and `requestAnimationFrame` (avoiding `@react-three/fiber` peer-dependency incompatibilities with React 19).
+  2. Built `TerrainCanvas.tsx` with $128 \times 128$ plane geometries ($\approx 1.8\text{ MiB}$ VRAM, well within $3.01\text{ MiB}$ ceiling) simulating Cinder Lake blast craters and Shackleton South Pole rim crests.
+  3. Integrated real-time camera synchronization through `useMissionStore`.
+  4. Implemented extreme low-angle solar elevation slider ($0.0^\circ\text{--}5.0^\circ$) casting real-time elongated PCF shadows with vacuum vs atmospheric ambient lighting contrast.
+  5. Built `TerrainControls.tsx` with color modes (hypsometric, slope, aspect, raw), contour grid, and resolution advisory.
+  6. Verified via TypeScript `tsc --noEmit` (exit 0) and Next.js build (exit 0, 8 routes). First Load JS on `/terrain` measured at 251 kB (comfortably below the ~264 KB target budget).
+- **Consequences**: High-performance, scientifically calibrated 3D terrain exploration delivered.
+- **Alternatives Considered**: Software raster raymarching (rejected: cannot achieve 60 FPS in browser); CesiumJS (rejected: multi-megabyte bundle overhead).

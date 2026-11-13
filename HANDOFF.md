@@ -162,6 +162,6 @@ When opening this repository in a fresh environment:
 
 ## 6. Exact Next Action for Resuming Agent
 
-1. **Waves 3.1 & 3.2 Completed & Verified**: Next.js 15 App Router scaffold, `ApplicationShell`, `TopNavBar`, Zustand reactive store, 7 flagship analog datasets, 30-requirement RVM, vector discovery map, 9-activity sidebar, and candidate summary drawer (Screen 01) fully operational and verified.
+1. **Waves 3.1, 3.2 & 3.3 Completed & Verified**: Next.js 15 App Router scaffold, `ApplicationShell`, `TopNavBar`, Zustand store, 7 analog datasets, 30 RVM criteria, Mission Command Screen 01, and 3D Terrain Studio Screen 02 (Three.js WebGL dual-viewport with low-angle solar lighting) fully operational.
 2. **Standing Authorization Active**: `TERRALIGN-GOV-AUTH-002` active for all remaining tasks.
-3. **Resuming Task**: Execute Wave 3.3: 3D Terrain Studio & Extreme Low-Angle Lighting on `/terrain` (Tasks 3.3.1, 3.3.2, 3.3.3).
+3. **Resuming Task**: Execute Wave 3.4: Reality Gap & Portfolio Optimization Engines on `/reality-gap` and `/portfolio` (Tasks 3.4.1, 3.4.2, 3.4.3).
