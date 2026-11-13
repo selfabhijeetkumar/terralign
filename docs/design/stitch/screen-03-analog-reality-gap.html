@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TERRALIGN - Analog Reality Gap Diagnostic &amp; Simulator Compensation</title>
+<!-- Google Fonts: Space Grotesk, Inter, Public Sans, Space Mono -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Public+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;family=Space+Mono:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            deep: "#050811",
+            surface: "#0A192F",
+            elevated: "#112240",
+            primary: "#00D4AA",
+            secondary: "#1E90FF",
+            tertiary: "#FF6B35",
+            neutralMuted: "#8B9CB5",
+            warning: "#FFB800",
+            danger: "#FF4757",
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          fontFamily: {
+            headline: ["Space Grotesk", "sans-serif"],
+            display: ["Space Grotesk", "sans-serif"],
+            body: ["Inter", "sans-serif"],
+            label: ["Public Sans", "sans-serif"],
+            mono: ["Space Mono", "monospace"]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .material-symbols-fill {
+      font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    /* Subtle custom telemetry scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #050811;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #112240;
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #8B9CB5;
+    }
+    /* Atmospheric radar scanline effect */
+    .scanline-bg {
+      background: linear-gradient(rgba(10, 25, 47, 0.95), rgba(5, 8, 17, 0.98)),
+                  radial-gradient(ellipse at 50% 0%, rgba(0, 212, 170, 0.08) 0%, transparent 70%);
+    }
+  </style>
+</head>
+<body class="bg-[#050811] text-[#E2E8F0] font-body min-h-screen flex flex-col selection:bg-[#00D4AA]/20 selection:text-[#00D4AA]">
+<!-- TopNavBar (Shared Component Anchor) -->
+<header class="bg-[#0A192F] shadow-md border-b border-[#8B9CB5]/15 sticky top-0 z-50">
+<div class="flex justify-between items-center w-full px-4 lg:px-6 py-2.5">
+<!-- Left: Brand Logo & Mission Tagline -->
+<div class="flex items-center gap-6">
+<a class="flex items-center gap-3 group" href="#">
+<div class="relative flex items-center justify-center w-8 h-8 rounded bg-[#112240] border border-[#00D4AA]/40 text-[#00D4AA] shadow-[0_0_12px_rgba(0,212,170,0.3)]">
+<span class="material-symbols-outlined text-lg">radar</span>
+<span class="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-[#00D4AA] animate-ping opacity-75"></span>
+<span class="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-[#00D4AA]"></span>
+</div>
+<div>
+<div class="font-headline text-lg md:text-xl font-bold tracking-wider text-[#00D4AA] uppercase leading-none">
+              TERRALIGN
+            </div>
+<div class="font-label text-[9px] text-[#8B9CB5] tracking-widest uppercase mt-0.5 font-medium">
+              Where Earth Meets Other Worlds
+            </div>
+</div>
+</a>
+<!-- System Status Flags (Desktop) -->
+<div class="hidden xl:flex items-center gap-3 pl-4 border-l border-[#8B9CB5]/20 font-mono text-[11px]">
+<div class="flex items-center gap-1.5 px-2 py-0.5 rounded bg-[#112240]/60 border border-[#00D4AA]/30 text-[#00D4AA]">
+<span class="w-1.5 h-1.5 rounded-full bg-[#00D4AA]"></span>
+<span>ARG COUPLING ENGINE: ONLINE</span>
+</div>
+<div class="flex items-center gap-1.5 px-2 py-0.5 rounded bg-[#112240]/40 border border-[#8B9CB5]/20 text-[#8B9CB5]">
+<span class="w-1.5 h-1.5 rounded-full bg-[#1E90FF]"></span>
+<span>USGS / LRO LOLA DATASETS VERIFIED</span>
+</div>
+</div>
+</div>
+<!-- Navigation Links (Web View) -->
+<nav class="hidden md:flex items-center gap-6 font-label uppercase text-xs tracking-wider">
+<a class="text-[#8B9CB5] hover:text-white transition-colors duration-150" href="#">Mission Command</a>
+<a class="text-[#8B9CB5] hover:text-white transition-colors duration-150" href="#">Analog Intelligence</a>
+<a class="text-[#8B9CB5] hover:text-white transition-colors duration-150" href="#">Terrain Mapping</a>
+<!-- Active link: Reality Gap mapped directly to screen intent -->
+<a class="text-[#00D4AA] border-b-2 border-[#00D4AA] pb-1 font-semibold flex items-center gap-1" href="#">
+<span>Reality Gap</span>
+<span class="w-1 h-1 rounded-full bg-[#00D4AA]"></span>
+</a>
+<a class="text-[#8B9CB5] hover:text-white transition-colors duration-150" href="#">Telemetry</a>
+<a class="text-[#8B9CB5] hover:text-white transition-colors duration-150" href="#">Provenance</a>
+</nav>
+<!-- Trailing Action Icons & CTAs -->
+<div class="flex items-center gap-2.5">
+<button class="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded text-xs font-label tracking-wide uppercase border border-[#8B9CB5]/30 text-[#8B9CB5] hover:bg-[#112240] hover:text-white transition-colors duration-200">
+<span class="material-symbols-outlined text-sm">file_download</span>
+<span>Export Data</span>
+</button>
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded text-xs font-label font-semibold tracking-wide uppercase bg-[#00D4AA] text-[#050811] hover:bg-[#00D4AA]/90 shadow-[0_0_15px_rgba(0,212,170,0.25)] transition-all duration-200 active:scale-95">
+<span class="material-symbols-outlined text-sm">description</span>
+<span class="hidden md:inline">Download</span> <span>ARG Report</span>
+</button>
+<div class="flex items-center gap-1 pl-1 text-[#8B9CB5] border-l border-[#8B9CB5]/20 ml-1">
+<button class="p-1.5 rounded hover:bg-[#112240] hover:text-[#00D4AA] transition-colors" title="Satellite Status">
+<span class="material-symbols-outlined text-[18px]">satellite_alt</span>
+</button>
+<button class="p-1.5 rounded hover:bg-[#112240] hover:text-[#00D4AA] transition-colors" title="Diagnostics Tuning">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+</button>
+<button class="p-1.5 rounded hover:bg-[#112240] hover:text-[#00D4AA] relative transition-colors" title="System Alerts">
+<span class="material-symbols-outlined text-[18px]">notifications</span>
+<span class="absolute top-1 right-1 w-1.5 h-1.5 rounded-full bg-[#FFB800]"></span>
+</button>
+</div>
+</div>
+</div>
+<!-- Secondary Breadcrumbs & Context sub-strip -->
+<div class="bg-[#050811]/90 px-4 lg:px-6 py-1.5 border-t border-[#8B9CB5]/10 flex items-center justify-between text-xs font-mono text-[#8B9CB5]">
+<div class="flex items-center gap-2">
+<a class="hover:text-[#00D4AA] transition-colors" href="#">Mission Command</a>
+<span>/</span>
+<a class="hover:text-[#00D4AA] transition-colors" href="#">Cinder Lake Crater Field</a>
+<span>/</span>
+<span class="text-[#00D4AA] font-medium">Analog Reality Gap (ARG) Diagnostic</span>
+</div>
+<div class="hidden sm:flex items-center gap-4 text-[11px]">
+<span>FID: <span class="text-white">AZ-CLN-1967</span></span>
+<span>LAT: <span class="text-white">35°19'14" N</span></span>
+<span>LON: <span class="text-white">111°31'06" W</span></span>
+<span>TARGET: <span class="text-[#1E90FF] font-semibold">MOON-SP-89.9S</span></span>
+</div>
+</div>
+</header>
+<!-- MAIN VIEWPORT CONTAINER -->
+<main class="flex-1 w-full max-w-[1600px] mx-auto px-4 lg:px-6 py-6 space-y-6">
+<!-- 1. SITE CONTEXT HEADER (Full-Width Scientific Banner) -->
+<section class="scanline-bg rounded-lg border border-[#8B9CB5]/20 p-5 lg:p-7 relative overflow-hidden shadow-lg">
+<div class="absolute -right-20 -top-20 w-80 h-80 rounded-full bg-[#00D4AA]/5 blur-3xl pointer-events-none"></div>
+<div class="absolute -left-20 -bottom-20 w-80 h-80 rounded-full bg-[#1E90FF]/5 blur-3xl pointer-events-none"></div>
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative z-10">
+<!-- Left: Diagnostic Meta & Mission Subtitle -->
+<div class="space-y-3 max-w-3xl">
+<div class="flex flex-wrap items-center gap-2.5">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded text-[10px] font-label font-bold uppercase tracking-wider bg-[#00D4AA]/10 text-[#00D4AA] border border-[#00D4AA]/30">
+<span class="material-symbols-outlined text-[13px]">verified</span>
+              TERRALIGN SCIENTIFIC HONESTY-FIRST FRAMEWORK
+            </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded text-[10px] font-mono tracking-wide bg-[#112240] text-[#1E90FF] border border-[#1E90FF]/30">
+<span class="material-symbols-outlined text-[13px]">radar</span>
+              MISSION: Rover Terramechanics &amp; Mobility
+            </span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-mono text-[#8B9CB5] bg-[#050811] border border-[#8B9CB5]/20">
+              SOLAR CYCLE 25
+            </span>
+</div>
+<div>
+<h1 class="font-headline text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white">
+              ANALOG REALITY GAP (ARG) DIAGNOSTIC
+            </h1>
+<p class="mt-1 text-sm sm:text-base text-[#8B9CB5] flex items-center flex-wrap gap-2">
+<span class="text-white font-medium">Cinder Lake Crater Field, AZ (Earth)</span>
+<span class="material-symbols-outlined text-sm text-[#00D4AA]">arrow_forward</span>
+<span class="text-[#1E90FF] font-medium">Lunar South Pole (Shackleton Rim, Moon)</span>
+</p>
+</div>
+<p class="text-xs sm:text-sm text-[#8B9CB5] leading-relaxed max-w-2xl font-body">
+            Algorithmic characterization of physical divergence between terrestrial volcanic cinder analogs and lunar polar regolith environments. In-situ testing cannot simulate hard vacuum, sub-1.62 m/s² gravity, or unattenuated solar radiation.
+          </p>
+</div>
+<!-- Right: Prominent Composite Reality Gap Gauge Card -->
+<div class="lg:w-96 flex-shrink-0 bg-[#0A192F]/90 backdrop-blur rounded border border-[#FF4757]/30 p-4 shadow-xl">
+<div class="flex items-center justify-between pb-2 border-b border-[#8B9CB5]/15">
+<span class="font-label text-xs uppercase tracking-wider text-[#8B9CB5] font-semibold">Composite Divergence Index</span>
+<span class="px-2 py-0.5 rounded text-[10px] font-mono uppercase bg-[#FF4757]/20 text-[#FF4757] border border-[#FF4757]/40 font-bold">
+              CRITICAL BIAS
+            </span>
+</div>
+<div class="mt-3 flex items-baseline justify-between flex-wrap gap-2">
+<div class="flex items-baseline gap-2">
+<span class="font-headline text-xs text-[#8B9CB5] uppercase font-bold tracking-wider">INDEX</span>
+<span class="font-mono text-4xl sm:text-5xl font-bold text-[#FF6B35] tracking-tight">0.72</span>
+<span class="px-2 py-0.5 rounded bg-[#FFB800]/15 text-[#FFB800] border border-[#FFB800]/30 text-[9px] font-mono font-bold">ILLUSTRATIVE ARG INDEX — NOT VALIDATED</span>
+</div>
+<div class="text-right">
+<span class="font-mono text-xs text-[#8B9CB5]">SCALE: 0.00 → 1.00</span>
+<p class="text-[10px] text-[#8B9CB5]/80 font-mono">1.00 = Absolute Disparity</p>
+</div>
+</div>
+<!-- Composite Gap Scale Bar -->
+<div class="mt-3 space-y-1">
+<div class="h-2.5 w-full bg-[#112240] rounded overflow-hidden flex p-0.5 border border-[#8B9CB5]/20">
+<div class="h-full rounded bg-gradient-to-r from-[#00D4AA] via-[#FFB800] to-[#FF4757]" style="width: 72%;"></div>
+</div>
+<div class="flex justify-between text-[9px] font-mono text-[#8B9CB5]">
+<span>0.00 IDEAL MATCH</span>
+<span class="text-[#FF6B35] font-bold">CURRENT: 0.72</span>
+<span>1.00 DISCONNECTED</span>
+</div>
+</div>
+<div class="mt-3 p-2 rounded bg-[#FF4757]/10 border border-[#FF4757]/20 flex items-start gap-2">
+<span class="material-symbols-outlined text-[#FF4757] text-base mt-0.5 flex-shrink-0">warning</span>
+<p class="font-body text-xs text-[#E2E8F0] leading-tight">
+<strong class="text-[#FF4757]">HIGH DIVERGENCE ZONE:</strong> Active mitigation protocols mandatory for Artemis-class flight certification.
+            </p>
+</div>
+</div>
+</div>
+</section>
+<!-- 2. SIX-AXIS REALITY GAP PANEL (3x2 Responsive Scientific Bento Grid) -->
+<section class="space-y-4">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+<div>
+<h2 class="font-headline text-lg sm:text-xl font-bold text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-[#00D4AA]">view_in_ar</span>
+            SIX-AXIS REALITY GAP PARAMETER MATRIX
+          </h2>
+<p class="text-xs text-[#8B9CB5] font-body">
+            Direct parameter-by-parameter variance mapping between terrestrial analog environment and target planetary body.
+          </p>
+</div>
+<div class="flex items-center gap-2 font-mono text-xs text-[#8B9CB5]">
+<span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-[#1E90FF]"></span> Exact</span>
+<span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-[#00D4AA]"></span> High Conf</span>
+<span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-[#FFB800]"></span> Moderate</span>
+<span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-[#FF4757]"></span> Low / Unchar</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+<!-- CARD 1: GRAVITY DISPARITY -->
+<div class="bg-[#0A192F] rounded-lg border border-[#8B9CB5]/15 p-4 flex flex-col justify-between hover:border-[#00D4AA]/40 transition-colors shadow-md">
+<div class="space-y-3">
+<div class="flex items-center justify-between border-b border-[#8B9CB5]/10 pb-2.5">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded bg-[#112240] border border-[#8B9CB5]/20 flex items-center justify-center text-[#00D4AA]">
+<span class="material-symbols-outlined text-base">scale</span>
+</div>
+<div>
+<h3 class="font-headline text-sm font-bold text-white uppercase tracking-wide">Gravity Field</h3>
+<span class="font-mono text-[10px] text-[#8B9CB5]">AXIS 01 // KINEMATICS</span>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded text-[10px] font-mono uppercase bg-[#1E90FF]/15 text-[#1E90FF] border border-[#1E90FF]/30 font-semibold">
+                CONFIDENCE: EXACT
+              </span>
+</div>
+<!-- 2-Column Readout -->
+<div class="grid grid-cols-2 gap-2 p-2.5 rounded bg-[#112240]/40 border border-[#8B9CB5]/10">
+<div class="space-y-1">
+<span class="font-label text-[10px] text-[#8B9CB5] uppercase font-semibold">Earth Analog</span>
+<div class="font-mono text-base font-bold text-white">9.81 <span class="text-xs font-normal text-[#8B9CB5]">m/s²</span></div>
+<div class="font-mono text-[10px] text-[#8B9CB5]">Invariant (1.00g)</div>
+</div>
+<div class="space-y-1 border-l border-[#8B9CB5]/15 pl-2.5">
+<span class="font-label text-[10px] text-[#1E90FF] uppercase font-semibold">Target (Moon)</span>
+<div class="font-mono text-base font-bold text-[#1E90FF]">1.62 <span class="text-xs font-normal text-[#8B9CB5]">m/s²</span></div>
+<div class="font-mono text-[10px] text-[#8B9CB5]">Polar Mean (0.166g)</div>
+</div>
+</div>
+<!-- Delta Metric & Divergence Bar -->
+<div class="space-y-1.5">
+<div class="flex justify-between items-center text-xs font-mono">
+<span class="text-[#8B9CB5]">Δg: <strong class="text-white">8.19 m/s²</strong></span>
+<span class="text-[#FF4757] font-bold">83.5% REDUCTION</span>
+</div>
+<div class="w-full h-2 bg-[#050811] rounded overflow-hidden p-0.5 border border-[#8B9CB5]/15">
+<div class="h-full bg-gradient-to-r from-[#FFB800] to-[#FF4757] rounded" style="width: 83.5%;"></div>
+</div>
+<div class="flex justify-between text-[9px] font-mono text-[#8B9CB5]">
+<span>PROVENANCE: CODATA Constant</span>
+<span>BIAS: CRITICAL</span>
+</div>
+</div>
+</div>
+<!-- Operational Constraint Note -->
+<div class="mt-3 pt-2.5 border-t border-[#8B9CB5]/10 text-xs text-[#8B9CB5] leading-relaxed">
+<div class="p-2 rounded bg-[#050811]/70 border border-[#8B9CB5]/10 font-body text-[11px]">
+<span class="text-[#00D4AA] font-semibold">Operational Caveat:</span> Cannot be compensated at analog site. Requires parabolic flights or gravity offloading harness (ARGOS) for valid wheel slip &amp; sinkage validation.
+            </div>
+</div>
+</div>
+<!-- CARD 2: ATMOSPHERIC PRESSURE -->
+<div class="bg-[#0A192F] rounded-lg border border-[#8B9CB5]/15 p-4 flex flex-col justify-between hover:border-[#00D4AA]/40 transition-colors shadow-md">
+<div class="space-y-3">
+<div class="flex items-center justify-between border-b border-[#8B9CB5]/10 pb-2.5">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded bg-[#112240] border border-[#8B9CB5]/20 flex items-center justify-center text-[#00D4AA]">
+<span class="material-symbols-outlined text-base">cloud_off</span>
+</div>
+<div>
+<h3 class="font-headline text-sm font-bold text-white uppercase tracking-wide">Atmosphere Pressure</h3>
+<span class="font-mono text-[10px] text-[#8B9CB5]">AXIS 02 // THERMO-AERO</span>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded text-[10px] font-mono uppercase bg-[#00D4AA]/15 text-[#00D4AA] border border-[#00D4AA]/30 font-semibold">
+                CONFIDENCE: HIGH
+              </span>
+</div>
+<!-- 2-Column Readout -->
+<div class="grid grid-cols-2 gap-2 p-2.5 rounded bg-[#112240]/40 border border-[#8B9CB5]/10">
+<div class="space-y-1">
+<span class="font-label text-[10px] text-[#8B9CB5] uppercase font-semibold">Earth Analog</span>
+<div class="font-mono text-base font-bold text-white">86.1 <span class="text-xs font-normal text-[#8B9CB5]">kPa</span></div>
+<div class="font-mono text-[10px] text-[#8B9CB5]">Alt 2,050m (80–86 kPa barometric)</div>
+</div>
+<div class="space-y-1 border-l border-[#8B9CB5]/15 pl-2.5">
+<span class="font-label text-[10px] text-[#1E90FF] uppercase font-semibold">Target (Moon)</span>
+<div class="font-mono text-base font-bold text-[#1E90FF]">~0 <span class="text-xs font-normal text-[#8B9CB5]">Pa</span></div>
+<div class="font-mono text-[10px] text-[#8B9CB5]">~10⁻¹⁰ Pa (Night SBE Reference)</div>
+</div>
+</div>
+<!-- Delta Metric & Divergence Bar -->
+<div class="space-y-1.5">
+<div class="flex justify-between items-center text-xs font-mono">
+<span class="text-[#8B9CB5]">Δp: <strong class="text-white">86.1 kPa</strong></span>
+<span class="text-[#FF4757] font-bold">100% DIVERGENCE (DENOM: p_⊕)</span>
+</div>
+<div class="w-full h-2 bg-[#050811] rounded overflow-hidden p-0.5 border border-[#8B9CB5]/15">
+<div class="h-full bg-[#FF4757] rounded" style="width: 100%;"></div>
+</div>
+<div class="flex justify-between text-[9px] font-mono text-[#8B9CB5]">
+<span>PROVENANCE: NOAA Barometric Model</span>
+<span>BIAS: TOTAL DISCONNECT</span>
+</div>
+</div>
+</div>
+<!-- Operational Constraint Note -->
+<div class="mt-3 pt-2.5 border-t border-[#8B9CB5]/10 text-xs text-[#8B9CB5] leading-relaxed">
+<div class="p-2 rounded bg-[#050811]/70 border border-[#8B9CB5]/10 font-body text-[11px]">
+<span class="text-[#00D4AA] font-semibold">Operational Caveat:</span> Vacuum eliminates convective cooling and acoustic feedback. Actuator thermal dissipation and motor lubrication in analog field tests behave erroneously.
+            </div>
+</div>
+</div>
+<!-- CARD 3: THERMAL BOUNDARY -->
+<div class="bg-[#0A192F] rounded-lg border border-[#8B9CB5]/15 p-4 flex flex-col justify-between hover:border-[#00D4AA]/40 transition-colors shadow-md">
+<div class="space-y-3">
+<div class="flex items-center justify-between border-b border-[#8B9CB5]/10 pb-2.5">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded bg-[#112240] border border-[#8B9CB5]/20 flex items-center justify-center text-[#00D4AA]">
+<span class="material-symbols-outlined text-base">device_thermostat</span>
+</div>
+<div>
+<h3 class="font-headline text-sm font-bold text-white uppercase tracking-wide">Thermal Boundary</h3>
+<span class="font-mono text-[10px] text-[#8B9CB5]">AXIS 03 // SURF TEMPERATURE</span>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded text-[10px] font-mono uppercase bg-[#FFB800]/15 text-[#FFB800] border border-[#FFB800]/30 font-semibold">
+                CONFIDENCE: MODERATE
+              </span>
+</div>
+<!-- 2-Column Readout -->
+<div class="grid grid-cols-2 gap-2 p-2.5 rounded bg-[#112240]/40 border border-[#8B9CB5]/10">
+<div class="space-y-1">
+<span class="font-label text-[10px] text-[#8B9CB5] uppercase font-semibold">Earth Analog</span>
+<div class="font-mono text-base font-bold text-white">-15° to +38° <span class="text-xs font-normal text-[#8B9CB5]">°C</span></div>
+<div class="font-mono text-[10px] text-[#8B9CB5]">Δ53°C annual spread</div>
+</div>
+<div class="space-y-1 border-l border-[#8B9CB5]/15 pl-2.5">
+<span class="font-label text-[10px] text-[#1E90FF] uppercase font-semibold">Target (Moon)</span>
+<div class="font-mono text-base font-bold text-[#1E90FF]">-233° to -53° <span class="text-xs font-normal text-[#8B9CB5]">°C (Polar)</span></div>
+<div class="font-mono text-[10px] text-[#8B9CB5]">PSR: 40K (-233°C) · Sunlit: 220K (-53°C)</div>
+</div>
+</div>
+<!-- Delta Metric & Divergence Bar -->
+<div class="space-y-1.5">
+<div class="flex justify-between items-center text-xs font-mono">
+<span class="text-[#8B9CB5]">ΔT Ext: <strong class="text-white">~180°C</strong> polar spread</span>
+<span class="text-[#FF6B35] font-bold">~75% EXPANSION (GLOBAL)</span>
+</div>
+<div class="w-full h-2 bg-[#050811] rounded overflow-hidden p-0.5 border border-[#8B9CB5]/15">
+<div class="h-full bg-gradient-to-r from-[#FFB800] via-[#FF6B35] to-[#FF4757] rounded" style="width: 75%;"></div>
+</div>
+<div class="flex justify-between text-[9px] font-mono text-[#8B9CB5]">
+<span>PROVENANCE: LRO Diviner Radiometer</span>
+<span>REF: SHACKLETON PSR VS CINDER AIR</span>
+</div>
+</div>
+</div>
+<!-- Operational Constraint Note -->
+<div class="mt-3 pt-2.5 border-t border-[#8B9CB5]/10 text-xs text-[#8B9CB5] leading-relaxed">
+<div class="p-2 rounded bg-[#050811]/70 border border-[#8B9CB5]/10 font-body text-[11px]">
+<span class="text-[#00D4AA] font-semibold">Operational Caveat:</span> Earth range represents meteorological air temperature. Lunar values represent Diviner surface brightness temperatures (equatorial subsolar max reaches +123°C; South Pole sunlit rims reach ~-53°C). Subsurface thermal conductivity disparity requires lab cryo-chamber testing.
+            </div>
+</div>
+</div>
+<!-- CARD 4: SOLAR IRRADIANCE -->
+<div class="bg-[#0A192F] rounded-lg border border-[#8B9CB5]/15 p-4 flex flex-col justify-between hover:border-[#00D4AA]/40 transition-colors shadow-md">
+<div class="space-y-3">
+<div class="flex items-center justify-between border-b border-[#8B9CB5]/10 pb-2.5">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded bg-[#112240] border border-[#8B9CB5]/20 flex items-center justify-center text-[#00D4AA]">
+<span class="material-symbols-outlined text-base">flare</span>
+</div>
+<div>
+<h3 class="font-headline text-sm font-bold text-white uppercase tracking-wide">Solar Irradiance</h3>
+<span class="font-mono text-[10px] text-[#8B9CB5]">AXIS 04 // OPTICAL &amp; FLUX</span>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded text-[10px] font-mono uppercase bg-[#00D4AA]/15 text-[#00D4AA] border border-[#00D4AA]/30 font-semibold">
+                CONFIDENCE: HIGH
+              </span>
+</div>
+<!-- 2-Column Readout -->
+<div class="grid grid-cols-2 gap-2 p-2.5 rounded bg-[#112240]/40 border border-[#8B9CB5]/10">
+<div class="space-y-1">
+<span class="font-label text-[10px] text-[#8B9CB5] uppercase font-semibold">Earth Analog</span>
+<div class="font-mono text-base font-bold text-white">1076 <span class="text-xs font-normal text-[#8B9CB5]">W/m²</span></div>
+<div class="font-mono text-[10px] text-[#8B9CB5]">Clear-Sky DNI (AM1.5: 1000 W/m²)</div>
+</div>
+<div class="space-y-1 border-l border-[#8B9CB5]/15 pl-2.5">
+<span class="font-label text-[10px] text-[#1E90FF] uppercase font-semibold">Target (Moon)</span>
+<div class="font-mono text-base font-bold text-[#1E90FF]">1361 <span class="text-xs font-normal text-[#8B9CB5]">W/m²</span></div>
+<div class="font-mono text-[10px] text-[#8B9CB5]">Total Solar Irradiance (TSI Normal)</div>
+</div>
+</div>
+<!-- Delta Metric & Divergence Bar -->
+<div class="space-y-1.5">
+<div class="flex justify-between items-center text-xs font-mono">
+<span class="text-[#8B9CB5]">ΔI Beam: <strong class="text-white">+285 W/m² (DNI)</strong></span>
+<span class="text-[#FFB800] font-bold">+26.5% FLUX GAIN (+36.1% vs AM1.5)</span>
+</div>
+<div class="w-full h-2 bg-[#050811] rounded overflow-hidden p-0.5 border border-[#8B9CB5]/15">
+<div class="h-full bg-[#FFB800] rounded" style="width: 26.5%;"></div>
+</div>
+<div class="flex justify-between text-[9px] font-mono text-[#8B9CB5]">
+<span>PROVENANCE: NASA SORCE / TSIS-1</span>
+<span>BIAS: MODERATE / CONTRAST</span>
+</div>
+</div>
+</div>
+<!-- Operational Constraint Note -->
+<div class="mt-3 pt-2.5 border-t border-[#8B9CB5]/10 text-xs text-[#8B9CB5] leading-relaxed">
+<div class="p-2 rounded bg-[#050811]/70 border border-[#8B9CB5]/10 font-body text-[11px]">
+<span class="text-[#00D4AA] font-semibold">Operational Caveat:</span> Lunar surface features infinite shadow contrast with zero sky diffuse fill. Machine vision models calibrated in Flagstaff will suffer catastrophic shadow bloom.
+            </div>
+</div>
+</div>
+<!-- CARD 5: RADIATION FLUX -->
+<div class="bg-[#0A192F] rounded-lg border border-[#8B9CB5]/15 p-4 flex flex-col justify-between hover:border-[#00D4AA]/40 transition-colors shadow-md">
+<div class="space-y-3">
+<div class="flex items-center justify-between border-b border-[#8B9CB5]/10 pb-2.5">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded bg-[#112240] border border-[#8B9CB5]/20 flex items-center justify-center text-[#FF4757]">
+<span class="material-symbols-outlined text-base">crisis_alert</span>
+</div>
+<div>
+<h3 class="font-headline text-sm font-bold text-white uppercase tracking-wide">Radiation Flux</h3>
+<span class="font-mono text-[10px] text-[#8B9CB5]">AXIS 05 // ENERGETIC PARTICLES</span>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded text-[10px] font-mono uppercase bg-[#FFB800]/15 text-[#FFB800] border border-[#FFB800]/30 font-semibold">
+                CONFIDENCE: MODERATE
+              </span>
+</div>
+<!-- 2-Column Readout -->
+<div class="grid grid-cols-2 gap-2 p-2.5 rounded bg-[#112240]/40 border border-[#8B9CB5]/10">
+<div class="space-y-1">
+<span class="font-label text-[10px] text-[#8B9CB5] uppercase font-semibold">Earth Analog</span>
+<div class="font-mono text-base font-bold text-white">3.2 <span class="text-xs font-normal text-[#8B9CB5]">mSv/yr</span></div>
+<div class="font-mono text-[10px] text-[#8B9CB5]">0.37 μSv/hr background</div>
+</div>
+<div class="space-y-1 border-l border-[#8B9CB5]/15 pl-2.5">
+<span class="font-label text-[10px] text-[#FF4757] uppercase font-semibold">Target (Moon)</span>
+<div class="font-mono text-base font-bold text-[#FF4757]">~380 <span class="text-xs font-normal text-[#8B9CB5]">mSv/yr</span></div>
+<div class="font-mono text-[10px] text-[#8B9CB5]">Unshielded GCR (Solar Min; 43 μSv/h)</div>
+</div>
+</div>
+<!-- Delta Metric & Divergence Bar -->
+<div class="space-y-1.5">
+<div class="flex justify-between items-center text-xs font-mono">
+<span class="text-[#8B9CB5]">ΔR: <strong class="text-white">~377 mSv/yr</strong></span>
+<span class="text-[#FF4757] font-bold">&gt;118× FACTOR (DOSE EQUIVALENT)</span>
+</div>
+<div class="w-full h-2 bg-[#050811] rounded overflow-hidden p-0.5 border border-[#8B9CB5]/15">
+<div class="h-full bg-[#FF4757] rounded" style="width: 100%;"></div>
+</div>
+<div class="flex justify-between text-[9px] font-mono text-[#8B9CB5]">
+<span>PROVENANCE: LRO CRaTER Instrument</span>
+<span>BIAS: UNSHIELDED</span>
+</div>
+</div>
+</div>
+<!-- Operational Constraint Note -->
+<div class="mt-3 pt-2.5 border-t border-[#8B9CB5]/10 text-xs text-[#8B9CB5] leading-relaxed">
+<div class="p-2 rounded bg-[#050811]/70 border border-[#8B9CB5]/10 font-body text-[11px]">
+<span class="text-[#00D4AA] font-semibold">Operational Caveat:</span> Analog tests cannot assess single-event upsets (SEUs) or sensor gate radiation degradation. Avionics reliability in Cinder Lake field testing is not flight-qualifying.
+            </div>
+</div>
+</div>
+<!-- CARD 6: REGOLITH COHESION & MORPHOLOGY -->
+<div class="bg-[#0A192F] rounded-lg border border-[#8B9CB5]/15 p-4 flex flex-col justify-between hover:border-[#00D4AA]/40 transition-colors shadow-md">
+<div class="space-y-3">
+<div class="flex items-center justify-between border-b border-[#8B9CB5]/10 pb-2.5">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded bg-[#112240] border border-[#8B9CB5]/20 flex items-center justify-center text-[#FF6B35]">
+<span class="material-symbols-outlined text-base">grain</span>
+</div>
+<div>
+<h3 class="font-headline text-sm font-bold text-white uppercase tracking-wide">Regolith Morphology</h3>
+<span class="font-mono text-[10px] text-[#8B9CB5]">AXIS 06 // TRIBOLOGY &amp; CLAST</span>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded text-[10px] font-mono uppercase bg-[#FF4757]/15 text-[#FF4757] border border-[#FF4757]/30 font-semibold">
+                CONFIDENCE: LOW (RED)
+              </span>
+</div>
+<!-- 2-Column Readout -->
+<div class="grid grid-cols-2 gap-2 p-2.5 rounded bg-[#112240]/40 border border-[#8B9CB5]/10">
+<div class="space-y-1">
+<span class="font-label text-[10px] text-[#8B9CB5] uppercase font-semibold">Earth Analog</span>
+<div class="font-mono text-xs font-bold text-white">Weathered Basaltic Cinder</div>
+<div class="font-mono text-[10px] text-[#8B9CB5]">Rounded clasts, zero static</div>
+</div>
+<div class="space-y-1 border-l border-[#8B9CB5]/15 pl-2.5">
+<span class="font-label text-[10px] text-[#1E90FF] uppercase font-semibold">Target (Moon)</span>
+<div class="font-mono text-xs font-bold text-[#1E90FF]">Agglutinates &amp; Glass</div>
+<div class="font-mono text-[10px] text-[#8B9CB5]">Jagged shards, high electrostatic</div>
+</div>
+</div>
+<!-- Delta Metric & Divergence Bar -->
+<div class="space-y-1.5">
+<div class="flex justify-between items-center text-xs font-mono">
+<span class="text-[#8B9CB5]">ΔC: <strong class="text-white">Non-Euclidean</strong></span>
+<span class="text-[#FF6B35] font-bold">~70% MECHANICAL GAP</span>
+</div>
+<div class="w-full h-2 bg-[#050811] rounded overflow-hidden p-0.5 border border-[#8B9CB5]/15">
+<div class="h-full bg-gradient-to-r from-[#FFB800] to-[#FF6B35] rounded" style="width: 70%;"></div>
+</div>
+<div class="flex justify-between text-[9px] font-mono text-[#8B9CB5]">
+<span>PROVENANCE: Apollo 15–17 Samples</span>
+<span>BIAS: ABRASION RISK</span>
+</div>
+</div>
+</div>
+<!-- Operational Constraint Note -->
+<div class="mt-3 pt-2.5 border-t border-[#8B9CB5]/10 text-xs text-[#8B9CB5] leading-relaxed">
+<div class="p-2 rounded bg-[#050811]/70 border border-[#8B9CB5]/10 font-body text-[11px]">
+<span class="text-[#00D4AA] font-semibold">Operational Caveat:</span> Earth cinder is hydrologically rounded. True regolith is an electrostatic abrasive that degrades seals and solar panels rapidly. Terramechanical wheel slip will be underestimated.
+            </div>
+</div>
+</div>
+</div>
+</section>
+<!-- 3. SIMULATOR EXPERIMENTAL COMPENSATION PROTOCOLS -->
+<section class="bg-[#0A192F] rounded-lg border border-[#8B9CB5]/20 overflow-hidden shadow-lg">
+<!-- Section Header with Engineering Advisory Banner -->
+<div class="p-4 sm:p-5 bg-gradient-to-r from-[#112240] to-[#0A192F] border-b border-[#8B9CB5]/15 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+<div class="space-y-1">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#00D4AA] text-lg">science</span>
+<h2 class="font-headline text-base sm:text-lg font-bold text-white tracking-wide">
+              PROPOSED EXPERIMENTAL COMPENSATION PROTOCOLS
+            </h2>
+</div>
+<p class="text-xs text-[#8B9CB5] font-body">
+            Technical offloading, environmental simulation, and algorithmic bias correction mapping for test facilities.
+          </p>
+</div>
+<div class="flex items-center gap-2 self-start sm:self-auto">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded text-xs font-mono font-bold tracking-wide uppercase bg-[#FFB800]/15 text-[#FFB800] border border-[#FFB800]/40">
+<span class="material-symbols-outlined text-sm">construction</span>
+            ENGINEERING PROPOSALS — NOT VALIDATED SIMULATIONS
+          </span>
+</div>
+</div>
+<!-- High-Density Technical Table Matrix -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse text-xs font-body">
+<thead>
+<tr class="border-b border-[#8B9CB5]/20 bg-[#050811]/60 font-mono text-[11px] text-[#8B9CB5] uppercase tracking-wider">
+<th class="py-3 px-4 font-semibold w-36">Gap Axis</th>
+<th class="py-3 px-4 font-semibold">Proposed Compensation</th>
+<th class="py-3 px-4 font-semibold w-56">Equipment / Facility</th>
+<th class="py-3 px-4 font-semibold w-48">Validation Status</th>
+<th class="py-3 px-4 font-semibold">Operational Constraint &amp; Physics Notes</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[#8B9CB5]/10 font-normal">
+<!-- Row 1: Gravity -->
+<tr class="hover:bg-[#112240]/40 transition-colors">
+<td class="py-3 px-4 font-mono font-bold text-[#00D4AA] flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">scale</span>
+<span>Gravity</span>
+</td>
+<td class="py-3 px-4 text-white font-medium">
+                Partial gravity offloading harness system or parabolic flight maneuvers
+              </td>
+<td class="py-3 px-4 font-mono text-[#8B9CB5]">
+                ARGOS System (NASA JSC Building 9)
+              </td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-mono bg-[#FFB800]/10 text-[#FFB800] border border-[#FFB800]/30">
+<span class="w-1.5 h-1.5 rounded-full bg-[#FFB800]"></span>
+                  PARTIAL LOAD ONLY
+                </span>
+</td>
+<td class="py-3 px-4 text-[#8B9CB5] text-[11px] leading-snug">
+                Reduces effective vehicle mass; does not scale granular internal friction angle or internal fluid mechanics.
+              </td>
+</tr>
+<!-- Row 2: Atmospheric Pressure -->
+<tr class="hover:bg-[#112240]/40 transition-colors">
+<td class="py-3 px-4 font-mono font-bold text-[#00D4AA] flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">compress</span>
+<span>Pressure</span>
+</td>
+<td class="py-3 px-4 text-white font-medium">
+                Thermal-vacuum cycling &amp; hard evacuation chamber testing
+              </td>
+<td class="py-3 px-4 font-mono text-[#8B9CB5]">
+                Chamber A / TVAC (NASA JSC)
+              </td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-mono bg-[#00D4AA]/10 text-[#00D4AA] border border-[#00D4AA]/30">
+<span class="w-1.5 h-1.5 rounded-full bg-[#00D4AA]"></span>
+                  VALIDATED (LAB)
+                </span>
+</td>
+<td class="py-3 px-4 text-[#8B9CB5] text-[11px] leading-snug">
+                Fully validated for standalone avionics/chassis; completely impossible for field rover mobility testing.
+              </td>
+</tr>
+<!-- Row 3: Thermal Boundary -->
+<tr class="hover:bg-[#112240]/40 transition-colors">
+<td class="py-3 px-4 font-mono font-bold text-[#00D4AA] flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">thermostat</span>
+<span>Thermal</span>
+</td>
+<td class="py-3 px-4 text-white font-medium">
+                Cryogenic nitrogen shroud cycling &amp; solar simulator lamps
+              </td>
+<td class="py-3 px-4 font-mono text-[#8B9CB5]">
+                Space Power Facility (Armstrong Test Fac)
+              </td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-mono bg-[#00D4AA]/10 text-[#00D4AA] border border-[#00D4AA]/30">
+<span class="w-1.5 h-1.5 rounded-full bg-[#00D4AA]"></span>
+                  STANDARD AEROSPACE
+                </span>
+</td>
+<td class="py-3 px-4 text-[#8B9CB5] text-[11px] leading-snug">
+                Replicates bulk temperature extremes; cannot reproduce complex micro-shadow topography gradients in soil.
+              </td>
+</tr>
+<!-- Row 4: Solar Irradiance -->
+<tr class="hover:bg-[#112240]/40 transition-colors">
+<td class="py-3 px-4 font-mono font-bold text-[#00D4AA] flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">wb_sunny</span>
+<span>Irradiance</span>
+</td>
+<td class="py-3 px-4 text-white font-medium">
+                High dynamic range (HDR) optical filtering &amp; collimated studio spotlights
+              </td>
+<td class="py-3 px-4 font-mono text-[#8B9CB5]">
+                Planetary Analog Light Stage (JPL)
+              </td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-mono bg-[#FFB800]/10 text-[#FFB800] border border-[#FFB800]/30">
+<span class="w-1.5 h-1.5 rounded-full bg-[#FFB800]"></span>
+                  PARTIAL SPECTRAL
+                </span>
+</td>
+<td class="py-3 px-4 text-[#8B9CB5] text-[11px] leading-snug">
+                Achieves geometric optical shadows; solar spectrum UV/far-UV cutoffs differ from true extraterrestrial sun.
+              </td>
+</tr>
+<!-- Row 5: Radiation Flux -->
+<tr class="hover:bg-[#112240]/40 transition-colors">
+<td class="py-3 px-4 font-mono font-bold text-[#FF4757] flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">warning</span>
+<span>Radiation</span>
+</td>
+<td class="py-3 px-4 text-white font-medium">
+                Heavy-ion beam component bombardment + Geant4/MCNP Monte Carlo modeling
+              </td>
+<td class="py-3 px-4 font-mono text-[#8B9CB5]">
+                NASA Space Radiation Lab (BNL)
+              </td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-mono bg-[#FF4757]/10 text-[#FF4757] border border-[#FF4757]/30">
+<span class="w-1.5 h-1.5 rounded-full bg-[#FF4757]"></span>
+                  THEORETICAL MODEL
+                </span>
+</td>
+<td class="py-3 px-4 text-[#8B9CB5] text-[11px] leading-snug">
+                No terrestrial field compensation possible. Entirely restricted to isolated component radiation tolerance testing.
+              </td>
+</tr>
+<!-- Row 6: Regolith Cohesion -->
+<tr class="hover:bg-[#112240]/40 transition-colors">
+<td class="py-3 px-4 font-mono font-bold text-[#FF6B35] flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">grain</span>
+<span>Regolith</span>
+</td>
+<td class="py-3 px-4 text-white font-medium">
+                Standardized mineral lunar simulant (JSC-1A / LHS-1) beds in test trenches
+              </td>
+<td class="py-3 px-4 font-mono text-[#8B9CB5]">
+                Lunar Terramechanics Bed (NASA GRC)
+              </td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-mono bg-[#FF4757]/10 text-[#FF4757] border border-[#FF4757]/30">
+<span class="w-1.5 h-1.5 rounded-full bg-[#FF4757]"></span>
+                  PROXY ONLY
+                </span>
+</td>
+<td class="py-3 px-4 text-[#8B9CB5] text-[11px] leading-snug">
+                Simulates grain size distribution and basic shear modulus; lacks electrostatic adhesion and cosmic ray micro-sintering.
+              </td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Advisory Callout Footer Box -->
+<div class="p-4 bg-[#050811]/90 border-t border-[#8B9CB5]/15 flex items-start gap-3">
+<span class="material-symbols-outlined text-[#FFB800] text-lg flex-shrink-0 mt-0.5">info</span>
+<div class="text-xs text-[#8B9CB5] leading-relaxed">
+<strong class="text-white font-medium">Scientific Rigor Advisory:</strong> These compensation proposals represent current state-of-the-art aerospace mitigating strategies. They do <span class="text-white underline">not</span> convert a terrestrial volcanic cinder test into a certified flight-equivalent simulation. Engineering teams must apply empirical calibration curves to wheel torque and sensor telemetry before mission validation sign-off.
+        </div>
+</div>
+</section>
+<!-- 4. COMPARATIVE ANOMALY TELEMETRY & CROSS-CHECK STRIP -->
+<div class="grid grid-cols-1 lg:grid-cols-4 gap-4">
+<div class="bg-[#0A192F] p-4 rounded-lg border border-[#8B9CB5]/15 space-y-2">
+<span class="text-[10px] font-mono uppercase text-[#8B9CB5] block font-semibold">Tractive Effort Bias</span>
+<div class="flex items-baseline justify-between">
+<span class="font-mono text-2xl font-bold text-[#FFB800]">+412%</span>
+<span class="text-[10px] font-mono text-[#8B9CB5]">OVERESTIMATION</span>
+</div>
+<p class="text-[11px] text-[#8B9CB5]">Earth gravity artificially enhances normal force and wheel grip.</p>
+</div>
+<div class="bg-[#0A192F] p-4 rounded-lg border border-[#8B9CB5]/15 space-y-2">
+<span class="text-[10px] font-mono uppercase text-[#8B9CB5] block font-semibold">Motor Convective Heat Lift</span>
+<div class="flex items-baseline justify-between">
+<span class="font-mono text-2xl font-bold text-[#00D4AA]">84.2 W</span>
+<span class="text-[10px] font-mono text-[#8B9CB5]">PARASITIC COOLING</span>
+</div>
+<p class="text-[11px] text-[#8B9CB5]">Heat dissipated to air during analog runs will build up in vacuum.</p>
+</div>
+<div class="bg-[#0A192F] p-4 rounded-lg border border-[#8B9CB5]/15 space-y-2">
+<span class="text-[10px] font-mono uppercase text-[#8B9CB5] block font-semibold">Optical Shadow Penumbra</span>
+<div class="flex items-baseline justify-between">
+<span class="font-mono text-2xl font-bold text-[#1E90FF]">0.53°</span>
+<span class="text-[10px] font-mono text-[#8B9CB5]">EARTH DIFFUSION</span>
+</div>
+<p class="text-[11px] text-[#8B9CB5]">Moon exhibits pure umbral shadow edge (&lt;0.01°) causing hazard false-negatives.</p>
+</div>
+<div class="bg-[#0A192F] p-4 rounded-lg border border-[#8B9CB5]/15 space-y-2">
+<span class="text-[10px] font-mono uppercase text-[#8B9CB5] block font-semibold">Seal Abrasion Factor</span>
+<div class="flex items-baseline justify-between">
+<span class="font-mono text-2xl font-bold text-[#FF4757]">14.8×</span>
+<span class="text-[10px] font-mono text-[#FF4757]">LUNAR AGGRESSION</span>
+</div>
+<p class="text-[11px] text-[#8B9CB5]">Unweathered lunar glass shards erode drive bearings 15x faster than cinder.</p>
+</div>
+</div>
+</main>
+<!-- 5. BOTTOM ACTION & PROVENANCE BAR -->
+<footer class="mt-8 bg-[#0A192F] border-t border-[#8B9CB5]/15 shadow-xl sticky bottom-0 z-40">
+<div class="max-w-[1600px] mx-auto px-4 lg:px-6 py-3 flex flex-col md:flex-row items-center justify-between gap-4">
+<!-- Provenance Identity -->
+<div class="flex items-center gap-3 text-xs font-mono text-[#8B9CB5]">
+<div class="w-2 h-2 rounded-full bg-[#00D4AA] animate-pulse"></div>
+<div>
+<span class="text-white font-medium">MODEL: ARG-v3.8</span> · 
+          <span>GSFC ASTROBIOLOGY &amp; ANALOG TESTING BRANCH</span> · 
+          <span class="text-[#00D4AA]">CONFIDENCE COEFFICIENT: 0.88</span>
+</div>
+</div>
+<!-- Action Cluster -->
+<div class="flex items-center gap-3 w-full md:w-auto justify-end">
+<button class="px-4 py-2 rounded text-xs font-label uppercase tracking-wider font-semibold border border-[#8B9CB5]/30 text-white hover:bg-[#112240] hover:text-[#00D4AA] hover:border-[#00D4AA]/40 transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-base">swap_horiz</span>
+<span>Compare Another Site</span>
+</button>
+<button class="px-5 py-2 rounded text-xs font-label uppercase tracking-wider font-bold bg-[#00D4AA] text-[#050811] hover:bg-[#00D4AA]/90 shadow-[0_0_20px_rgba(0,212,170,0.3)] transition-all duration-200 active:scale-95 flex items-center gap-2">
+<span class="material-symbols-outlined text-base">download_for_offline</span>
+<span>Download Full ARG Diagnostic Dossier (PDF/JSON)</span>
+</button>
+</div>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #050811;
+  --foreground: #f8fafc;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Inter, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Monospace tabular numbers for telemetry & scientific readouts */
+.font-mono {
+  font-family: "Space Mono", monospace;
+  font-feature-settings: "tnum" 1;
+}
+
+/* Aerospace Glassmorphic HUD panel */
+.glass-panel {
+  background: rgba(10, 25, 47, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(139, 156, 181, 0.15);
+}
+

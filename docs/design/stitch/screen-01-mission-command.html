@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TERRALIGN - Global Mission Command &amp; Activity Selector</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Public+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@400;500;600;700&amp;family=Space+Mono:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {},
+          borderRadius: {
+            DEFAULT: "0.25rem",
+            lg: "0.5rem",
+            xl: "0.75rem",
+            full: "9999px"
+          },
+          fontFamily: {
+            headline: ["Space Grotesk", "sans-serif"],
+            display: ["Space Grotesk", "sans-serif"],
+            body: ["Inter", "sans-serif"],
+            label: ["Public Sans", "sans-serif"],
+            mono: ["Space Mono", "monospace"]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    /* Custom subtle HUD lines and technical aesthetics */
+    .graticule-grid {
+      background-size: 50px 50px;
+      background-image: 
+        linear-gradient(to right, rgba(139, 156, 181, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(139, 156, 181, 0.05) 1px, transparent 1px);
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #050811;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #112240;
+      border-radius: 2px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: #00D4AA;
+    }
+  </style>
+</head>
+<body class="bg-[#050811] text-[#8B9CB5] font-body h-screen flex flex-col overflow-hidden select-none antialiased">
+<!-- ================= TOP APP BAR ================= -->
+<header class="flex justify-between items-center w-full px-6 py-2.5 border-b border-[#8B9CB5]/15 bg-[#0A192F] shadow-md z-50 shrink-0">
+<!-- Brand / Title -->
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2.5">
+<span class="inline-block w-2.5 h-2.5 rounded-full bg-[#00D4AA] shadow-[0_0_8px_#00D4AA] animate-pulse"></span>
+<span class="font-headline font-bold text-xl tracking-wider text-[#00D4AA] uppercase">TERRALIGN</span>
+</div>
+<div class="hidden lg:flex items-center text-xs tracking-wide text-[#8B9CB5] border-l border-[#8B9CB5]/20 pl-4 py-0.5">
+        Where Earth Meets Other Worlds.
+      </div>
+</div>
+<!-- Central Nav -->
+<nav class="hidden md:flex items-center gap-8 font-label text-xs uppercase tracking-wider">
+<a class="text-[#00D4AA] border-b-2 border-[#00D4AA] pb-1 font-semibold flex items-center gap-1.5 transition-colors duration-150" href="#">
+<span class="material-symbols-outlined text-[16px]">radar</span>
+        Mission Command
+      </a>
+<a class="text-[#8B9CB5] hover:text-white transition-colors duration-150 flex items-center gap-1.5" href="#">
+<span class="material-symbols-outlined text-[16px]">landscape</span>
+        Terrain Mapping
+      </a>
+<a class="text-[#8B9CB5] hover:text-white transition-colors duration-150 flex items-center gap-1.5" href="#">
+<span class="material-symbols-outlined text-[16px]">compare_arrows</span>
+        Analog Intelligence
+      </a>
+<a class="text-[#8B9CB5] hover:text-white transition-colors duration-150 flex items-center gap-1.5" href="#">
+<span class="material-symbols-outlined text-[16px]">terminal</span>
+        Telemetry
+      </a>
+<a class="text-[#8B9CB5] hover:text-white transition-colors duration-150 flex items-center gap-1.5" href="#">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+        Provenance
+      </a>
+</nav>
+<!-- Right Quick Actions -->
+<div class="flex items-center gap-3">
+<div class="hidden xl:flex items-center gap-2 px-3 py-1 bg-[#112240] rounded border border-[#8B9CB5]/20 text-[11px] font-mono text-[#8B9CB5]">
+<span class="w-1.5 h-1.5 rounded-full bg-[#00D4AA]"></span>
+<span>USGS-ASTRO: SYNCED</span>
+</div>
+<div class="flex items-center gap-1">
+<button class="p-2 rounded text-[#8B9CB5] hover:text-[#00D4AA] hover:bg-[#112240] transition-colors" title="Satellite Uplink">
+<span class="material-symbols-outlined text-[18px]">satellite_alt</span>
+</button>
+<button class="p-2 rounded text-[#8B9CB5] hover:text-[#00D4AA] hover:bg-[#112240] transition-colors" title="Sensor Array Tuning">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+</button>
+<button class="p-2 rounded text-[#8B9CB5] hover:text-[#00D4AA] hover:bg-[#112240] transition-colors relative" title="Alerts">
+<span class="material-symbols-outlined text-[18px]">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-[#FF6B35] rounded-full"></span>
+</button>
+</div>
+<button class="ml-2 px-3 py-1.5 rounded bg-[#112240] hover:bg-[#112240]/80 border border-[#8B9CB5]/30 text-xs font-label uppercase tracking-wider text-white flex items-center gap-1.5 transition-all">
+<span class="material-symbols-outlined text-[14px]">file_download</span>
+        Export Data
+      </button>
+<button class="px-3.5 py-1.5 rounded bg-[#00D4AA] hover:bg-[#00D4AA]/90 text-[#050811] text-xs font-label font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-[0_0_12px_rgba(0,212,170,0.3)] transition-all">
+<span class="material-symbols-outlined text-[14px]">rocket_launch</span>
+        Launch Activity
+      </button>
+</div>
+</header>
+<!-- ================= MAIN LAYOUT CANVAS ================= -->
+<div class="flex-1 flex overflow-hidden relative">
+<!-- ================= LEFT PANEL: MISSION SELECTOR (35%) ================= -->
+<aside class="w-full lg:w-[35%] xl:w-[32%] min-w-[340px] max-w-[480px] bg-[#0A192F] border-r border-[#8B9CB5]/15 flex flex-col z-20 shadow-xl">
+<!-- Panel Header & Target Selector -->
+<div class="p-4 border-b border-[#8B9CB5]/15 space-y-3.5 shrink-0">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#00D4AA] text-[18px]">tune</span>
+<h2 class="font-headline font-semibold text-xs tracking-wider text-white uppercase">Mission Configuration</h2>
+</div>
+<span class="px-2 py-0.5 rounded bg-[#112240] border border-[#8B9CB5]/20 font-mono text-[10px] text-[#00D4AA]">SYS-ID: ARC-LUNAR-09</span>
+</div>
+<!-- Target Body Selector (Moon vs Mars) -->
+<div class="grid grid-cols-2 gap-2.5">
+<!-- MOON (Active) -->
+<button class="relative flex flex-col p-3 rounded-lg border-2 border-[#00D4AA] bg-[#112240] text-left transition-all shadow-[0_0_15px_rgba(0,212,170,0.15)] group">
+<div class="flex items-center justify-between w-full mb-1">
+<span class="font-headline font-bold text-sm tracking-wide text-white group-hover:text-[#00D4AA] transition-colors">MOON</span>
+<span class="material-symbols-outlined text-[#00D4AA] text-[18px]">brightness_2</span>
+</div>
+<div class="text-[11px] text-[#8B9CB5]">Lunar Surface</div>
+<div class="mt-2 flex items-center justify-between text-[10px] font-mono text-[#1E90FF]">
+<span>ARTEMIS ZONE</span>
+<span class="w-1.5 h-1.5 rounded-full bg-[#00D4AA]"></span>
+</div>
+</button>
+<!-- MARS (Inactive) -->
+<button class="relative flex flex-col p-3 rounded-lg border border-[#8B9CB5]/20 bg-[#050811]/60 text-left hover:border-[#8B9CB5]/40 hover:bg-[#112240]/40 transition-all opacity-70 group">
+<div class="flex items-center justify-between w-full mb-1">
+<span class="font-headline font-bold text-sm tracking-wide text-white group-hover:text-[#FF6B35] transition-colors">MARS</span>
+<span class="material-symbols-outlined text-[#8B9CB5] text-[18px] group-hover:text-[#FF6B35]">public</span>
+</div>
+<div class="text-[11px] text-[#8B9CB5]">Martian Surface</div>
+<div class="mt-2 flex items-center justify-between text-[10px] font-mono text-[#8B9CB5]">
+<span>MSR / PERSEVERANCE</span>
+<span class="w-1.5 h-1.5 rounded-full bg-transparent border border-[#8B9CB5]"></span>
+</div>
+</button>
+</div>
+</div>
+<!-- Scrollable Activities List -->
+<div class="flex-1 overflow-y-auto custom-scrollbar p-3 space-y-2">
+<div class="flex items-center justify-between px-1 text-[11px] font-label uppercase tracking-wider text-[#8B9CB5]">
+<span>Planetary Mission Activities (9)</span>
+<span class="font-mono text-[10px] text-[#00D4AA]">SORT: RELEVANCE</span>
+</div>
+<!-- Activity 1 (ACTIVE) -->
+<div class="p-3 rounded-lg border-2 border-[#00D4AA] bg-[#112240] cursor-pointer shadow-[0_0_12px_rgba(0,212,170,0.12)] relative">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-[#00D4AA] shadow-[0_0_6px_#00D4AA]"></span>
+<span class="font-headline font-bold text-xs text-white">1. Rover Terramechanics &amp; Mobility</span>
+</div>
+<span class="px-1.5 py-0.5 rounded bg-[#00D4AA]/20 text-[#00D4AA] font-mono text-[9px] font-bold">MATCH: 96%</span>
+</div>
+<p class="text-[11px] text-[#8B9CB5] mt-1 ml-4 leading-relaxed">Traction, slip ratio &amp; regolith bearing capacity</p>
+<div class="mt-2 ml-4 flex items-center gap-2 text-[10px] font-mono text-[#00D4AA]">
+<span class="px-1.5 py-0.2 bg-[#050811] rounded border border-[#8B9CB5]/15">BASALTIC VOLCANIC</span>
+<span class="px-1.5 py-0.2 bg-[#050811] rounded border border-[#8B9CB5]/15">SLOPE &gt;18°</span>
+</div>
+</div>
+<!-- Activity 2 -->
+<div class="p-3 rounded-lg border border-[#8B9CB5]/15 bg-[#050811]/40 hover:bg-[#112240]/60 hover:border-[#8B9CB5]/30 cursor-pointer transition-all">
+<div class="flex items-center justify-between">
+<span class="font-headline font-semibold text-xs text-[#8B9CB5] hover:text-white">2. Lunar South Pole Low-Angle Lighting</span>
+<span class="text-[#8B9CB5] font-mono text-[9px]">88%</span>
+</div>
+<p class="text-[11px] text-[#8B9CB5]/80 mt-1 leading-relaxed">Extreme shadow &amp; glare simulation</p>
+</div>
+<!-- Activity 3 -->
+<div class="p-3 rounded-lg border border-[#8B9CB5]/15 bg-[#050811]/40 hover:bg-[#112240]/60 hover:border-[#8B9CB5]/30 cursor-pointer transition-all">
+<div class="flex items-center justify-between">
+<span class="font-headline font-semibold text-xs text-[#8B9CB5] hover:text-white">3. EVA &amp; Spacesuit Operations</span>
+<span class="text-[#8B9CB5] font-mono text-[9px]">84%</span>
+</div>
+<p class="text-[11px] text-[#8B9CB5]/80 mt-1 leading-relaxed">Metabolic expenditure &amp; terrain navigation</p>
+</div>
+<!-- Activity 4 -->
+<div class="p-3 rounded-lg border border-[#8B9CB5]/15 bg-[#050811]/40 hover:bg-[#112240]/60 hover:border-[#8B9CB5]/30 cursor-pointer transition-all">
+<div class="flex items-center justify-between">
+<span class="font-headline font-semibold text-xs text-[#8B9CB5] hover:text-white">4. Cryogenic Volatile &amp; Permafrost Drilling</span>
+<span class="text-[#8B9CB5] font-mono text-[9px]">91%</span>
+</div>
+<p class="text-[11px] text-[#8B9CB5]/80 mt-1 leading-relaxed">Permanently shadowed region analogs</p>
+</div>
+<!-- Activity 5 -->
+<div class="p-3 rounded-lg border border-[#8B9CB5]/15 bg-[#050811]/40 hover:bg-[#112240]/60 hover:border-[#8B9CB5]/30 cursor-pointer transition-all">
+<div class="flex items-center justify-between">
+<span class="font-headline font-semibold text-xs text-[#8B9CB5] hover:text-white">5. Lava Tube Exploration</span>
+<span class="text-[#8B9CB5] font-mono text-[9px]">79%</span>
+</div>
+<p class="text-[11px] text-[#8B9CB5]/80 mt-1 leading-relaxed">Subsurface morphology &amp; comms attenuation</p>
+</div>
+<!-- Activity 6 -->
+<div class="p-3 rounded-lg border border-[#8B9CB5]/15 bg-[#050811]/40 hover:bg-[#112240]/60 hover:border-[#8B9CB5]/30 cursor-pointer transition-all">
+<div class="flex items-center justify-between">
+<span class="font-headline font-semibold text-xs text-[#8B9CB5] hover:text-white">6. Inverted Delta &amp; Fluvial Science</span>
+<span class="text-[#8B9CB5] font-mono text-[9px]">73%</span>
+</div>
+<p class="text-[11px] text-[#8B9CB5]/80 mt-1 leading-relaxed">Sedimentology &amp; stratigraphy</p>
+</div>
+<!-- Activity 7 -->
+<div class="p-3 rounded-lg border border-[#8B9CB5]/15 bg-[#050811]/40 hover:bg-[#112240]/60 hover:border-[#8B9CB5]/30 cursor-pointer transition-all">
+<div class="flex items-center justify-between">
+<span class="font-headline font-semibold text-xs text-[#8B9CB5] hover:text-white">7. Hyper-Arid Astrobiology &amp; Life Detection</span>
+<span class="text-[#8B9CB5] font-mono text-[9px]">82%</span>
+</div>
+<p class="text-[11px] text-[#8B9CB5]/80 mt-1 leading-relaxed">Biomarker preservation testing</p>
+</div>
+<!-- Activity 8 -->
+<div class="p-3 rounded-lg border border-[#8B9CB5]/15 bg-[#050811]/40 hover:bg-[#112240]/60 hover:border-[#8B9CB5]/30 cursor-pointer transition-all">
+<div class="flex items-center justify-between">
+<span class="font-headline font-semibold text-xs text-[#8B9CB5] hover:text-white">8. Landing Hazard Detection</span>
+<span class="text-[#8B9CB5] font-mono text-[9px]">87%</span>
+</div>
+<p class="text-[11px] text-[#8B9CB5]/80 mt-1 leading-relaxed">Slope distribution &amp; boulder fields</p>
+</div>
+<!-- Activity 9 -->
+<div class="p-3 rounded-lg border border-[#8B9CB5]/15 bg-[#050811]/40 hover:bg-[#112240]/60 hover:border-[#8B9CB5]/30 cursor-pointer transition-all">
+<div class="flex items-center justify-between">
+<span class="font-headline font-semibold text-xs text-[#8B9CB5] hover:text-white">9. ISRU &amp; Regolith Sintering</span>
+<span class="text-[#8B9CB5] font-mono text-[9px]">85%</span>
+</div>
+<p class="text-[11px] text-[#8B9CB5]/80 mt-1 leading-relaxed">Feedstock extraction &amp; thermal processing</p>
+</div>
+<!-- Filter Segment Collapsible -->
+<div class="pt-3 border-t border-[#8B9CB5]/15 space-y-3">
+<div class="flex items-center justify-between cursor-pointer">
+<span class="font-headline text-xs font-semibold text-white tracking-wide uppercase flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px] text-[#00D4AA]">filter_alt</span>
+              Scientific Analog Filters
+            </span>
+<span class="text-[10px] font-mono text-[#00D4AA]">4 ACTIVE</span>
+</div>
+<!-- Filter tags -->
+<div class="space-y-2 text-[11px]">
+<div>
+<span class="text-[#8B9CB5] text-[10px] uppercase font-mono block mb-1">Geology Type</span>
+<div class="flex flex-wrap gap-1.5">
+<span class="px-2 py-0.5 rounded bg-[#00D4AA]/20 text-[#00D4AA] border border-[#00D4AA]/30 text-[10px]">Basaltic</span>
+<span class="px-2 py-0.5 rounded bg-[#112240] text-[#8B9CB5] border border-[#8B9CB5]/15 text-[10px]">Anorthositic</span>
+<span class="px-2 py-0.5 rounded bg-[#112240] text-[#8B9CB5] border border-[#8B9CB5]/15 text-[10px]">Siliciclastic</span>
+</div>
+</div>
+<div>
+<span class="text-[#8B9CB5] text-[10px] uppercase font-mono block mb-1">Geomorphology</span>
+<div class="flex flex-wrap gap-1.5">
+<span class="px-2 py-0.5 rounded bg-[#00D4AA]/20 text-[#00D4AA] border border-[#00D4AA]/30 text-[10px]">Crater Field</span>
+<span class="px-2 py-0.5 rounded bg-[#112240] text-[#8B9CB5] border border-[#8B9CB5]/15 text-[10px]">Dunes</span>
+<span class="px-2 py-0.5 rounded bg-[#00D4AA]/20 text-[#00D4AA] border border-[#00D4AA]/30 text-[10px]">Volcanic Field</span>
+<span class="px-2 py-0.5 rounded bg-[#112240] text-[#8B9CB5] border border-[#8B9CB5]/15 text-[10px]">Periglacial</span>
+</div>
+</div>
+<div>
+<span class="text-[#8B9CB5] text-[10px] uppercase font-mono block mb-1">Data Availability</span>
+<div class="flex flex-wrap gap-1.5">
+<span class="px-2 py-0.5 rounded bg-[#00D4AA]/20 text-[#00D4AA] border border-[#00D4AA]/30 text-[10px]">DEM ≤0.5m</span>
+<span class="px-2 py-0.5 rounded bg-[#00D4AA]/20 text-[#00D4AA] border border-[#00D4AA]/30 text-[10px]">Multispectral</span>
+<span class="px-2 py-0.5 rounded bg-[#112240] text-[#8B9CB5] border border-[#8B9CB5]/15 text-[10px]">Core Samples</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Panel Footer Action -->
+<div class="p-3 border-t border-[#8B9CB5]/15 bg-[#050811]/70 shrink-0">
+<button class="w-full px-3 py-2 rounded-lg border border-[#8B9CB5]/30 bg-[#112240]/60 hover:bg-[#112240] text-white hover:text-[#00D4AA] transition-all flex items-center justify-between text-xs font-headline">
+<div class="flex items-center gap-2 text-left">
+<span class="material-symbols-outlined text-[16px] text-[#00D4AA]">hub</span>
+<div>
+<div class="font-semibold text-white">Multi-Site Portfolio</div>
+<div class="text-[10px] text-[#8B9CB5] font-normal">Cross-cutting analog matrix architectures</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+</aside>
+<!-- ================= RIGHT PANEL: CARTOGRAPHIC MAP & HUD (65%) ================= -->
+<main class="flex-1 relative flex flex-col bg-[#050811] overflow-hidden">
+<!-- Precision Map Canvas HUD Container -->
+<div class="relative flex-1 w-full h-full graticule-grid overflow-hidden bg-[#050811]">
+<!-- Cartographic Map Graphic Vector Layer (MapLibre style aesthetic) -->
+<svg class="absolute inset-0 w-full h-full opacity-60 pointer-events-none" preserveaspectratio="none" viewbox="0 0 1000 600" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<radialgradient cx="50%" cy="50%" id="mapGlow" r="50%">
+<stop offset="0%" stop-color="#112240" stop-opacity="0.8"></stop>
+<stop offset="100%" stop-color="#050811" stop-opacity="0"></stop>
+</radialgradient>
+</defs>
+<!-- Latitude Graticules -->
+<line stroke="#8B9CB5" stroke-dasharray="4,6" stroke-opacity="0.1" x1="0" x2="1000" y1="120" y2="120"></line>
+<line stroke="#8B9CB5" stroke-dasharray="2,4" stroke-opacity="0.15" x1="0" x2="1000" y1="240" y2="240"></line>
+<line stroke="#8B9CB5" stroke-opacity="0.2" x1="0" x2="1000" y1="360" y2="360"></line> <!-- Equator -->
+<line stroke="#8B9CB5" stroke-dasharray="4,6" stroke-opacity="0.1" x1="0" x2="1000" y1="480" y2="480"></line>
+<!-- Longitude Graticules -->
+<line stroke="#8B9CB5" stroke-dasharray="4,6" stroke-opacity="0.1" x1="250" x2="250" y1="0" y2="600"></line>
+<line stroke="#8B9CB5" stroke-opacity="0.18" x1="500" x2="500" y1="0" y2="600"></line> <!-- Prime Meridian -->
+<line stroke="#8B9CB5" stroke-dasharray="4,6" stroke-opacity="0.1" x1="750" x2="750" y1="0" y2="600"></line>
+<!-- Simplified Continent Silhouettes (#112240) -->
+<!-- North America -->
+<path d="M120,80 Q200,60 260,110 T300,220 Q240,260 190,290 T140,240 Q100,160 120,80 Z" fill="#112240" opacity="0.75" stroke="#8B9CB5" stroke-opacity="0.2"></path>
+<!-- South America -->
+<path d="M240,320 Q310,340 330,420 T280,520 Q240,540 230,460 T220,360 Z" fill="#112240" opacity="0.7" stroke="#8B9CB5" stroke-opacity="0.2"></path>
+<!-- Europe & Asia -->
+<path d="M470,90 Q560,70 700,90 T900,160 Q880,260 760,280 T600,240 Q520,210 470,160 Z" fill="#112240" opacity="0.75" stroke="#8B9CB5" stroke-opacity="0.2"></path>
+<!-- Africa -->
+<path d="M480,240 Q570,250 580,340 T540,460 Q490,480 470,390 T460,290 Z" fill="#112240" opacity="0.75" stroke="#8B9CB5" stroke-opacity="0.2"></path>
+<!-- Australia -->
+<path d="M780,380 Q860,370 890,420 T840,490 Q780,480 760,430 Z" fill="#112240" opacity="0.7" stroke="#8B9CB5" stroke-opacity="0.2"></path>
+<!-- Antarctica -->
+<path d="M180,560 Q500,530 820,560 T500,595 Z" fill="#112240" opacity="0.85" stroke="#8B9CB5" stroke-opacity="0.2"></path>
+<!-- Arctic / Greenland / Devon Island -->
+<path d="M280,60 Q340,50 350,90 T290,110 Z" fill="#112240" opacity="0.85" stroke="#8B9CB5" stroke-opacity="0.2"></path>
+<path d="M430,70 Q460,65 470,85 T440,95 Z" fill="#112240" opacity="0.85" stroke="#8B9CB5" stroke-opacity="0.2"></path>
+</svg>
+<!-- Top Map HUD Controls & Coordinates Bar -->
+<div class="absolute top-4 left-4 right-4 flex items-center justify-between pointer-events-auto z-10">
+<div class="flex items-center gap-2 bg-[#0A192F]/90 backdrop-blur-md px-3 py-1.5 rounded-lg border border-[#8B9CB5]/20 shadow-lg">
+<span class="font-mono text-xs text-[#00D4AA] flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px]">my_location</span>
+              35.3071° N, 111.5049° W
+            </span>
+<span class="text-[#8B9CB5]/40">|</span>
+<span class="font-mono text-[11px] text-[#8B9CB5]">ELEV: 2,050m (Floor)</span>
+<span class="text-[#8B9CB5]/40">|</span>
+<span class="font-mono text-[11px] text-[#1E90FF]">PROJECTION: WGS-84 / MERCATOR</span>
+</div>
+<!-- Map Layer Controls -->
+<div class="flex items-center gap-1.5 bg-[#0A192F]/90 backdrop-blur-md p-1 rounded-lg border border-[#8B9CB5]/20 shadow-lg">
+<button class="px-2.5 py-1 rounded bg-[#00D4AA] text-[#050811] text-[11px] font-label font-bold uppercase tracking-wider flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">pin_drop</span>
+              Analog Sites (7)
+            </button>
+<button class="px-2.5 py-1 rounded text-[#8B9CB5] hover:text-white hover:bg-[#112240] text-[11px] font-label uppercase tracking-wider flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[14px]">layers</span>
+              DEM 0.5m
+            </button>
+<button class="px-2.5 py-1 rounded text-[#8B9CB5] hover:text-white hover:bg-[#112240] text-[11px] font-label uppercase tracking-wider flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[14px]">satellite</span>
+              Satellite
+            </button>
+<div class="h-4 w-px bg-[#8B9CB5]/20 mx-1"></div>
+<button class="p-1 rounded text-[#8B9CB5] hover:text-white hover:bg-[#112240]" title="Zoom In">
+<span class="material-symbols-outlined text-[16px]">add</span>
+</button>
+<button class="p-1 rounded text-[#8B9CB5] hover:text-white hover:bg-[#112240]" title="Zoom Out">
+<span class="material-symbols-outlined text-[16px]">remove</span>
+</button>
+<button class="p-1 rounded text-[#8B9CB5] hover:text-white hover:bg-[#112240]" title="Reset View">
+<span class="material-symbols-outlined text-[16px]">center_focus_strong</span>
+</button>
+</div>
+</div>
+<!-- ================= CARTOGRAPHIC MARKERS ================= -->
+<!-- 1. Atacama Desert, Chile (-24.5000, -69.2500) -> approx x=26%, y=68% -->
+<div class="absolute left-[26%] top-[68%] -translate-x-1/2 -translate-y-1/2 group cursor-pointer pointer-events-auto">
+<div class="relative flex items-center justify-center">
+<span class="absolute w-6 h-6 rounded-full bg-[#00D4AA]/20 animate-ping"></span>
+<span class="w-3 h-3 rounded-full bg-[#00D4AA] border-2 border-[#050811] shadow-[0_0_8px_#00D4AA]"></span>
+</div>
+<div class="absolute left-4 top-1/2 -translate-y-1/2 hidden group-hover:flex flex-col bg-[#0A192F] border border-[#8B9CB5]/30 p-2 rounded shadow-xl whitespace-nowrap z-30">
+<span class="font-headline font-semibold text-xs text-white">Atacama Desert, Chile</span>
+<span class="font-mono text-[10px] text-[#00D4AA]">-24.5000°, -69.2500°</span>
+<span class="text-[10px] text-[#8B9CB5]">Hyper-Arid Astrobiology Match: 91%</span>
+</div>
+</div>
+<!-- 2. McMurdo Dry Valleys, Antarctica (-77.5000, 162.5000) -> approx x=84%, y=92% -->
+<div class="absolute left-[84%] top-[92%] -translate-x-1/2 -translate-y-1/2 group cursor-pointer pointer-events-auto">
+<div class="relative flex items-center justify-center">
+<span class="w-2.5 h-2.5 rounded-full bg-[#1E90FF] border-2 border-[#050811] shadow-[0_0_8px_#1E90FF]"></span>
+</div>
+<div class="absolute right-4 top-1/2 -translate-y-1/2 hidden group-hover:flex flex-col bg-[#0A192F] border border-[#8B9CB5]/30 p-2 rounded shadow-xl whitespace-nowrap z-30">
+<span class="font-headline font-semibold text-xs text-white">McMurdo Dry Valleys, Antarctica</span>
+<span class="font-mono text-[10px] text-[#1E90FF]">-77.5000°, 162.5000°</span>
+<span class="text-[10px] text-[#8B9CB5]">Permafrost &amp; Glacial Till Match: 88%</span>
+</div>
+</div>
+<!-- 3. Iceland Volcanic Highlands (64.8000, -18.2000) -> approx x=46%, y=16% -->
+<div class="absolute left-[46%] top-[16%] -translate-x-1/2 -translate-y-1/2 group cursor-pointer pointer-events-auto">
+<div class="relative flex items-center justify-center">
+<span class="w-2.5 h-2.5 rounded-full bg-[#00D4AA] border-2 border-[#050811] shadow-[0_0_8px_#00D4AA]"></span>
+</div>
+<div class="absolute left-4 top-1/2 -translate-y-1/2 hidden group-hover:flex flex-col bg-[#0A192F] border border-[#8B9CB5]/30 p-2 rounded shadow-xl whitespace-nowrap z-30">
+<span class="font-headline font-semibold text-xs text-white">Iceland Volcanic Highlands</span>
+<span class="font-mono text-[10px] text-[#00D4AA]">64.8000°, -18.2000°</span>
+<span class="text-[10px] text-[#8B9CB5]">Basaltic Glaciovolcanic Match: 89%</span>
+</div>
+</div>
+<!-- 4. Hawaii Volcanic Province (19.4200, -155.2800) -> approx x=9%, y=46% -->
+<div class="absolute left-[9%] top-[46%] -translate-x-1/2 -translate-y-1/2 group cursor-pointer pointer-events-auto">
+<div class="relative flex items-center justify-center">
+<span class="w-2.5 h-2.5 rounded-full bg-[#00D4AA] border-2 border-[#050811] shadow-[0_0_8px_#00D4AA]"></span>
+</div>
+<div class="absolute left-4 top-1/2 -translate-y-1/2 hidden group-hover:flex flex-col bg-[#0A192F] border border-[#8B9CB5]/30 p-2 rounded shadow-xl whitespace-nowrap z-30">
+<span class="font-headline font-semibold text-xs text-white">Hawaii Volcanic Province</span>
+<span class="font-mono text-[10px] text-[#00D4AA]">19.4200°, -155.2800°</span>
+<span class="text-[10px] text-[#8B9CB5]">Lava Tube &amp; Basalt Flow Match: 87%</span>
+</div>
+</div>
+<!-- 5. SELECTED SITE: Cinder Lake Crater Field 1 / San Francisco Volcanic Field, AZ (35.3071, -111.5049) -> approx x=21%, y=36% -->
+<div class="absolute left-[21%] top-[36%] -translate-x-1/2 -translate-y-1/2 pointer-events-auto z-30">
+<div class="relative flex items-center justify-center">
+<!-- Pulsing Reticle Target -->
+<span class="absolute w-12 h-12 rounded-full border border-[#00D4AA]/40 animate-ping"></span>
+<span class="absolute w-8 h-8 rounded-full border border-[#00D4AA]/80 animate-pulse"></span>
+<span class="w-4 h-4 rounded-full bg-[#00D4AA] border-2 border-white shadow-[0_0_14px_#00D4AA]"></span>
+<!-- Reticle Crosshairs -->
+<div class="absolute w-14 h-px bg-[#00D4AA]/60 pointer-events-none"></div>
+<div class="absolute h-14 w-px bg-[#00D4AA]/60 pointer-events-none"></div>
+</div>
+<!-- Active Floating Tag -->
+<div class="absolute left-6 top-0 -translate-y-1/2 bg-[#0A192F]/95 border-2 border-[#00D4AA] px-3 py-1.5 rounded-lg shadow-[0_0_20px_rgba(0,212,170,0.3)] whitespace-nowrap flex items-center gap-2">
+<span class="inline-block w-2 h-2 rounded-full bg-[#00D4AA] animate-pulse"></span>
+<div>
+<div class="font-headline font-bold text-xs text-white flex items-center gap-1.5">
+                Cinder Lake Crater Field 1
+                <span class="px-1 py-0.2 bg-[#00D4AA]/20 text-[#00D4AA] text-[9px] rounded font-mono">SELECTED</span>
+</div>
+<div class="font-mono text-[10px] text-[#8B9CB5]">35.3071° N, 111.5049° W · 96% Match</div>
+</div>
+</div>
+</div>
+<!-- 6. Utah San Rafael Swell / MDRS (38.4064, -110.7924) -> approx x=22.5%, y=33.5% -->
+<div class="absolute left-[22.5%] top-[33.5%] -translate-x-1/2 -translate-y-1/2 group cursor-pointer pointer-events-auto">
+<div class="relative flex items-center justify-center">
+<span class="w-2.5 h-2.5 rounded-full bg-[#FF6B35] border-2 border-[#050811] shadow-[0_0_8px_#FF6B35]"></span>
+</div>
+<div class="absolute left-4 top-1/2 -translate-y-1/2 hidden group-hover:flex flex-col bg-[#0A192F] border border-[#8B9CB5]/30 p-2 rounded shadow-xl whitespace-nowrap z-30">
+<span class="font-headline font-semibold text-xs text-white">Utah San Rafael Swell / MDRS</span>
+<span class="font-mono text-[10px] text-[#FF6B35]">38.4064°, -110.7924°</span>
+<span class="text-[10px] text-[#8B9CB5]">Inverted Fluvial Channels Match: 83%</span>
+</div>
+</div>
+<!-- 7. Devon Island, Canadian Arctic (75.3333, -89.6667) -> approx x=28%, y=12% -->
+<div class="absolute left-[28%] top-[12%] -translate-x-1/2 -translate-y-1/2 group cursor-pointer pointer-events-auto">
+<div class="relative flex items-center justify-center">
+<span class="w-2.5 h-2.5 rounded-full bg-[#00D4AA] border-2 border-[#050811] shadow-[0_0_8px_#00D4AA]"></span>
+</div>
+<div class="absolute left-4 top-1/2 -translate-y-1/2 hidden group-hover:flex flex-col bg-[#0A192F] border border-[#8B9CB5]/30 p-2 rounded shadow-xl whitespace-nowrap z-30">
+<span class="font-headline font-semibold text-xs text-white">Devon Island, Canadian Arctic</span>
+<span class="font-mono text-[10px] text-[#00D4AA]">75.3333°, -89.6667°</span>
+<span class="text-[10px] text-[#8B9CB5]">Haughton Impact Crater Match: 92%</span>
+</div>
+</div>
+<!-- Bottom Compass & Scale HUD in Map -->
+<div class="absolute bottom-52 left-6 pointer-events-none flex items-center gap-4 text-[#8B9CB5]/60 font-mono text-[10px]">
+<div class="flex items-center gap-1.5 border border-[#8B9CB5]/20 px-2 py-1 rounded bg-[#0A192F]/60 backdrop-blur">
+<span class="material-symbols-outlined text-[14px] text-[#00D4AA]">explore</span>
+<span>NORTH 000°</span>
+</div>
+<div class="flex flex-col items-center">
+<div class="w-24 h-1 border-b-2 border-l-2 border-r-2 border-[#8B9CB5]/40"></div>
+<span>1,000 KM</span>
+</div>
+</div>
+</div>
+<!-- ================= CANDIDATE SUMMARY PANEL (Docked Floating Sheet) ================= -->
+<section class="w-full bg-[#0A192F]/95 backdrop-blur-md border-t border-[#8B9CB5]/25 px-6 py-4 z-40 shadow-2xl shrink-0">
+<div class="max-w-7xl mx-auto flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+<!-- Candidate Identification & Provenance -->
+<div class="space-y-1.5 max-w-xl">
+<div class="flex items-center gap-2.5 flex-wrap">
+<span class="px-2 py-0.5 rounded bg-[#00D4AA]/20 text-[#00D4AA] font-mono text-[10px] font-bold tracking-wider uppercase border border-[#00D4AA]/30">PRIMARY ANALOG MATCH</span>
+<span class="px-2 py-0.5 rounded bg-[#FFB800]/15 text-[#FFB800] font-mono text-[9px] border border-[#FFB800]/30 font-bold">ILLUSTRATIVE DEMO VALUES</span>
+<span class="px-2 py-0.5 rounded bg-[#00D4AA]/10 text-[#00D4AA] font-mono text-[10px] border border-[#00D4AA]/20 flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-[#00D4AA]"></span>
+                HIGH CONFIDENCE (C = 0.91)
+              </span>
+<span class="text-xs font-mono text-[#8B9CB5]">35.3071°N, 111.5049°W</span>
+</div>
+<h3 class="font-headline font-bold text-lg text-white tracking-tight">
+              Cinder Lake Crater Field 1 — San Francisco Volcanic Field, Arizona, USA
+            </h3>
+<!-- Quick Stats Row -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1 font-mono text-[11px]">
+<div><span class="text-[#8B9CB5]">ELEVATION:</span> <span class="text-white">2,050 m (Basin floor; terrain up to 2,130m)</span></div>
+<div><span class="text-[#8B9CB5]">CLIMATE:</span> <span class="text-white">Semi-Arid</span></div>
+<div><span class="text-[#8B9CB5]">GEOLOGY:</span> <span class="text-white">Basaltic Cinder</span></div>
+<div><span class="text-[#8B9CB5]">SURFACE AGE:</span> <span class="text-white">1064 CE</span></div>
+</div>
+<!-- Provenance & DOI -->
+<div class="pt-1 flex items-center gap-2 text-[10px] font-mono text-[#8B9CB5]">
+<span class="material-symbols-outlined text-[13px] text-[#00D4AA]">verified</span>
+<span>NASA Apollo Field Geology · USGS Astrogeology Node</span>
+<span class="text-[#1E90FF]">Ref: USGS Open-File Report 68-24 · NASA CR-101740</span>
+</div>
+</div>
+<!-- Suitability Telemetry Breakdown -->
+<div class="bg-[#112240] p-3 rounded-lg border border-[#8B9CB5]/20 min-w-[280px] lg:min-w-[340px] space-y-2">
+<div class="flex items-center justify-between text-xs">
+<span class="font-headline font-semibold text-white">Analog Suitability Matrix</span>
+<span class="font-mono text-[#00D4AA] font-bold">OVERALL: 96% <span class="text-[9px] text-[#FFB800] font-normal">(ILLUSTRATIVE)</span></span>
+</div>
+<!-- Segmented Telemetry Indicator Bars -->
+<div class="space-y-1.5 text-[10px] font-mono">
+<div>
+<div class="flex justify-between text-[#8B9CB5] mb-0.5">
+<span>Mission-Specific Terramechanics</span>
+<span class="text-[#00D4AA]">96%</span>
+</div>
+<div class="w-full bg-[#050811] h-1.5 rounded-full overflow-hidden">
+<div class="bg-[#00D4AA] h-full rounded-full" style="width: 96%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-[#8B9CB5] mb-0.5">
+<span>Geological Resemblance</span>
+<span class="text-white">94%</span>
+</div>
+<div class="w-full bg-[#050811] h-1.5 rounded-full overflow-hidden">
+<div class="bg-[#1E90FF] h-full rounded-full" style="width: 94%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-[#8B9CB5] mb-0.5">
+<span>Geomorphological Fidelity</span>
+<span class="text-white">92%</span>
+</div>
+<div class="w-full bg-[#050811] h-1.5 rounded-full overflow-hidden">
+<div class="bg-[#1E90FF] h-full rounded-full" style="width: 92%"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- CTAs -->
+<div class="flex sm:flex-col justify-end gap-2 shrink-0">
+<button class="px-5 py-2.5 rounded bg-[#00D4AA] hover:bg-[#00D4AA]/90 text-[#050811] font-label font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(0,212,170,0.3)] transition-all">
+<span>Open Terrain Studio</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+<button class="px-5 py-2 rounded bg-transparent hover:bg-[#112240] border border-[#8B9CB5]/30 text-white hover:text-[#00D4AA] font-label text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all">
+<span class="material-symbols-outlined text-[15px]">compare_arrows</span>
+<span>View Reality Gap</span>
+</button>
+</div>
+</div>
+</section>
+</main>
+</div>
+<!-- ================= BOTTOM TELEMETRY STATUS BAR ================= -->
+<footer class="h-8 bg-[#050811] border-t border-[#8B9CB5]/15 px-6 flex items-center justify-between text-[11px] font-mono text-[#8B9CB5] shrink-0 z-50">
+<div class="flex items-center gap-6 overflow-hidden text-ellipsis whitespace-nowrap">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-[#00D4AA]"></span>
+<span class="text-white">SELECTED MISSION:</span>
+<span class="text-[#00D4AA]">Lunar South Pole Rover Mobility</span>
+</div>
+<div class="hidden md:flex items-center gap-1.5">
+<span class="text-white">SITES MATCHING:</span>
+<span class="text-[#00D4AA] font-bold">5 of 7</span>
+</div>
+<div class="hidden lg:flex items-center gap-1.5">
+<span class="text-white">DATA COVERAGE:</span>
+<span class="text-[#00D4AA]">High (LIDAR + Hyperspectral)</span>
+</div>
+</div>
+<div class="flex items-center gap-4 shrink-0 text-xs">
+<span class="hidden sm:inline text-[#8B9CB5]">NODE: FLAGSTAFF_AZ</span>
+<div class="flex items-center gap-1.5 text-[#00D4AA]">
+<span class="material-symbols-outlined text-[14px]">cloud_done</span>
+<span>SYNCHRONIZED</span>
+</div>
+<span class="text-[#8B9CB5]/40">|</span>
+<span>v2.4-SCI</span>
+</div>
+</footer>
+</body></html>
