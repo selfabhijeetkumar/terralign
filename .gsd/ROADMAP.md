@@ -73,8 +73,8 @@ updated: "2026-11-12T01:35:00+05:30"
 - **Objective:** Build the functional Next.js 15 application, Three.js/R3F hardware-accelerated terrain canvas, MapLibre 2D spatial view, suitability calculation API, and export engine.
 - **Depends on:** Phase 2
 - **Key Plans:**
-  - Plan 3.1: Next.js 15 Scaffold (Task 3.1.1 [x]), ApplicationShell & TopNavBar (Task 3.1.2 [x]), Zustand Store (Task 3.1.3 [ ]).
-  - Plan 3.2: 7 Flagship Analog Site Database & Filter Engine (`/api/analogs`).
+  - Plan 3.1: Next.js 15 Scaffold (Task 3.1.1 [x]), ApplicationShell & TopNavBar (Task 3.1.2 [x]), Zustand Store (Task 3.1.3 [x]).
+  - Plan 3.2: 7 Flagship Analog Site Database & Filter Engine (`/api/analogs`) (In Progress).
   - Plan 3.3: Interactive 3D Terrain & Lunar South Pole Lighting Canvas (R3F).
   - Plan 3.4: Analog Reality Gap (ARG) Panel & Portfolio Optimizer.
 

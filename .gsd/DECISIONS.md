@@ -218,3 +218,20 @@
   4. **Task 3.1.3 Gate Unlocked**: Immediate progression to Wave 3.1, Task 3.1.3 (`useMissionStore.ts` Zustand 5.x state management).
 - **Consequences**: Unblocks rapid, disciplined continuous execution across Waves 3.1, 3.2, 3.3, 3.4, and Phase 4. Task-wise verification and atomic commits remain strictly mandatory.
 - **Alternatives Considered**: Halting at every individual atomic task for manual authorization prompts (rejected: explicitly waived by Product Lead master build directive).
+
+---
+
+## [DEC-017] Zustand 5.x Mission State Management Implementation (Task 3.1.3)
+
+- **Date**: 2026-11-14
+- **Status**: Accepted & Verified
+- **Context**: Wave 3.1, Task 3.1.3 requires reactive state coordination across all four core screens, supporting 60 Hz dual-viewport WebGL rendering in Wave 3.3 without full-tree re-render thrashing.
+- **Decision**:
+  1. Installed `zustand@^5.1.0` (zero sub-dependencies, ~1.1 KB gzipped).
+  2. Implemented `src/types/store.ts` and `src/store/useMissionStore.ts` partitioning state into 4 slices: `MissionSlice`, `SelectionSlice`, `TerrainSlice`, and `PortfolioSlice`.
+  3. Added input bounds clamping for lunar low-angle solar elevation ($[0.0, 5.0]^\circ$) and modular degree wrapping ($[0, 360]^\circ$).
+  4. Provided optimized selector hooks to decouple high-frequency 3D viewport state from static layout controls.
+  5. Kept state strictly session-only (no unneeded local storage persistence).
+  6. Verified via 8-test unit suite (`scripts/test-store.mjs`), TypeScript `tsc --noEmit` (exit 0), and Next.js build (exit 0, 7 pages). Gzip First Load JS remains 109.17 KB ($39.35\%$ under the 180 KB limit).
+- **Consequences**: Provides unified, type-safe, low-overhead reactive state for all subsequent Phase 3 waves.
+- **Alternatives Considered**: React Context (rejected: causes full-tree re-renders at 60 Hz); Redux Toolkit (rejected: excessive boilerplate and bundle size).

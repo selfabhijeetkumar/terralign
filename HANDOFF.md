@@ -162,6 +162,6 @@ When opening this repository in a fresh environment:
 
 ## 6. Exact Next Action for Resuming Agent
 
-1. **Task 3.1.2 ApplicationShell & TopNavBar Completed & Verified**: Recommended for formal closure (`docs/governance/task-3.1.2-final-verification-and-closure-report.md`).
-2. **Task 3.1.3 Authorization Prepared**: Complete implementation plan and formal authorization request prepared at `docs/governance/task-3.1.3-authorization-request.md`.
-3. **Phase 3 Scope Gate Enforced**: Task 3.1.3 (`useMissionStore.ts` Zustand store) remains **STRICTLY LOCKED** awaiting explicit written Product Lead authorization. Do not install `zustand` or write code until authorized.
+1. **Wave 3.1 Foundation Completed & Verified**: Next.js 15 App Router scaffold (3.1.1), `ApplicationShell` + `TopNavBar` (3.1.2), and Zustand reactive store `useMissionStore.ts` (3.1.3) fully implemented, tested, and committed.
+2. **Standing Authorization Active**: `TERRALIGN-GOV-AUTH-002` active for all remaining Phase 3 and Phase 4 MVP tasks.
+3. **Resuming Task**: Execute Wave 3.2, Task 3.2.1: Bundle 7 Flagship Analog Profiles & 30-Parameter RVM JSON Dataset (`data/analogs.json`, `data/rvm.json`, TypeScript schemas, and query API).
