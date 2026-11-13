@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import ApplicationShell from "@/components/layout/Shell";
 
 export const metadata: Metadata = {
   title: "TERRALIGN — Where Earth Meets Other Worlds",
@@ -15,7 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className="bg-space-bg text-text-primary antialiased min-h-screen">
-        {children}
+        <ApplicationShell>{children}</ApplicationShell>
       </body>
     </html>
   );

@@ -49,6 +49,23 @@
 
 ---
 
+## 4. Addendum A & B: Baseline Commit & Task 3.1.2 Authorizations
+
+### 4.1 Authorization A: Initial Git Baseline Commit
+- **Authorization Reference:** `TERRALIGN-GOV-AUTH-002A`
+- **Authorized Scope:** Staging and initial commit of verified Task 3.1.1 baseline files on branch `master`.
+- **Approved Commit Message:** `chore(terralign): establish verified Next.js foundation baseline`
+- **Commit Result:** Root commit `adcc017` created containing 200 verified baseline files (excluding secrets, build artifacts, and external utilities).
+- **Working Tree:** Verified clean post-commit.
+
+### 4.2 Authorization B: Wave 3.1, Task 3.1.2 Implementation
+- **Authorization Reference:** `TERRALIGN-GOV-AUTH-002B`
+- **Authorized Scope:** `Wave 3.1, Task 3.1.2: Implement ApplicationShell, TopNavBar & Dark Space Navigation Tokens`.
+- **Scope Limitation:** Strictly limited to Task 3.1.2. Does NOT authorize Task 3.1.3 or any subsequent tasks.
+- **Execution Result:** Verified implementation of `ApplicationShell` (`src/components/layout/Shell.tsx`), `TopNavBar` (`src/components/layout/TopNavBar.tsx`), and 4-screen routing (`/`, `/terrain`, `/reality-gap`, `/portfolio`). Zero dependencies added to `package.json`. TypeScript and production build pass with zero errors.
+
+---
+
 *Record officially sealed in repository governance archives.*  
 *Signed: Abhijeet Kumar, Product Lead — TERRALIGN*
 

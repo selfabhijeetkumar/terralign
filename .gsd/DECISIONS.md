@@ -185,3 +185,36 @@
   4. Updated `docs/design/prm-114-final-approval-register.md`, `.gsd/STATE.md`, `.gsd/ROADMAP.md`, `HANDOFF.md`, and `AI-CONTEXT.md`.
 - **Consequences**: Implementation commences under strict GSD v1.6.0 and Ponytail FULL governance. Eliminates scope creep and guarantees clean atomic task execution.
 - **Alternatives Considered**: Authorizing the entire Phase 3 in a single unmonitored block (rejected: violates GSD atomic task gate discipline).
+
+---
+
+## [DEC-015] Git Baseline Commit (`adcc017`) & Wave 3.1 Task 3.1.2 Scope Execution
+
+- **Date**: 2026-11-13
+- **Status**: Accepted & Verified
+- **Context**: Product Lead granted two explicit written authorizations: (A) Authorization to create the initial Git baseline commit preserving verified Task 3.1.1 deliverables while excluding secrets, build artifacts, and external utilities (`gemini-web2api/`); (B) Authorization to implement Wave 3.1, Task 3.1.2 (`ApplicationShell`, `TopNavBar` & Dark Space Navigation Tokens).
+- **Decision**:
+  1. **Git Baseline Established**: Staged 200 verified baseline files and created initial root commit `adcc017` (`chore(terralign): establish verified Next.js foundation baseline`) on branch `master`. Working tree reconciled and verified.
+  2. **ApplicationShell Created**: Implemented `src/components/layout/Shell.tsx` providing WCAG 2.2 Level AA keyboard skip-link, top app bar integration, and resilient scrollable main viewport canvas.
+  3. **TopNavBar Created**: Implemented `src/components/layout/TopNavBar.tsx` featuring dynamic active-tab routing across the 4 screens (`/`, `/terrain`, `/reality-gap`, `/portfolio`), telemetry sync indicator (`USGS-ASTRO: SYNCED`), quick utility cluster, primary launch CTA, and mobile hamburger drawer navigation.
+  4. **4-Screen Routing Connected**: Provided clean view containers for `/terrain`, `/reality-gap`, and `/portfolio` alongside `/` (Mission Command), enabling real cross-screen tab navigation.
+  5. **Ponytail FULL Compliance**: Added zero new dependencies to `package.json`. Reused Tailwind Dark Space tokens and native inline SVGs.
+  6. **Empirical Verification**: TypeScript `tsc --noEmit` exited with code 0 (zero errors); Next.js `next build` compiled 7 static pages in 6.2s with individual route First Load JS measured at 106 kB ($41.1\%$ under the $<180\text{ KB}$ ceiling).
+  7. **Scope Confinement**: Task 3.1.3 (`useMissionStore.ts`) remains strictly locked.
+- **Consequences**: Complete navigation foundation is operational, type-safe, accessible, and verified.
+- **Alternatives Considered**: Installing third-party component libraries or icon packages (rejected: violates Ponytail FULL zero-bloat principle).
+
+---
+
+## [DEC-016] Permanent Standing Product Lead Scope Authorization & Task 3.1.2 Formal Closure
+
+- **Date**: 2026-11-13
+- **Status**: Accepted & Authorized
+- **Context**: Product Lead Abhijeet Kumar issued standing authorization `TERRALIGN-GOV-AUTH-002` granting comprehensive approval for all remaining planned TERRALIGN MVP development tasks across Phase 3 and Phase 4 under GSD v1.6.0 and Ponytail FULL governance. Task 3.1.2 completed independent audit with verdict `VERIFIED WITH WARNINGS` and all warnings dispositioned.
+- **Decision**:
+  1. **Standing Authorization Activated**: Recorded `TERRALIGN-GOV-AUTH-002` in `docs/governance/standing-product-lead-authorization.md`. Autonomous progression through remaining roadmap tasks is now active. Repetitive task-level authorization stops are waived for all tasks within approved scope.
+  2. **Task 3.1.2 Formally Closed**: Marked Wave 3.1, Task 3.1.2 (`ApplicationShell`, `TopNavBar`, 4-screen routing) as **CLOSED**. Empirical verification confirmed: TypeScript exit 0, Next.js build exit 0 (7 static pages), measured gzip bundle 109.17 KB (<180 KB ceiling), Category A/B accessibility passed. Category C (live browser) preserved for Phase 4 QA.
+  3. **Task 3.1.2 Staging & Commit Authorized**: All verified Task 3.1.2 implementation and audit documentation staged and committed to Git on branch `master`.
+  4. **Task 3.1.3 Gate Unlocked**: Immediate progression to Wave 3.1, Task 3.1.3 (`useMissionStore.ts` Zustand 5.x state management).
+- **Consequences**: Unblocks rapid, disciplined continuous execution across Waves 3.1, 3.2, 3.3, 3.4, and Phase 4. Task-wise verification and atomic commits remain strictly mandatory.
+- **Alternatives Considered**: Halting at every individual atomic task for manual authorization prompts (rejected: explicitly waived by Product Lead master build directive).
