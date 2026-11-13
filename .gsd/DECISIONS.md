@@ -235,3 +235,19 @@
   6. Verified via 8-test unit suite (`scripts/test-store.mjs`), TypeScript `tsc --noEmit` (exit 0), and Next.js build (exit 0, 7 pages). Gzip First Load JS remains 109.17 KB ($39.35\%$ under the 180 KB limit).
 - **Consequences**: Provides unified, type-safe, low-overhead reactive state for all subsequent Phase 3 waves.
 - **Alternatives Considered**: React Context (rejected: causes full-tree re-renders at 60 Hz); Redux Toolkit (rejected: excessive boilerplate and bundle size).
+
+---
+
+## [DEC-018] Flagship Knowledge Base, Vector Cartography & Mission Command (Wave 3.2)
+
+- **Date**: 2026-11-14
+- **Status**: Accepted & Verified
+- **Context**: Screen 01 (Global Mission Command) requires global site discovery across the 7 flagship analogs, standardized 9 surface exploration activities, 30 NASA-informed RVM requirements, and low-latency interaction without external tile server dependencies.
+- **Decision**:
+  1. Bundled verified scientific datasets in `data/analogs.json` (7 sites with WGS84 coordinates, elevations, and citations) and `data/rvm.json` (30 requirements with exact PRM-113 reconciled portfolio math: $k=2 \rightarrow 63.3\%$, $k=3 \rightarrow 78.3\%$).
+  2. Implemented lightweight equirectangular SVG cartographic map (`DiscoveryMap.tsx`) providing offline safety, zero MapTiler token dependency, and immediate telemetry HUD integration.
+  3. Built `ActivitySelector.tsx` and `CandidateSummaryDrawer.tsx` bound directly to `useMissionStore`.
+  4. Created Next.js API endpoint `GET /api/analogs`.
+  5. Verified via 5-test unit suite (`scripts/test-analogs-rvm.mjs`), TypeScript `tsc --noEmit` (exit 0), and Next.js build (exit 0, 8 routes). First Load JS measured at 121.43 KB ($32.54\%$ under the 180 KB ceiling).
+- **Consequences**: Screen 01 is fully functional and scientifically grounded with zero external API dependencies.
+- **Alternatives Considered**: Heavy MapLibre WebGL vector tile runtime (rejected under Ponytail FULL: adds ~250 KB bundle weight and requires external API keys).

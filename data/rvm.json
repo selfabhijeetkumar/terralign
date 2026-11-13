@@ -1,0 +1,736 @@
+[
+  {
+    "id": "RVM-MEC-001",
+    "code": "MEC-01",
+    "name": "Regolith Sinkage & Slip Terramechanics",
+    "description": "Loose unconsolidated regolith bearing strength under rover wheel loading and track shear",
+    "category": "mechanical",
+    "standardReference": "NASA SP-2016-6105 / Bekker-Wong Terramechanics Framework",
+    "targetMetric": "Cone Index qc = 50-200 kPa; slip ratio s < 0.25",
+    "targetTolerance": "±15%",
+    "isInvariantGap": false,
+    "coveredBySiteIds": [
+      "cinder-lake",
+      "hawaii-mauna-kea",
+      "utah-san-rafael",
+      "haughton-crater"
+    ],
+    "fidelityScoresBySite": {
+      "cinder-lake": 0.9,
+      "askja-caldera": 0.6,
+      "atacama-desert": 0.4,
+      "mcmurdo-dry-valleys": 0.65,
+      "hawaii-mauna-kea": 0.82,
+      "utah-san-rafael": 0.78,
+      "haughton-crater": 0.85
+    }
+  },
+  {
+    "id": "RVM-MEC-002",
+    "code": "MEC-02",
+    "name": "Crater Rim Slope Negotiation (>18°)",
+    "description": "Steep slope stability and wheel drawbar pull on loose basaltic scree angles up to 25°",
+    "category": "mechanical",
+    "standardReference": "NASA Artemis LTV Functional Requirements Document",
+    "targetMetric": "Slope angle ≥ 18° with sinkage < 40mm",
+    "targetTolerance": "±2°",
+    "isInvariantGap": false,
+    "coveredBySiteIds": [
+      "cinder-lake",
+      "hawaii-mauna-kea",
+      "utah-san-rafael",
+      "haughton-crater"
+    ],
+    "fidelityScoresBySite": {
+      "cinder-lake": 0.9,
+      "askja-caldera": 0.6,
+      "atacama-desert": 0.4,
+      "mcmurdo-dry-valleys": 0.62,
+      "hawaii-mauna-kea": 0.84,
+      "utah-san-rafael": 0.72,
+      "haughton-crater": 0.91
+    }
+  },
+  {
+    "id": "RVM-MEC-003",
+    "code": "MEC-03",
+    "name": "Boulder Hazard Density & Obstacle Traversal",
+    "description": "Spatial density distribution of meter-scale blocky obstacles for autonomous navigation",
+    "category": "mechanical",
+    "standardReference": "NASA SP-8098 / Lunar Surface Models",
+    "targetMetric": "Cumulative boulder fractional area Cf = 0.05 - 0.15",
+    "targetTolerance": "±0.03",
+    "isInvariantGap": false,
+    "coveredBySiteIds": [
+      "askja-caldera",
+      "mcmurdo-dry-valleys",
+      "hawaii-mauna-kea",
+      "haughton-crater"
+    ],
+    "fidelityScoresBySite": {
+      "cinder-lake": 0.45,
+      "askja-caldera": 0.9,
+      "atacama-desert": 0.4,
+      "mcmurdo-dry-valleys": 0.7,
+      "hawaii-mauna-kea": 0.78,
+      "utah-san-rafael": 0.64,
+      "haughton-crater": 0.89
+    }
+  },
+  {
+    "id": "RVM-MEC-004",
+    "code": "MEC-04",
+    "name": "Subsurface Cryogenic Regolith Compaction",
+    "description": "Resistance of ice-cemented permafrost to rotary-percussive penetration and coring",
+    "category": "mechanical",
+    "standardReference": "NASA VIPER Drill Subsystem Verification Matrix",
+    "targetMetric": "Compressive strength 5 - 25 MPa at 10-50cm depth",
+    "targetTolerance": "±3 MPa",
+    "isInvariantGap": false,
+    "coveredBySiteIds": [
+      "mcmurdo-dry-valleys",
+      "haughton-crater"
+    ],
+    "fidelityScoresBySite": {
+      "cinder-lake": 0.25,
+      "askja-caldera": 0.3,
+      "atacama-desert": 0.5,
+      "mcmurdo-dry-valleys": 0.97,
+      "hawaii-mauna-kea": 0.2,
+      "utah-san-rafael": 0.15,
+      "haughton-crater": 0.88
+    }
+  },
+  {
+    "id": "RVM-MEC-005",
+    "code": "MEC-05",
+    "name": "Reduced Gravity Dynamics Offset (0.166g / 0.38g)",
+    "description": "Dynamic traction and suspension behavior under non-terrestrial gravitational acceleration",
+    "category": "mechanical",
+    "standardReference": "Physical Invariant (Earth 1.0g vs Lunar 0.166g / Mars 0.38g)",
+    "targetMetric": "g = 1.62 m/s² (Moon) / 3.72 m/s² (Mars)",
+    "targetTolerance": "Exact constant",
+    "isInvariantGap": true,
+    "coveredBySiteIds": [],
+    "fidelityScoresBySite": {
+      "cinder-lake": 0,
+      "askja-caldera": 0,
+      "atacama-desert": 0,
+      "mcmurdo-dry-valleys": 0,
+      "hawaii-mauna-kea": 0,
+      "utah-san-rafael": 0,
+      "haughton-crater": 0
+    }
+  },
+  {
+    "id": "RVM-MEC-006",
+    "code": "MEC-06",
+    "name": "Electrostatic Dust Adhesion & Abrasive Wear",
+    "description": "Pristine vacuum regolith micro-abrasion and electrostatic surface charging on solar arrays",
+    "category": "mechanical",
+    "standardReference": "NASA-STD-3001 / Dust Mitigation Requirements",
+    "targetMetric": "Glassy submicron abrasive fraction with active triboelectric charge",
+    "targetTolerance": "Qualitative proxy",
+    "isInvariantGap": false,
+    "coveredBySiteIds": [
+      "cinder-lake",
+      "hawaii-mauna-kea"
+    ],
+    "fidelityScoresBySite": {
+      "cinder-lake": 0.9,
+      "askja-caldera": 0.6,
+      "atacama-desert": 0.4,
+      "mcmurdo-dry-valleys": 0.4,
+      "hawaii-mauna-kea": 0.78,
+      "utah-san-rafael": 0.52,
+      "haughton-crater": 0.6
+    }
+  },
+  {
+    "id": "RVM-OPT-001",
+    "code": "OPT-01",
+    "name": "Extreme Low-Angle Solar Grazing Illumination (0°-5°)",
+    "description": "Persistent dynamic deep shadow casting and high-contrast glare across crater morphology",
+    "category": "optical",
+    "standardReference": "Artemis III Science Definition Report / Polar Illumination",
+    "targetMetric": "Sun elevation 0.0° - 5.0° above horizon plane",
+    "targetTolerance": "±0.2°",
+    "isInvariantGap": false,
+    "coveredBySiteIds": [
+      "cinder-lake",
+      "mcmurdo-dry-valleys",
+      "hawaii-mauna-kea",
+      "haughton-crater"
+    ],
+    "fidelityScoresBySite": {
+      "cinder-lake": 0.9,
+      "askja-caldera": 0.6,
+      "atacama-desert": 0.4,
+      "mcmurdo-dry-valleys": 0.72,
+      "hawaii-mauna-kea": 0.85,
+      "utah-san-rafael": 0.48,
+      "haughton-crater": 0.9
+    }
+  },
+  {
+    "id": "RVM-OPT-002",
+    "code": "OPT-02",
+    "name": "High-Contrast Shadow Floor Contrast Ratio",
+    "description": "Zero atmospheric Rayleigh scattering deep shadow dark floors vs blazing rim highlights",
+    "category": "optical",
+    "standardReference": "NASA SP-8084 / Lunar Surface Optical Properties",
+    "targetMetric": "Dynamic range > 100,000:1 without diffuse sky fill",
+    "targetTolerance": "Simulation requirement",
+    "isInvariantGap": false,
+    "coveredBySiteIds": [
+      "cinder-lake",
+      "mcmurdo-dry-valleys",
+      "hawaii-mauna-kea",
+      "haughton-crater"
+    ],
+    "fidelityScoresBySite": {
+      "cinder-lake": 0.9,
+      "askja-caldera": 0.6,
+      "atacama-desert": 0.4,
+      "mcmurdo-dry-valleys": 0.7,
+      "hawaii-mauna-kea": 0.82,
+      "utah-san-rafael": 0.55,
+      "haughton-crater": 0.78
+    }
+  },
+  {
+    "id": "RVM-OPT-003",
+    "code": "OPT-03",
+    "name": "Albedo Forward-Scattering & Heiligenschein",
+    "description": "Opposition surge retroreflection and forward-scatter albedo of fine volcanic ash",
+    "category": "optical",
+    "standardReference": "Hapke Photometric Model for Planetary Regolith",
+    "targetMetric": "Phase angle 0° - 30° surge peak factor > 2.0",
+    "targetTolerance": "±0.3",
+    "isInvariantGap": false,
+    "coveredBySiteIds": [
+      "cinder-lake",
+      "hawaii-mauna-kea"
+    ],
+    "fidelityScoresBySite": {
+      "cinder-lake": 0.9,
+      "askja-caldera": 0.6,
+      "atacama-desert": 0.4,
+      "mcmurdo-dry-valleys": 0.5,
+      "hawaii-mauna-kea": 0.84,
+      "utah-san-rafael": 0.45,
+      "haughton-crater": 0.65
+    }
+  },
+  {
+    "id": "RVM-OPT-004",
+    "code": "OPT-04",
+    "name": "Multispectral Basaltic Mineral Band Matching",
+    "description": "Visible to near-infrared (VNIR) 1μm and 2μm pyroxene/olivine absorption band verification",
+    "category": "optical",
+    "standardReference": "NASA PDS CRISM / M3 Spectroscopy Standards",
+    "targetMetric": "Band center 1.05μm ± 0.02μm; depth ≥ 12%",
+    "targetTolerance": "±2%",
+    "isInvariantGap": false,
+    "coveredBySiteIds": [
+      "cinder-lake",
+      "mcmurdo-dry-valleys",
+      "hawaii-mauna-kea",
+      "haughton-crater"
+    ],
+    "fidelityScoresBySite": {
+      "cinder-lake": 0.9,
+      "askja-caldera": 0.6,
+      "atacama-desert": 0.4,
+      "mcmurdo-dry-valleys": 0.75,
+      "hawaii-mauna-kea": 0.92,
+      "utah-san-rafael": 0.5,
+      "haughton-crater": 0.7
+    }
+  },
+  {
+    "id": "RVM-OPT-005",
+    "code": "OPT-05",
+    "name": "Subterranean Lava Tube Low-Light Optical Sensing",
+    "description": "Laser LiDAR reflectivity and active illumination imaging in pitch-black volcanic conduits",
+    "category": "optical",
+    "standardReference": "NASA Lunar Cave Reconnaissance Study",
+    "targetMetric": "Zero ambient photons; cave wall reflectivity 0.08 - 0.15",
+    "targetTolerance": "±0.02",
+    "isInvariantGap": false,
+    "coveredBySiteIds": [
+      "askja-caldera",
+      "hawaii-mauna-kea"
+    ],
+    "fidelityScoresBySite": {
+      "cinder-lake": 0.45,
+      "askja-caldera": 0.9,
+      "atacama-desert": 0.4,
+      "mcmurdo-dry-valleys": 0.1,
+      "hawaii-mauna-kea": 0.97,
+      "utah-san-rafael": 0.05,
+      "haughton-crater": 0.12
+    }
+  },
+  {
+    "id": "RVM-OPT-006",
+    "code": "OPT-06",
+    "name": "Solar Irradiance Flux Disparity (ΔI)",
+    "description": "Unattenuated top-of-atmosphere solar flux at 1 AU (1361 W/m²) vs terrestrial AM1.5",
+    "category": "optical",
+    "standardReference": "ASTM G173-03 / TSIS-1 Solar Irradiance",
+    "targetMetric": "Solar constant 1361 W/m² (Earth sea level: 1000 W/m²)",
+    "targetTolerance": "Direct physical constant",
+    "isInvariantGap": true,
+    "coveredBySiteIds": [],
+    "fidelityScoresBySite": {
+      "cinder-lake": 0,
+      "askja-caldera": 0,
+      "atacama-desert": 0,
+      "mcmurdo-dry-valleys": 0,
+      "hawaii-mauna-kea": 0,
+      "utah-san-rafael": 0,
+      "haughton-crater": 0
+    }
+  },
+  {
+    "id": "RVM-GEO-001",
+    "code": "GEO-01",
+    "name": "Primitive Basaltic Geochemistry (Low SiO2)",
+    "description": "Tholeiitic to alkali basalt lithology with SiO2 < 50 wt% and Mg# > 55",
+    "category": "geochemical",
+    "standardReference": "Apollo Basalt Geochemistry Compendium",
+    "targetMetric": "SiO2: 45 - 50 wt%; FeO: 12 - 18 wt%",
+    "targetTolerance": "±3 wt%",
+    "isInvariantGap": false,
+    "coveredBySiteIds": [
+      "cinder-lake",
+      "mcmurdo-dry-valleys",
+      "hawaii-mauna-kea"
+    ],
+    "fidelityScoresBySite": {
+      "cinder-lake": 0.9,
+      "askja-caldera": 0.6,
+      "atacama-desert": 0.4,
+      "mcmurdo-dry-valleys": 0.7,
+      "hawaii-mauna-kea": 0.95,
+      "utah-san-rafael": 0.4,
+      "haughton-crater": 0.65
+    }
+  },
+  {
+    "id": "RVM-GEO-002",
+    "code": "GEO-02",
+    "name": "Natural Soil Perchlorate Concentration (ClO4-)",
+    "description": "Hyper-arid soil perchlorate concentrations matching Phoenix and Curiosity observations",
+    "category": "geochemical",
+    "standardReference": "Phoenix WCL & SAM Instrument Baseline",
+    "targetMetric": "0.03 - 0.6 wt% ClO4- in bulk soil / caliche",
+    "targetTolerance": "±0.1 wt%",
+    "isInvariantGap": false,
+    "coveredBySiteIds": [
+      "cinder-lake"
+    ],
+    "fidelityScoresBySite": {
+      "cinder-lake": 0.9,
+      "askja-caldera": 0.6,
+      "atacama-desert": 0.4,
+      "mcmurdo-dry-valleys": 0.45,
+      "hawaii-mauna-kea": 0.1,
+      "utah-san-rafael": 0.35,
+      "haughton-crater": 0.2
+    }
+  },
+  {
+    "id": "RVM-GEO-003",
+    "code": "GEO-03",
+    "name": "Diagenetic Hematite Concretion Morphology",
+    "description": "Spherical diagenetic iron oxide spherules reproducing Meridiani Planum blueberries",
+    "category": "geochemical",
+    "standardReference": "Opportunity Rover APXS & Mössbauer Results",
+    "targetMetric": "Diameter 1 - 5mm; hematite purity > 70 wt%",
+    "targetTolerance": "±1mm",
+    "isInvariantGap": false,
+    "coveredBySiteIds": [
+      "utah-san-rafael"
+    ],
+    "fidelityScoresBySite": {
+      "cinder-lake": 0.25,
+      "askja-caldera": 0.3,
+      "atacama-desert": 0.5,
+      "mcmurdo-dry-valleys": 0.3,
+      "hawaii-mauna-kea": 0.15,
+      "utah-san-rafael": 0.98,
+      "haughton-crater": 0.35
+    }
+  },
+  {
+    "id": "RVM-GEO-004",
+    "code": "GEO-04",
+    "name": "Ultra-Low Organic Carbon Depletion (<10 ppm)",
+    "description": "Severe biotic organic carbon depletion for blind life detection validation",
+    "category": "geochemical",
+    "standardReference": "Mars Sample Return Science Criteria",
+    "targetMetric": "Total Organic Carbon (TOC) < 10 ppm",
+    "targetTolerance": "±5 ppm",
+    "isInvariantGap": false,
+    "coveredBySiteIds": [
+      "atacama-desert",
+      "mcmurdo-dry-valleys",
+      "utah-san-rafael",
+      "haughton-crater"
+    ],
+    "fidelityScoresBySite": {
+      "cinder-lake": 0.35,
+      "askja-caldera": 0.45,
+      "atacama-desert": 0.92,
+      "mcmurdo-dry-valleys": 0.92,
+      "hawaii-mauna-kea": 0.45,
+      "utah-san-rafael": 0.76,
+      "haughton-crater": 0.78
+    }
+  },
+  {
+    "id": "RVM-GEO-005",
+    "code": "GEO-05",
+    "name": "Impact Breccia & Shatter Cone Hydrothermal System",
+    "description": "Meteoritic shock metamorphism, polymict impact breccias, and jarosite/gossan minerals",
+    "category": "geochemical",
+    "standardReference": "LPI Impact Crater Database / Haughton Crater Compendium",
+    "targetMetric": "Planar Deformation Features (PDF) & hydrothermal alteration phases",
+    "targetTolerance": "Qualitative verification",
+    "isInvariantGap": false,
+    "coveredBySiteIds": [
+      "askja-caldera",
+      "haughton-crater"
+    ],
+    "fidelityScoresBySite": {
+      "cinder-lake": 0.45,
+      "askja-caldera": 0.9,
+      "atacama-desert": 0.4,
+      "mcmurdo-dry-valleys": 0.35,
+      "hawaii-mauna-kea": 0.25,
+      "utah-san-rafael": 0.4,
+      "haughton-crater": 0.96
+    }
+  },
+  {
+    "id": "RVM-GEO-006",
+    "code": "GEO-06",
+    "name": "Sinuous Inverted Fluvial Channel Sedimentary Lithofacies",
+    "description": "Exhumed conglomeratic riverbed sandstones with deltaic foreset cross-bedding",
+    "category": "geochemical",
+    "standardReference": "Mars Perseverance Jezero Delta Campaign",
+    "targetMetric": "Channel width 100 - 500m; conglomerate facies intact",
+    "targetTolerance": "±50m",
+    "isInvariantGap": false,
+    "coveredBySiteIds": [
+      "utah-san-rafael"
+    ],
+    "fidelityScoresBySite": {
+      "cinder-lake": 0.25,
+      "askja-caldera": 0.3,
+      "atacama-desert": 0.5,
+      "mcmurdo-dry-valleys": 0.35,
+      "hawaii-mauna-kea": 0.15,
+      "utah-san-rafael": 0.98,
+      "haughton-crater": 0.4
+    }
+  },
+  {
+    "id": "RVM-ENV-001",
+    "code": "ENV-01",
+    "name": "Hyper-Aridity & Water Activity Constraint (aw < 0.6)",
+    "description": "Absence of persistent liquid water forcing microbial dormancy or extinction",
+    "category": "environmental",
+    "standardReference": "NASA Planetary Protection Category IVb",
+    "targetMetric": "Annual precipitation < 2mm; water activity aw < 0.60",
+    "targetTolerance": "±0.05",
+    "isInvariantGap": false,
+    "coveredBySiteIds": [
+      "atacama-desert",
+      "mcmurdo-dry-valleys",
+      "utah-san-rafael",
+      "haughton-crater"
+    ],
+    "fidelityScoresBySite": {
+      "cinder-lake": 0.35,
+      "askja-caldera": 0.45,
+      "atacama-desert": 0.92,
+      "mcmurdo-dry-valleys": 0.94,
+      "hawaii-mauna-kea": 0.6,
+      "utah-san-rafael": 0.7,
+      "haughton-crater": 0.75
+    }
+  },
+  {
+    "id": "RVM-ENV-002",
+    "code": "ENV-02",
+    "name": "Continuous Permafrost Thermal Stability",
+    "description": "Dry active layer overlying stable cryogenic permafrost under sub-zero mean annual temperature",
+    "category": "environmental",
+    "standardReference": "NASA Phoenix Science Results / Ground Ice Models",
+    "targetMetric": "Mean annual ground temp ≤ -15°C; ground ice stable",
+    "targetTolerance": "±3°C",
+    "isInvariantGap": false,
+    "coveredBySiteIds": [
+      "askja-caldera",
+      "mcmurdo-dry-valleys",
+      "haughton-crater"
+    ],
+    "fidelityScoresBySite": {
+      "cinder-lake": 0.45,
+      "askja-caldera": 0.9,
+      "atacama-desert": 0.4,
+      "mcmurdo-dry-valleys": 0.96,
+      "hawaii-mauna-kea": 0.3,
+      "utah-san-rafael": 0.15,
+      "haughton-crater": 0.9
+    }
+  },
+  {
+    "id": "RVM-ENV-003",
+    "code": "ENV-03",
+    "name": "High Ultraviolet Flux (UVA + UVB > 60 W/m²)",
+    "description": "Intense unattenuated solar ultraviolet radiation for material degradation testing",
+    "category": "environmental",
+    "standardReference": "ASTM E490 Solar Constant and Air Mass Zero",
+    "targetMetric": "UV Index > 12; total UV irradiance > 60 W/m²",
+    "targetTolerance": "±5 W/m²",
+    "isInvariantGap": false,
+    "coveredBySiteIds": [
+      "atacama-desert",
+      "hawaii-mauna-kea",
+      "utah-san-rafael"
+    ],
+    "fidelityScoresBySite": {
+      "cinder-lake": 0.35,
+      "askja-caldera": 0.45,
+      "atacama-desert": 0.92,
+      "mcmurdo-dry-valleys": 0.65,
+      "hawaii-mauna-kea": 0.9,
+      "utah-san-rafael": 0.72,
+      "haughton-crater": 0.5
+    }
+  },
+  {
+    "id": "RVM-ENV-004",
+    "code": "ENV-04",
+    "name": "Deep Space Vacuum Gradient (10⁻¹⁰ Pa vs 101 kPa)",
+    "description": "Ultra-high vacuum of lunar surface vs dense terrestrial barometric atmosphere",
+    "category": "environmental",
+    "standardReference": "Fundamental Physical Invariant (P < 10⁻¹⁰ Pa)",
+    "targetMetric": "Pressure P = 0 Pa",
+    "targetTolerance": "Exact constant",
+    "isInvariantGap": true,
+    "coveredBySiteIds": [],
+    "fidelityScoresBySite": {
+      "cinder-lake": 0,
+      "askja-caldera": 0,
+      "atacama-desert": 0,
+      "mcmurdo-dry-valleys": 0,
+      "hawaii-mauna-kea": 0,
+      "utah-san-rafael": 0,
+      "haughton-crater": 0
+    }
+  },
+  {
+    "id": "RVM-ENV-005",
+    "code": "ENV-05",
+    "name": "Unshielded Galactic Cosmic Radiation Flux (ΔR)",
+    "description": "Annual ionizing radiation dose rate on airless body surface (380 mSv/yr)",
+    "category": "environmental",
+    "standardReference": "LRO CRaTER Instrument Measurements (Schwadron et al., 2018)",
+    "targetMetric": "Dose rate = 380 mSv/year (Earth background: 3.5 mSv/yr)",
+    "targetTolerance": "Exact constant",
+    "isInvariantGap": true,
+    "coveredBySiteIds": [],
+    "fidelityScoresBySite": {
+      "cinder-lake": 0,
+      "askja-caldera": 0,
+      "atacama-desert": 0,
+      "mcmurdo-dry-valleys": 0,
+      "hawaii-mauna-kea": 0,
+      "utah-san-rafael": 0,
+      "haughton-crater": 0
+    }
+  },
+  {
+    "id": "RVM-ENV-006",
+    "code": "ENV-06",
+    "name": "Thermal Envelope Divergence (PSR Floor <40 K)",
+    "description": "Cryogenic thermal regime in lunar permanently shadowed crater depressions",
+    "category": "environmental",
+    "standardReference": "LRO Diviner Radiometer Surface Temperatures",
+    "targetMetric": "T = 40 K (-233°C) in PSRs; rim span 220 K to 40 K",
+    "targetTolerance": "±10 K",
+    "isInvariantGap": false,
+    "coveredBySiteIds": [
+      "askja-caldera"
+    ],
+    "fidelityScoresBySite": {
+      "cinder-lake": 0.45,
+      "askja-caldera": 0.9,
+      "atacama-desert": 0.4,
+      "mcmurdo-dry-valleys": 0,
+      "hawaii-mauna-kea": 0,
+      "utah-san-rafael": 0,
+      "haughton-crater": 0
+    }
+  },
+  {
+    "id": "RVM-OPR-001",
+    "code": "OPR-01",
+    "name": "Apollo & Artemis Field Geology Traverse Simulation",
+    "description": "Rigorous crewed sampling traverse drills and geological sample bag cataloging",
+    "category": "operational",
+    "standardReference": "NASA Apollo Traverse Records / Artemis EVA CONOPS",
+    "targetMetric": "Traverse distance 5 - 15 km; 30+ waypoint sampling",
+    "targetTolerance": "±1 km",
+    "isInvariantGap": false,
+    "coveredBySiteIds": [
+      "cinder-lake",
+      "mcmurdo-dry-valleys",
+      "hawaii-mauna-kea",
+      "utah-san-rafael",
+      "haughton-crater"
+    ],
+    "fidelityScoresBySite": {
+      "cinder-lake": 0.9,
+      "askja-caldera": 0.6,
+      "atacama-desert": 0.4,
+      "mcmurdo-dry-valleys": 0.8,
+      "hawaii-mauna-kea": 0.92,
+      "utah-san-rafael": 0.88,
+      "haughton-crater": 0.94
+    }
+  },
+  {
+    "id": "RVM-OPR-002",
+    "code": "OPR-02",
+    "name": "Isolated Habitat Long-Duration Simulation Logistics",
+    "description": "Isolation habitat facility supporting 4-12 month human crew psychological studies",
+    "category": "operational",
+    "standardReference": "NASA Human Research Program (HRP) Requirements",
+    "targetMetric": "Hermetic crew habitat; simulated EVA airlock cycles",
+    "targetTolerance": "Operational readiness",
+    "isInvariantGap": false,
+    "coveredBySiteIds": [
+      "askja-caldera",
+      "hawaii-mauna-kea",
+      "utah-san-rafael",
+      "haughton-crater"
+    ],
+    "fidelityScoresBySite": {
+      "cinder-lake": 0.45,
+      "askja-caldera": 0.9,
+      "atacama-desert": 0.4,
+      "mcmurdo-dry-valleys": 0.65,
+      "hawaii-mauna-kea": 0.98,
+      "utah-san-rafael": 0.96,
+      "haughton-crater": 0.9
+    }
+  },
+  {
+    "id": "RVM-OPR-003",
+    "code": "OPR-03",
+    "name": "Subterranean Skylight LiDAR Mapping Traversals",
+    "description": "Autonomous robotic descent and LiDAR point-cloud acquisition in dark lava conduits",
+    "category": "operational",
+    "standardReference": "NASA NIAC Subsurface Lava Tube Exploration Protocols",
+    "targetMetric": "Descent tether ≥ 15m; 3D SLAM mapping error < 5cm",
+    "targetTolerance": "±2cm",
+    "isInvariantGap": false,
+    "coveredBySiteIds": [
+      "askja-caldera",
+      "hawaii-mauna-kea"
+    ],
+    "fidelityScoresBySite": {
+      "cinder-lake": 0.45,
+      "askja-caldera": 0.9,
+      "atacama-desert": 0.4,
+      "mcmurdo-dry-valleys": 0.1,
+      "hawaii-mauna-kea": 0.97,
+      "utah-san-rafael": 0.05,
+      "haughton-crater": 0.15
+    }
+  },
+  {
+    "id": "RVM-OPR-004",
+    "code": "OPR-04",
+    "name": "High-Latitude Low-Sun Compass-Degraded Navigation",
+    "description": "Magnetic compass dead reckoning failure and optical sun compass navigation drills",
+    "category": "operational",
+    "standardReference": "Polar Exploration Navigation Protocols",
+    "targetMetric": "Magnetic dip angle > 85°; visual sun compass heading accuracy ±1°",
+    "targetTolerance": "±0.5°",
+    "isInvariantGap": false,
+    "coveredBySiteIds": [
+      "askja-caldera",
+      "mcmurdo-dry-valleys",
+      "haughton-crater"
+    ],
+    "fidelityScoresBySite": {
+      "cinder-lake": 0.45,
+      "askja-caldera": 0.9,
+      "atacama-desert": 0.4,
+      "mcmurdo-dry-valleys": 0.92,
+      "hawaii-mauna-kea": 0.35,
+      "utah-san-rafael": 0.25,
+      "haughton-crater": 0.96
+    }
+  },
+  {
+    "id": "RVM-OPR-005",
+    "code": "OPR-05",
+    "name": "Sample Cleanliness Protocol & Biocontamination Mitigation",
+    "description": "Aseptic handling and clean sampling tools in extreme environmental settings",
+    "category": "operational",
+    "standardReference": "NASA Planetary Protection Officer Directive",
+    "targetMetric": "Sample container particulate count ISO Class 5 clean",
+    "targetTolerance": "Inspection standard",
+    "isInvariantGap": false,
+    "coveredBySiteIds": [
+      "atacama-desert",
+      "mcmurdo-dry-valleys",
+      "utah-san-rafael",
+      "haughton-crater"
+    ],
+    "fidelityScoresBySite": {
+      "cinder-lake": 0.4,
+      "askja-caldera": 0.4,
+      "atacama-desert": 0.7,
+      "mcmurdo-dry-valleys": 0.92,
+      "hawaii-mauna-kea": 0.5,
+      "utah-san-rafael": 0.7,
+      "haughton-crater": 0.8
+    }
+  },
+  {
+    "id": "RVM-OPR-006",
+    "code": "OPR-06",
+    "name": "Autonomous Terrain Hazard Avoidance & Pathfinding",
+    "description": "Stereo camera computer vision obstacle avoidance over crater fields and dunes",
+    "category": "operational",
+    "standardReference": "AutoNav / Planetary Rover Autonomous Driving Standard",
+    "targetMetric": "Autonomous driving speed ≥ 15 cm/s with 0 collisions",
+    "targetTolerance": "0 collisions",
+    "isInvariantGap": false,
+    "coveredBySiteIds": [
+      "cinder-lake",
+      "mcmurdo-dry-valleys",
+      "hawaii-mauna-kea",
+      "utah-san-rafael",
+      "haughton-crater"
+    ],
+    "fidelityScoresBySite": {
+      "cinder-lake": 0.9,
+      "askja-caldera": 0.6,
+      "atacama-desert": 0.4,
+      "mcmurdo-dry-valleys": 0.75,
+      "hawaii-mauna-kea": 0.8,
+      "utah-san-rafael": 0.7,
+      "haughton-crater": 0.94
+    }
+  }
+]

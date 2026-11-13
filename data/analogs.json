@@ -1,0 +1,527 @@
+[
+  {
+    "id": "cinder-lake",
+    "name": "San Francisco Volcanic Field — Cinder Lake Crater Field 1",
+    "shortName": "Cinder Lake, Arizona",
+    "region": "Coconino County, Arizona",
+    "country": "United States",
+    "coordinates": {
+      "lat": 35.3071,
+      "lng": -111.5049
+    },
+    "elevationMeters": 2050,
+    "elevationDescription": "2,050m crater floor basin; surrounding volcanic cinder hills rise to 2,130m",
+    "targetBody": "moon",
+    "primaryMissionRelevance": "Apollo lunar mare cratering, rover terramechanics & Artemis Lunar Terrain Vehicle (LTV) mobility",
+    "geologicalSetting": "Quaternary alkali-basalt cinder cones, extensive cinder ash blankets, and basalt lava fields",
+    "geomorphology": "Man-made crater field blasted with dynamite in 1967 replicating Mare Tranquillitatis crater frequency distribution",
+    "environmentalRegime": "Semi-arid continental high desert, freeze-thaw cycles, high solar UV flux",
+    "operationalHeritage": "Historical training site for Apollo 11-17 astronauts, Lunar Roving Vehicle (LRV) field trials, USGS Grover vehicle",
+    "demResolutionMeters": 1.0,
+    "demSource": "USGS 3DEP Airborne LiDAR (USGS Fact Sheet 2020-3027)",
+    "literatureCitations": [
+      {
+        "title": "The U.S. Geological Survey Branch of Astrogeology: A Chronological History",
+        "authors": "Schaber, G.G.",
+        "year": 2005,
+        "citation": "USGS Open-File Report 2005-1190",
+        "doiOrReport": "USGS OFR 2005-1190"
+      },
+      {
+        "title": "Lunar Crater Field Simulation at Cinder Lake, Arizona",
+        "authors": "USGS Astrogeology Team",
+        "year": 1968,
+        "citation": "USGS Open-File Report 68-24 / NASA CR-101740",
+        "doiOrReport": "NASA CR-101740"
+      }
+    ],
+    "suitabilityScores": {
+      "rover_terramechanics": 0.96,
+      "low_angle_lighting": 0.88,
+      "astronaut_eva": 0.84,
+      "cryo_drilling": 0.12,
+      "lava_tubes": 0.35,
+      "inverted_deltas": 0.08,
+      "hyper_arid_astrobiology": 0.22,
+      "landing_hazards": 0.87,
+      "isru_sintering": 0.85
+    },
+    "confidenceScores": {
+      "rover_terramechanics": 0.91,
+      "low_angle_lighting": 0.85,
+      "astronaut_eva": 0.89,
+      "cryo_drilling": 0.45,
+      "lava_tubes": 0.60,
+      "inverted_deltas": 0.30,
+      "hyper_arid_astrobiology": 0.40,
+      "landing_hazards": 0.92,
+      "isru_sintering": 0.86
+    },
+    "dimensions": {
+      "geological": 0.92,
+      "geomorphological": 0.97,
+      "environmental": 0.68,
+      "operational": 0.95,
+      "taskSpecific": 0.96
+    },
+    "realityGaps": {
+      "gravityDisparityPercent": 83.5,
+      "pressureDivergencePercent": 100.0,
+      "thermalSpreadC": 218.0,
+      "solarFluxGainPercent": 26.5,
+      "radiationFluxMSvPerYear": 380.0,
+      "regolithCohesionKPa": 1.2
+    },
+    "classification": "VERIFIED SOURCE DATA"
+  },
+  {
+    "id": "askja-caldera",
+    "name": "Iceland Volcanic Highlands — Askja Caldera & Lambahraun",
+    "shortName": "Askja Caldera, Iceland",
+    "region": "Dyngjufjöll Mountains, Central Highlands",
+    "country": "Iceland",
+    "coordinates": {
+      "lat": 65.0167,
+      "lng": -16.75
+    },
+    "elevationMeters": 1150,
+    "elevationDescription": "1,150m caldera rim; surrounding volcanic plains span 800m to 1,510m",
+    "targetBody": "both",
+    "primaryMissionRelevance": "Apollo field geology heritage, primitive tholeiitic basalt chemistry, and autonomous obstacle navigation",
+    "geologicalSetting": "Active Mid-Atlantic plate boundary rift and mantle plume producing primitive tholeiitic basalts and pumice",
+    "geomorphology": "Caldera collapse scarps, glacio-volcanic palagonite ridges, extensive blocky 'a'ā and ropy pāhoehoe lava fields",
+    "environmentalRegime": "Subarctic alpine desert, intense precipitation freeze-thaw, zero vegetative canopy",
+    "operationalHeritage": "Training site for 32 Apollo astronauts (1965/1967) and modern ESA Pangaea field geology campaigns",
+    "demResolutionMeters": 30.0,
+    "demSource": "Copernicus GLO-30 Global DEM",
+    "literatureCitations": [
+      {
+        "title": "Apollo Astronaut Training in Iceland: Historic Analogs for Future Lunar Exploration",
+        "authors": "Garry, W.B., et al.",
+        "year": 2012,
+        "citation": "Lunar and Planetary Science Conference XLIII, Abstract #2465",
+        "doiOrReport": "LPSC XLIII #2465"
+      },
+      {
+        "title": "Iceland as an analog for volcanic and fluvial processes on Mars",
+        "authors": "Mangold, N., et al.",
+        "year": 2017,
+        "citation": "Geomorphology, 290, pp. 248-262",
+        "doiOrReport": "10.1016/j.geomorph.2017.04.015"
+      }
+    ],
+    "suitabilityScores": {
+      "rover_terramechanics": 0.88,
+      "low_angle_lighting": 0.86,
+      "astronaut_eva": 0.94,
+      "cryo_drilling": 0.32,
+      "lava_tubes": 0.72,
+      "inverted_deltas": 0.28,
+      "hyper_arid_astrobiology": 0.35,
+      "landing_hazards": 0.89,
+      "isru_sintering": 0.91
+    },
+    "confidenceScores": {
+      "rover_terramechanics": 0.88,
+      "low_angle_lighting": 0.84,
+      "astronaut_eva": 0.95,
+      "cryo_drilling": 0.50,
+      "lava_tubes": 0.75,
+      "inverted_deltas": 0.40,
+      "hyper_arid_astrobiology": 0.45,
+      "landing_hazards": 0.85,
+      "isru_sintering": 0.88
+    },
+    "dimensions": {
+      "geological": 0.95,
+      "geomorphological": 0.91,
+      "environmental": 0.74,
+      "operational": 0.93,
+      "taskSpecific": 0.94
+    },
+    "realityGaps": {
+      "gravityDisparityPercent": 83.5,
+      "pressureDivergencePercent": 100.0,
+      "thermalSpreadC": 218.0,
+      "solarFluxGainPercent": 26.5,
+      "radiationFluxMSvPerYear": 380.0,
+      "regolithCohesionKPa": 1.8
+    },
+    "classification": "VERIFIED SOURCE DATA"
+  },
+  {
+    "id": "atacama-desert",
+    "name": "Atacama Desert — Yungay & Maria Elena South",
+    "shortName": "Atacama Desert, Chile",
+    "region": "Antofagasta Region",
+    "country": "Chile",
+    "coordinates": {
+      "lat": -24.0667,
+      "lng": -69.8667
+    },
+    "elevationMeters": 1100,
+    "elevationDescription": "1,100m plateau; hyper-arid core ranges from 900m to 1,300m above sea level",
+    "targetBody": "mars",
+    "primaryMissionRelevance": "Hyper-arid soil chemistry, natural perchlorates, extreme organic carbon depletion, and astrobiological life detection",
+    "geologicalSetting": "Endorheic tectonic basin filled with evaporitic halite, gypsum, and perchlorate-bearing caliche beds",
+    "geomorphology": "Playas, salt polygon crusts, yardangs, and deflated wind-scoured gravel plains",
+    "environmentalRegime": "Hyper-arid (<2mm/year rain), intense UV irradiance (>60 W/m²), extreme desiccation",
+    "operationalHeritage": "Viking biology instrument benchmark testing, NASA ExoMars drill campaigns, Sample Return caching protocols",
+    "demResolutionMeters": 30.0,
+    "demSource": "Copernicus GLO-30 Global DEM",
+    "literatureCitations": [
+      {
+        "title": "Mars-Like Soils in the Atacama Desert, Chile, and the Search for Life",
+        "authors": "Navarro-González, R., et al.",
+        "year": 2003,
+        "citation": "Science, 302(5647), pp. 1018-1021",
+        "doiOrReport": "10.1126/science.1089143"
+      },
+      {
+        "title": "Atmospheric Photochemical Origin of Perchlorate in Atacama and Martian Soils",
+        "authors": "Catling, D.C., et al.",
+        "year": 2010,
+        "citation": "Journal of Geophysical Research: Planets, 115(E1)",
+        "doiOrReport": "10.1029/2009JE003425"
+      }
+    ],
+    "suitabilityScores": {
+      "rover_terramechanics": 0.74,
+      "low_angle_lighting": 0.52,
+      "astronaut_eva": 0.78,
+      "cryo_drilling": 0.25,
+      "lava_tubes": 0.15,
+      "inverted_deltas": 0.42,
+      "hyper_arid_astrobiology": 0.98,
+      "landing_hazards": 0.68,
+      "isru_sintering": 0.62
+    },
+    "confidenceScores": {
+      "rover_terramechanics": 0.80,
+      "low_angle_lighting": 0.65,
+      "astronaut_eva": 0.82,
+      "cryo_drilling": 0.40,
+      "lava_tubes": 0.30,
+      "inverted_deltas": 0.55,
+      "hyper_arid_astrobiology": 0.96,
+      "landing_hazards": 0.72,
+      "isru_sintering": 0.70
+    },
+    "dimensions": {
+      "geological": 0.91,
+      "geomorphological": 0.82,
+      "environmental": 0.98,
+      "operational": 0.85,
+      "taskSpecific": 0.98
+    },
+    "realityGaps": {
+      "gravityDisparityPercent": 62.0,
+      "pressureDivergencePercent": 99.4,
+      "thermalSpreadC": 140.0,
+      "solarFluxGainPercent": 18.0,
+      "radiationFluxMSvPerYear": 240.0,
+      "regolithCohesionKPa": 0.8
+    },
+    "classification": "VERIFIED SOURCE DATA"
+  },
+  {
+    "id": "mcmurdo-dry-valleys",
+    "name": "McMurdo Dry Valleys — University & Beacon Valleys",
+    "shortName": "McMurdo Dry Valleys, Antarctica",
+    "region": "Victoria Land, Transantarctic Mountains",
+    "country": "Antarctica",
+    "coordinates": {
+      "lat": -77.5,
+      "lng": 162.0
+    },
+    "elevationMeters": 1050,
+    "elevationDescription": "1,050m valley floor; ice-free mountain valleys span 500m to 1,600m",
+    "targetBody": "mars",
+    "primaryMissionRelevance": "Dry permafrost equilibrium with atmospheric vapor, cryogenic ground-ice drilling, and polygonal patterned ground",
+    "geologicalSetting": "Beacon Supergroup quartzose sandstones intruded by Jurassic Ferrar Dolerite sills",
+    "geomorphology": "Thermal contraction crack polygons (10-30m diameter), ventifacts carved by katabatic winds, and tafoni weathering",
+    "environmentalRegime": "Hyper-arid polar desert, mean annual temp -20°C to -25°C, winter lows below -50°C, dry permafrost at 10-50cm depth",
+    "operationalHeritage": "NASA Phoenix lander sub-ice drill testing, IceBite autonomous rotary-percussive drill deployment",
+    "demResolutionMeters": 30.0,
+    "demSource": "Copernicus GLO-30 Global DEM",
+    "literatureCitations": [
+      {
+        "title": "Permafrost and Ice-Rich Subsurface on Mars: Antarctic Analogs",
+        "authors": "McKay, C.P., et al.",
+        "year": 1998,
+        "citation": "Antarctic Science, 10(2), pp. 199-204",
+        "doiOrReport": "10.1017/S095410209800025X"
+      },
+      {
+        "title": "Antarctic Dry Valleys: Microclimate zonation, variable geomorphic processes, and implications for Mars",
+        "authors": "Marchant, D.R., & Head, J.W.",
+        "year": 2007,
+        "citation": "Icarus, 192(1), pp. 187-216",
+        "doiOrReport": "10.1016/j.icarus.2007.06.018"
+      }
+    ],
+    "suitabilityScores": {
+      "rover_terramechanics": 0.65,
+      "low_angle_lighting": 0.72,
+      "astronaut_eva": 0.81,
+      "cryo_drilling": 0.97,
+      "lava_tubes": 0.10,
+      "inverted_deltas": 0.35,
+      "hyper_arid_astrobiology": 0.92,
+      "landing_hazards": 0.70,
+      "isru_sintering": 0.40
+    },
+    "confidenceScores": {
+      "rover_terramechanics": 0.70,
+      "low_angle_lighting": 0.75,
+      "astronaut_eva": 0.85,
+      "cryo_drilling": 0.95,
+      "lava_tubes": 0.20,
+      "inverted_deltas": 0.45,
+      "hyper_arid_astrobiology": 0.90,
+      "landing_hazards": 0.68,
+      "isru_sintering": 0.50
+    },
+    "dimensions": {
+      "geological": 0.88,
+      "geomorphological": 0.93,
+      "environmental": 0.96,
+      "operational": 0.82,
+      "taskSpecific": 0.97
+    },
+    "realityGaps": {
+      "gravityDisparityPercent": 62.0,
+      "pressureDivergencePercent": 99.4,
+      "thermalSpreadC": 150.0,
+      "solarFluxGainPercent": 20.0,
+      "radiationFluxMSvPerYear": 220.0,
+      "regolithCohesionKPa": 3.5
+    },
+    "classification": "VERIFIED SOURCE DATA"
+  },
+  {
+    "id": "hawaii-mauna-kea",
+    "name": "Hawaii Volcanic Province — Mauna Kea Summit & HI-SEAS",
+    "shortName": "Mauna Kea / HI-SEAS, Hawaii",
+    "region": "Island of Hawaii",
+    "country": "United States",
+    "coordinates": {
+      "lat": 19.8206,
+      "lng": -155.4681
+    },
+    "elevationMeters": 4207,
+    "elevationDescription": "4,207m Mauna Kea summit; HI-SEAS analog habitat located at 2,500m on Mauna Loa flank",
+    "targetBody": "both",
+    "primaryMissionRelevance": "JSC Mars-1 palagonitic tephra simulant source, basaltic lava tubes for radiation shelter, and human isolation habitat",
+    "geologicalSetting": "Intraplate oceanic mantle hotspot shield volcano producing tholeiitic and alkalic basalt flows and cinder cones",
+    "geomorphology": "Pu'u cinder cones, volcanic tephra blankets, intact basaltic lava tube caverns, and high-altitude alpine periglacial slopes",
+    "environmentalRegime": "High-altitude tropical alpine, low atmospheric humidity, cold night cycling, intense UV solar flux",
+    "operationalHeritage": "NASA-funded HI-SEAS human crew isolation missions (4-12 months), Apollo lunar navigation, PISCES rover trials",
+    "demResolutionMeters": 1.0,
+    "demSource": "USGS 3DEP Airborne LiDAR",
+    "literatureCitations": [
+      {
+        "title": "JSC Mars-1: A Martian Regolith Simulant",
+        "authors": "Allen, C.C., et al.",
+        "year": 1998,
+        "citation": "Lunar and Planetary Science XXIX, Abstract #1690",
+        "doiOrReport": "LPSC XXIX #1690"
+      },
+      {
+        "title": "HI-SEAS: A Long-Duration Planetary Surface Exploration Simulation",
+        "authors": "Binsted, K., et al.",
+        "year": 2014,
+        "citation": "IEEE Aerospace Conference",
+        "doiOrReport": "10.1109/AERO.2014.6836173"
+      }
+    ],
+    "suitabilityScores": {
+      "rover_terramechanics": 0.82,
+      "low_angle_lighting": 0.85,
+      "astronaut_eva": 0.92,
+      "cryo_drilling": 0.20,
+      "lava_tubes": 0.97,
+      "inverted_deltas": 0.15,
+      "hyper_arid_astrobiology": 0.45,
+      "landing_hazards": 0.81,
+      "isru_sintering": 0.93
+    },
+    "confidenceScores": {
+      "rover_terramechanics": 0.85,
+      "low_angle_lighting": 0.80,
+      "astronaut_eva": 0.94,
+      "cryo_drilling": 0.35,
+      "lava_tubes": 0.95,
+      "inverted_deltas": 0.25,
+      "hyper_arid_astrobiology": 0.50,
+      "landing_hazards": 0.82,
+      "isru_sintering": 0.92
+    },
+    "dimensions": {
+      "geological": 0.94,
+      "geomorphological": 0.89,
+      "environmental": 0.78,
+      "operational": 0.96,
+      "taskSpecific": 0.97
+    },
+    "realityGaps": {
+      "gravityDisparityPercent": 83.5,
+      "pressureDivergencePercent": 100.0,
+      "thermalSpreadC": 218.0,
+      "solarFluxGainPercent": 26.5,
+      "radiationFluxMSvPerYear": 380.0,
+      "regolithCohesionKPa": 1.5
+    },
+    "classification": "VERIFIED SOURCE DATA"
+  },
+  {
+    "id": "utah-san-rafael",
+    "name": "Utah Desert & San Rafael Swell — MDRS",
+    "shortName": "San Rafael Swell, Utah",
+    "region": "Hanksville, Wayne County, Utah",
+    "country": "United States",
+    "coordinates": {
+      "lat": 38.4064,
+      "lng": -110.7919
+    },
+    "elevationMeters": 1425,
+    "elevationDescription": "1,425m elevation; Jurassic sedimentary formations span 1,300m to 1,550m",
+    "targetBody": "mars",
+    "primaryMissionRelevance": "Inverted fluvial channels (Jezero/Eberswalde delta analog), diagenetic hematite Moqui marbles, and Mars Society MDRS ops",
+    "geologicalSetting": "Mesozoic sedimentary strata (Morrison Formation, Dakota Sandstone, Mancos Shale) deposited in ancient river-floodplain systems",
+    "geomorphology": "Topographically inverted conglomeratic channel ridges, badlands, bentonite clay swells, and spherical hematite concretions",
+    "environmentalRegime": "Cold mid-latitude desert, low precipitation, intense seasonal thermal cycling, windy aeolian transport",
+    "operationalHeritage": "Mars Desert Research Station (MDRS) hosting over 260 field simulation crews since 2001, rover navigation trials",
+    "demResolutionMeters": 1.0,
+    "demSource": "USGS 3DEP Airborne LiDAR",
+    "literatureCitations": [
+      {
+        "title": "A 'Rosetta Stone' for Martian Blueberries",
+        "authors": "Chan, M.A., et al.",
+        "year": 2004,
+        "citation": "Nature, 429, pp. 731-734",
+        "doiOrReport": "10.1038/nature02600"
+      },
+      {
+        "title": "Inverted fluvial channels in the San Rafael Swell, Utah: Analogs for Martian sinuous ridges",
+        "authors": "Williams, R.M.E., et al.",
+        "year": 2009,
+        "citation": "Geomorphology, 107(3-4), pp. 200-215",
+        "doiOrReport": "10.1016/j.geomorph.2008.12.015"
+      }
+    ],
+    "suitabilityScores": {
+      "rover_terramechanics": 0.78,
+      "low_angle_lighting": 0.48,
+      "astronaut_eva": 0.88,
+      "cryo_drilling": 0.15,
+      "lava_tubes": 0.05,
+      "inverted_deltas": 0.98,
+      "hyper_arid_astrobiology": 0.76,
+      "landing_hazards": 0.65,
+      "isru_sintering": 0.55
+    },
+    "confidenceScores": {
+      "rover_terramechanics": 0.84,
+      "low_angle_lighting": 0.60,
+      "astronaut_eva": 0.92,
+      "cryo_drilling": 0.30,
+      "lava_tubes": 0.10,
+      "inverted_deltas": 0.96,
+      "hyper_arid_astrobiology": 0.82,
+      "landing_hazards": 0.75,
+      "isru_sintering": 0.65
+    },
+    "dimensions": {
+      "geological": 0.96,
+      "geomorphological": 0.98,
+      "environmental": 0.80,
+      "operational": 0.92,
+      "taskSpecific": 0.98
+    },
+    "realityGaps": {
+      "gravityDisparityPercent": 62.0,
+      "pressureDivergencePercent": 99.4,
+      "thermalSpreadC": 135.0,
+      "solarFluxGainPercent": 18.0,
+      "radiationFluxMSvPerYear": 240.0,
+      "regolithCohesionKPa": 2.2
+    },
+    "classification": "VERIFIED SOURCE DATA"
+  },
+  {
+    "id": "haughton-crater",
+    "name": "Devon Island — Haughton-Mars Project (HMP)",
+    "shortName": "Haughton Crater, Nunavut",
+    "region": "Qikiqtaaluk Region, Nunavut High Arctic",
+    "country": "Canada",
+    "coordinates": {
+      "lat": 75.3667,
+      "lng": -89.6833
+    },
+    "elevationMeters": 250,
+    "elevationDescription": "250m crater floor; complex impact structure spans 100m to 400m elevation",
+    "targetBody": "both",
+    "primaryMissionRelevance": "Complex impact crater in Paleozoic carbonates, shatter cones, impact-induced hydrothermal systems, and Arctic rover ops",
+    "geologicalSetting": "23km diameter meteorite impact crater formed 39 Ma in Ordovician-Silurian limestone and dolomite target strata",
+    "geomorphology": "Central uplift, polymict impact breccia hills, shatter cones, periglacial thermal contraction polygons, and active-layer gullies",
+    "environmentalRegime": "Extreme polar desert, continuous permafrost, winter temps below -45°C, degraded magnetic compass environment",
+    "operationalHeritage": "Haughton-Mars Project (HMP) active since 1997, NASA Ames autonomous humvee/rover testing, field geology drills",
+    "demResolutionMeters": 30.0,
+    "demSource": "Copernicus GLO-30 Global DEM",
+    "literatureCitations": [
+      {
+        "title": "The Haughton-Mars Project: Overview of Science and Exploration at the Haughton Crater Analog Site",
+        "authors": "Lee, P., & Osinski, G.R.",
+        "year": 2005,
+        "citation": "Lunar and Planetary Science Conference XXXVI, Abstract #2270",
+        "doiOrReport": "LPSC XXXVI #2270"
+      },
+      {
+        "title": "Hydrothermal Activity at the Haughton Impact Structure, Devon Island, Canada",
+        "authors": "Osinski, G.R., et al.",
+        "year": 2005,
+        "citation": "Meteoritics & Planetary Science, 40(12), pp. 1759-1775",
+        "doiOrReport": "10.1111/j.1945-5100.2005.tb00144.x"
+      }
+    ],
+    "suitabilityScores": {
+      "rover_terramechanics": 0.85,
+      "low_angle_lighting": 0.90,
+      "astronaut_eva": 0.91,
+      "cryo_drilling": 0.88,
+      "lava_tubes": 0.12,
+      "inverted_deltas": 0.40,
+      "hyper_arid_astrobiology": 0.78,
+      "landing_hazards": 0.92,
+      "isru_sintering": 0.70
+    },
+    "confidenceScores": {
+      "rover_terramechanics": 0.88,
+      "low_angle_lighting": 0.86,
+      "astronaut_eva": 0.92,
+      "cryo_drilling": 0.85,
+      "lava_tubes": 0.20,
+      "inverted_deltas": 0.45,
+      "hyper_arid_astrobiology": 0.80,
+      "landing_hazards": 0.94,
+      "isru_sintering": 0.72
+    },
+    "dimensions": {
+      "geological": 0.94,
+      "geomorphological": 0.96,
+      "environmental": 0.92,
+      "operational": 0.94,
+      "taskSpecific": 0.92
+    },
+    "realityGaps": {
+      "gravityDisparityPercent": 83.5,
+      "pressureDivergencePercent": 100.0,
+      "thermalSpreadC": 218.0,
+      "solarFluxGainPercent": 26.5,
+      "radiationFluxMSvPerYear": 380.0,
+      "regolithCohesionKPa": 2.0
+    },
+    "classification": "VERIFIED SOURCE DATA"
+  }
+]
