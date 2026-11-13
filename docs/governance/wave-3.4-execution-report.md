@@ -89,3 +89,4 @@ Wave 3.4 completes the scientific analysis core of TERRALIGN across Screen 03 (A
 4. `.gsd/STATE.md` — Updated progress to Wave 3.4 complete.
 5. `.gsd/ROADMAP.md` — Marked Phase 3 Wave 3.4 tasks complete.
 6. `HANDOFF.md` — Updated current milestone and deliverables.
+

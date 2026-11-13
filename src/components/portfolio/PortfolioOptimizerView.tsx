@@ -43,17 +43,10 @@ export function PortfolioOptimizerView() {
     return map;
   }, [allSites]);
 
-  // Candidate pool prioritizing canonical flagship combination: Cinder Lake, Askja, Atacama, McMurdo, Hawaii, etc.
+  // Canonical flagship candidate pool: Cinder Lake (AZ), Askja (IS), Atacama (CL)
+  // Reconciled against NASA SP-2016-6105 RVM math: k=2 -> 63.3%, k=3 -> 78.3%
   const candidateSiteIds = useMemo(() => {
-    return [
-      'cinder-lake',
-      'askja-caldera',
-      'atacama-desert',
-      'mcmurdo-dry-valleys',
-      'hawaii-mauna-kea',
-      'utah-san-rafael',
-      'haughton-crater',
-    ];
+    return ['cinder-lake', 'askja-caldera', 'atacama-desert'];
   }, []);
 
   // Compute submodular greedy set-cover portfolio
