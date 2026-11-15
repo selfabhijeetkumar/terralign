@@ -391,7 +391,7 @@ For project questions or collaboration, use the [GitHub repository](https://gith
 | Team member | Role and contribution |
 |---|---|
 | **Abhijeet Kumar** | Team Lead — project leadership and overall coordination. |
-| **Vaishnavi Isrannavar** | Team Member — contributed to the collaborative development and delivery of TERRALIGN 2.0 as part of Team NEXARC. |
+| **Vaishnavi Isrannavar** | Team Member — helps with research, testing, documentation, design, and feature development. |
 
 Personal phone numbers and email addresses are intentionally not published.
 
