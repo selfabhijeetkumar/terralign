@@ -1,6 +1,6 @@
 <div align="center">
 
-# TERRALIGN 2.0
+# TERRALIGN 
 
 ### Where Earth Meets Other Worlds
 
