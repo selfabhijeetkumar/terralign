@@ -26,7 +26,7 @@ export function ActivitySelector() {
   const activities = getAllActivities();
 
   return (
-    <aside className="w-full lg:w-[380px] xl:w-[420px] h-full flex flex-col bg-[#0A192F]/95 border-r border-[#8B9CB5]/20 backdrop-blur-md select-none shrink-0 z-20 overflow-hidden">
+    <aside className="w-full lg:w-[380px] xl:w-[420px] h-full flex flex-col bg-[#0A192F]/95 border-r border-[#8B9CB5]/20 backdrop-blur-md select-none shrink-0 z-20 overflow-hidden luminous-surface shine-card">
       {/* Target Body Selector Header */}
       <div className="p-4 border-b border-[#8B9CB5]/15 bg-[#050811]/60">
         <div className="flex items-center justify-between mb-2">

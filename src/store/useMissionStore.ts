@@ -14,6 +14,7 @@ import type {
   MissionFilters,
   CameraTransform,
   TerrainSlice,
+  TerrainDataMode,
 } from '@/types/store';
 
 export const INITIAL_MISSION_STATE: TerralignAppState = {
@@ -37,9 +38,10 @@ export const INITIAL_MISSION_STATE: TerralignAppState = {
     sunElevationDeg: 2.3, // Canonical low-angle solar elevation for Lunar South Pole
     sunAzimuthDeg: 45.0,
     cameraTransform: {
-      position: [0, 1500, 2500],
-      target: [0, 0, 0],
+      position: [0, 1080, 1680],
+      target: [0, -50, 0],
     },
+    dataMode: 'procedural',
   },
   portfolio: {
     targetK: 3,
@@ -163,6 +165,11 @@ export const useMissionStore = create<MissionStore>((set) => ({
       terrain: { ...state.terrain, cameraTransform: transform },
     })),
 
+  setTerrainDataMode: (mode: TerrainDataMode) =>
+    set((state) => ({
+      terrain: { ...state.terrain, dataMode: mode },
+    })),
+
   // --- Portfolio Actions ---
   setPortfolioK: (k: 2 | 3) =>
     set((state) => ({
@@ -191,20 +198,24 @@ export const useTargetBody = () => useMissionStore((state) => state.mission.targ
 export const useActiveActivity = () => useMissionStore((state) => state.mission.activeActivity);
 export const useSelectedSiteId = () => useMissionStore((state) => state.selection.selectedSiteId);
 export const useComparisonSiteIds = () => useMissionStore((state) => state.selection.comparisonSiteIds);
-export const useSunLighting = () =>
-  useMissionStore((state) => ({
-    elevation: state.terrain.sunElevationDeg,
-    azimuth: state.terrain.sunAzimuthDeg,
-  }));
-export const useTerrainSync = () =>
-  useMissionStore((state) => ({
-    syncCameras: state.terrain.syncCameras,
-    syncRotation: state.terrain.syncRotation,
-    linkZoom: state.terrain.linkZoom,
-  }));
-export const usePortfolioConfig = () =>
-  useMissionStore((state) => ({
-    targetK: state.portfolio.targetK,
-    threshold: state.portfolio.fidelityThreshold,
-    domain: state.portfolio.activeDomainFilter,
-  }));
+// IMPORTANT: Zustand v5 selectors must return referentially stable values.
+// Returning new object literals causes infinite re-render loops with useSyncExternalStore.
+// Use separate primitive selectors instead.
+export const useSunElevation = () =>
+  useMissionStore((state) => state.terrain.sunElevationDeg);
+export const useSunAzimuth = () =>
+  useMissionStore((state) => state.terrain.sunAzimuthDeg);
+export const useTerrainSyncCameras = () =>
+  useMissionStore((state) => state.terrain.syncCameras);
+export const useTerrainSyncRotation = () =>
+  useMissionStore((state) => state.terrain.syncRotation);
+export const useTerrainLinkZoom = () =>
+  useMissionStore((state) => state.terrain.linkZoom);
+export const usePortfolioTargetK = () =>
+  useMissionStore((state) => state.portfolio.targetK);
+export const usePortfolioThreshold = () =>
+  useMissionStore((state) => state.portfolio.fidelityThreshold);
+export const usePortfolioDomain = () =>
+  useMissionStore((state) => state.portfolio.activeDomainFilter);
+export const useTerrainDataMode = () =>
+  useMissionStore((state) => state.terrain.dataMode ?? 'procedural');

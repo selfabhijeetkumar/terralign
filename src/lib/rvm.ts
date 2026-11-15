@@ -27,11 +27,13 @@ export interface PortfolioCoverageResult {
   totalRequirements: number;
   coveredRequirementIds: string[];
   coveredCount: number;
-  coveragePercent: number; // e.g. 78.3%
-  partialWeightedCount: number;
-  partialWeightedPercent: number;
-  invariantGapCount: number;
-  invariantGapPercent: number; // 4/30 = 13.3%
+  coveragePercent: number; // e.g. 76.7%
+  fullCount: number; // 23 full criteria (score >= threshold)
+  partialCount: number; // 3 partial criteria (0.50 <= score < threshold)
+  partialWeightedCount: number; // 23 + (3 * 0.5) = 24.5
+  partialWeightedPercent: number; // 24.5 / 30 = 81.7%
+  invariantGapCount: number; // 4
+  invariantGapPercent: number; // 4 / 30 = 13.3%
   marginalSiteContributions: Array<{
     siteId: string;
     newlyCoveredIds: string[];
@@ -105,10 +107,11 @@ export function optimizePortfolio(
     });
   }
 
-  // Calculate partial credit:
+  // Calculate mathematically consistent coverage and partial credit:
   // Reconciled against NASA SP-2016-6105 RVM canonical math:
-  // 22 full criteria (> 0.70) @ 1.0 + 3 partial criteria (0.50 <= score < 0.70) @ 0.5 = 23.5 / 30 = 78.3%
-  // Strict binary coverage at theta >= 0.70 is 23 / 30 = 76.7%
+  // For k=3: 23 full criteria (maxScore >= threshold=0.70) @ 1.0 + 3 partial criteria (0.50 <= maxScore < 0.70) @ 0.5
+  // = 23.0 + 1.5 = 24.5 / 30 = 81.67% (81.7%)
+  // Strict binary coverage at theta >= 0.70 is 23 / 30 = 76.67% (76.7%)
   let fullCount = 0;
   let partialCount = 0;
   for (const req of reqs) {
@@ -118,7 +121,7 @@ export function optimizePortfolio(
       const score = req.fidelityScoresBySite[sId] ?? 0;
       if (score > maxScore) maxScore = score;
     }
-    if (maxScore > threshold) {
+    if (maxScore >= threshold) {
       fullCount++;
     } else if (maxScore >= 0.50 && maxScore < threshold) {
       partialCount++;
@@ -138,6 +141,8 @@ export function optimizePortfolio(
     coveredRequirementIds: Array.from(coveredSet),
     coveredCount,
     coveragePercent,
+    fullCount,
+    partialCount,
     partialWeightedCount: partialScoreSum,
     partialWeightedPercent,
     invariantGapCount: invariantGaps.length,

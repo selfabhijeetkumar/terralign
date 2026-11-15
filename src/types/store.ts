@@ -8,6 +8,8 @@ export type TargetBody = 'moon' | 'mars';
 
 export type ColorMode = 'hypsometric' | 'slope' | 'aspect' | 'raw';
 
+export type TerrainDataMode = 'procedural' | 'scientific_grid';
+
 export type DomainFilter = 'all' | 'mechanical' | 'optical' | 'geochemical' | 'environmental' | 'operational';
 
 export interface MissionFilters {
@@ -44,6 +46,7 @@ export interface TerrainSlice {
   sunElevationDeg: number; // 0.0 to 5.0 (lunar south pole low-angle)
   sunAzimuthDeg: number; // 0 to 360
   cameraTransform: CameraTransform;
+  dataMode?: TerrainDataMode;
 }
 
 export interface PortfolioSlice {
@@ -76,6 +79,7 @@ export interface MissionStoreActions {
   setSunElevation: (elevation: number) => void;
   setSunAzimuth: (azimuth: number) => void;
   setCameraTransform: (transform: CameraTransform) => void;
+  setTerrainDataMode: (mode: TerrainDataMode) => void;
 
   // Portfolio Actions
   setPortfolioK: (k: 2 | 3) => void;

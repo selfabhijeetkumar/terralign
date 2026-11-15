@@ -1,0 +1,30 @@
+# =============================================================================
+# TERRALIGN 2.0 — Render Blueprint Specification
+# Mission: COSMIC ASCENSION — Backend Web Service
+# Docs: https://render.com/docs/blueprint-spec
+# =============================================================================
+
+services:
+  - type: web
+    name: terralign-backend
+    runtime: node
+    plan: free
+    region: oregon
+    buildCommand: pnpm install
+    startCommand: pnpm start:server
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: ALLOWED_ORIGINS
+        value: "*"
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GEMINI_MODEL
+        value: gemini-2.5-flash
+      - key: GROQ_API_KEY
+        sync: false
+      - key: GROQ_MODEL
+        value: openai/gpt-oss-120b

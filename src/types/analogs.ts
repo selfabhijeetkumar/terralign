@@ -7,6 +7,7 @@
 import type { TargetBody } from './store';
 
 export type EpistemicClassification =
+  | 'PUBLISHED SOURCE REFERENCE'
   | 'VERIFIED SOURCE DATA'
   | 'DERIVED FROM VERIFIED DATA'
   | 'ILLUSTRATIVE DEMO DATA'

@@ -64,18 +64,39 @@ for (const req of rvm) {
   }
 }
 
-assert.equal(countA, 11, 'Site A must uniquely cover 11 criteria (36.7%)');
-assert.equal(countB_new, 8, 'Site B must marginally cover 8 criteria (26.7%)');
-assert.equal(countA + countB_new, 19, 'Two-site portfolio k=2 must cover exactly 19 criteria (63.3%)');
-assert.equal(countC_new, 4, 'Site C must marginally cover 4 criteria (13.3%)');
-assert.equal(countA + countB_new + countC_new, 23, 'Binary model k=3 must cover exactly 23 criteria (76.7%)');
+// Test 4A: k=1 baseline (Site A: Cinder Lake)
+assert.equal(countA, 11, 'Site A (Cinder Lake) must cover exactly 11 criteria (36.7%) for k=1');
+const k1Percent = ((countA / 30) * 100).toFixed(1);
+assert.equal(k1Percent, '36.7', 'k=1 binary coverage must be 36.7%');
+
+// Test 4B: k=2 campaign (Site A + Site B: Askja Caldera)
+assert.equal(countB_new, 8, 'Site B (Askja Caldera) must marginally add 8 criteria (26.7%)');
+const k2Total = countA + countB_new;
+assert.equal(k2Total, 19, 'Two-site portfolio k=2 must cover exactly 19 criteria (63.3%)');
+const k2Percent = ((k2Total / 30) * 100).toFixed(1);
+assert.equal(k2Percent, '63.3', 'k=2 binary coverage must be 63.3%');
+
+// Test 4C: k=3 campaign (Site A + Site B + Site C: Atacama Desert)
+assert.equal(countC_new, 4, 'Site C (Atacama Desert) must marginally add 4 criteria (13.3%)');
+
+const totalFull = countA + countB_new + countC_new;
+assert.equal(totalFull, 23, 'Binary model k=3 must cover exactly 23 criteria (76.7%)');
 assert.equal(countPartial, 3, 'Must have exactly 3 partial-credit criteria (0.50..0.69)');
 
-const partialWeightedTotal = 22 * 1.0 + 3 * 0.5; // 22 full + 3 partial
-assert.equal(partialWeightedTotal, 23.5, 'Partial-weighted score must be exactly 23.5 for k=3');
+// Test 4D: Explicit verification of OPR-05 at exact 0.70 boundary
+const opr05 = rvm.find((r) => r.id === 'RVM-OPR-005');
+assert(opr05, 'RVM-OPR-005 must exist in RVM dataset');
+assert.equal(opr05.fidelityScoresBySite['atacama-desert'], 0.70, 'RVM-OPR-005 score at Atacama Desert must be exactly 0.70');
+assert(opr05.fidelityScoresBySite['atacama-desert'] >= 0.70, 'RVM-OPR-005 must meet threshold θ >= 0.70 as full criterion');
+
+// Reconciled production weighted calculation: 23 full @ 1.0 + 3 partial @ 0.5 = 24.5 / 30 = 81.7%
+const partialWeightedTotal = totalFull * 1.0 + countPartial * 0.5; // 23 full + 3 partial
+assert.equal(partialWeightedTotal, 24.5, 'Partial-weighted score must be exactly 24.5 for k=3');
 const partialPercent = (partialWeightedTotal / 30) * 100;
-assert.equal(partialPercent.toFixed(1), '78.3', 'Coverage must round to 78.3%');
-console.log(`✓ Test 4: Portfolio math reconciled: k=2 is 19/30 (63.3%), binary k=3 is 23/30 (76.7%), partial k=3 is 23.5/30 (78.3%)`);
+assert.equal(partialPercent.toFixed(1), '81.7', 'Coverage must round to 81.7%');
+const binaryPercent = (totalFull / 30) * 100;
+assert.equal(binaryPercent.toFixed(1), '76.7', 'Binary coverage must round to 76.7%');
+console.log(`✓ Test 4: Portfolio math reconciled: k=1 is 11/30 (36.7%), k=2 is 19/30 (63.3%), binary k=3 is 23/30 (76.7%), partial k=3 is 24.5/30 (81.7%)`);
 
 // Test 5: Verify Terrestrial Ceiling (26/30 = 86.7%)
 let totalSatisfiableOnEarth = 0;

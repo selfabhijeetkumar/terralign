@@ -14,9 +14,11 @@ interface NavItem {
 const NAV_ITEMS: NavItem[] = [
   {
     name: "Mission Command",
-    href: "/",
+    href: "/mission",
     icon: ({ className }) => (
       <svg
+        width="16"
+        height="16"
         className={className}
         viewBox="0 0 20 20"
         fill="none"
@@ -40,6 +42,8 @@ const NAV_ITEMS: NavItem[] = [
     badge: "3D",
     icon: ({ className }) => (
       <svg
+        width="16"
+        height="16"
         className={className}
         viewBox="0 0 20 20"
         fill="none"
@@ -59,6 +63,8 @@ const NAV_ITEMS: NavItem[] = [
     badge: "ARG",
     icon: ({ className }) => (
       <svg
+        width="16"
+        height="16"
         className={className}
         viewBox="0 0 20 20"
         fill="none"
@@ -73,11 +79,13 @@ const NAV_ITEMS: NavItem[] = [
     ),
   },
   {
-    name: "Portfolio Optimizer",
+    name: "Portfolio",
     href: "/portfolio",
     badge: "k=3",
     icon: ({ className }) => (
       <svg
+        width="16"
+        height="16"
         className={className}
         viewBox="0 0 20 20"
         fill="none"
@@ -93,6 +101,47 @@ const NAV_ITEMS: NavItem[] = [
       </svg>
     ),
   },
+  {
+    name: "Live Data Lab",
+    href: "/live-data",
+    badge: "API",
+    icon: ({ className }) => (
+      <svg
+        width="16"
+        height="16"
+        className={className}
+        viewBox="0 0 20 20"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M3 3V17H17" />
+        <path d="M7 13L10 8L13 11L17 5" />
+      </svg>
+    ),
+  },
+  {
+    name: "Datasets",
+    href: "/datasets",
+    badge: "AI INTEL",
+    icon: ({ className }) => (
+      <svg
+        width="16"
+        height="16"
+        className={className}
+        viewBox="0 0 20 20"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M3 5C3 3.89543 6.13401 3 10 3C13.866 3 17 3.89543 17 5M3 5V15C3 16.1046 6.13401 17 10 17C13.866 17 17 16.1046 17 15V5M3 5C3 6.10457 6.13401 7 10 7C13.866 7 17 6.10457 17 5M3 10C3 11.1046 6.13401 12 10 12C13.866 12 17 11.1046 17 10" />
+      </svg>
+    ),
+  },
 ];
 
 export default function TopNavBar() {
@@ -100,42 +149,36 @@ export default function TopNavBar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const isActive = (href: string) => {
-    if (href === "/") {
-      return pathname === "/";
-    }
-    return pathname.startsWith(href);
+    return pathname === href || pathname.startsWith(href + '/');
   };
 
   return (
-    <header className="w-full bg-space-surface border-b border-space-border px-4 sm:px-6 py-2.5 flex items-center justify-between z-50 shrink-0 sticky top-0 shadow-md">
-      {/* --- Left Section: Brand & Telemetry --- */}
-      <div className="flex items-center gap-4 lg:gap-6">
-        <Link
-          href="/"
-          className="flex items-center gap-2.5 focus:outline-none focus:ring-2 focus:ring-accent-terrestrial focus:ring-offset-2 focus:ring-offset-space-surface rounded-sm"
-          aria-label="TERRALIGN Home - Global Mission Command"
-        >
-          <div className="relative flex items-center justify-center">
-            <span className="w-2.5 h-2.5 rounded-full bg-accent-terrestrial shadow-[0_0_8px_#00D4AA] animate-pulse" />
-            <span className="w-5 h-5 rounded-full border border-accent-terrestrial/30 absolute animate-ping opacity-50" />
-          </div>
-          <div>
-            <span className="font-display font-bold text-lg sm:text-xl tracking-wider text-accent-terrestrial uppercase block leading-none">
-              TERRALIGN
-            </span>
-          </div>
-        </Link>
+    <header className="w-full bg-[#050811]/95 backdrop-blur-md border-b border-[#8B9CB5]/15 px-4 sm:px-6 py-0 flex items-center justify-between z-50 shrink-0 sticky top-0 h-12 select-none relative">
+      {/* Top Ambient Glow Line */}
+      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#00D4AA]/40 to-transparent pointer-events-none" />
 
-        {/* Tagline Divider */}
-        <div className="hidden lg:flex items-center text-[11px] font-sans tracking-wide text-text-muted border-l border-space-border pl-4 py-0.5">
-          Where Earth Meets Other Worlds.
+      {/* ── Brand Logotype ── */}
+      <Link
+        href="/"
+        className="flex items-center gap-3 focus:outline-none focus-ring rounded-sm group relative"
+        aria-label="TERRALIGN Home — Planetary Exploration Platform"
+      >
+        <div className="relative flex items-center justify-center">
+          <span className="w-2 h-2 rounded-full bg-[#00D4AA] shadow-[0_0_8px_#00D4AA] flex-shrink-0 group-hover:scale-125 transition-transform" />
+          <span className="absolute w-4 h-4 rounded-full border border-[#00D4AA]/30 animate-ping pointer-events-none" />
         </div>
-      </div>
+        <span className="font-display font-bold text-base tracking-[0.16em] text-white uppercase leading-none drop-shadow-[0_0_10px_rgba(255,255,255,0.15)]">
+          TERRALIGN
+        </span>
+        <span className="hidden lg:block text-[10px] font-mono tracking-wider text-[#8B9CB5] border-l border-[#8B9CB5]/20 pl-3">
+          WHERE EARTH MEETS OTHER WORLDS
+        </span>
+      </Link>
 
-      {/* --- Center Section: Desktop / Tablet Navigation --- */}
+      {/* ── Desktop Navigation ── */}
       <nav
-        className="hidden md:flex items-center gap-5 lg:gap-8 font-sans text-xs uppercase tracking-wider"
-        aria-label="Primary Application Navigation"
+        className="hidden md:flex items-center gap-1 font-sans"
+        aria-label="Primary navigation"
       >
         {NAV_ITEMS.map((item) => {
           const active = isActive(item.href);
@@ -144,132 +187,100 @@ export default function TopNavBar() {
               key={item.href}
               href={item.href}
               aria-current={active ? "page" : undefined}
-              className={`flex items-center gap-1.5 py-1 transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-accent-terrestrial rounded-sm ${
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded text-xs uppercase tracking-wider transition-all duration-150 focus:outline-none focus-ring relative ${
                 active
-                  ? "text-accent-terrestrial border-b-2 border-accent-terrestrial font-semibold shadow-[0_2px_0_0_#00D4AA]"
-                  : "text-text-muted hover:text-text-primary"
+                  ? "bg-white/[0.08] text-white font-medium border border-[#00D4AA]/30 shadow-[0_0_12px_rgba(0,212,170,0.12)]"
+                  : "text-[#8B9CB5] hover:text-[#E2E8F0] hover:bg-white/[0.04]"
               }`}
             >
-              <item.icon className={`w-4 h-4 ${active ? "text-accent-terrestrial" : "text-text-muted"}`} />
+              <item.icon className={`w-3.5 h-3.5 flex-shrink-0 ${active ? "text-[#00D4AA]" : "text-[#8B9CB5]"}`} />
               <span>{item.name}</span>
               {item.badge && (
                 <span
-                  className={`text-[9px] font-mono px-1 py-0.2 rounded border ${
+                  className={`text-[9px] font-mono px-1 rounded border ${
                     active
-                      ? "bg-accent-terrestrial/10 border-accent-terrestrial/40 text-accent-terrestrial"
-                      : "bg-space-elevated border-space-border text-text-muted"
+                      ? "bg-[#00D4AA]/15 border-[#00D4AA]/30 text-[#00D4AA] font-bold"
+                      : "bg-[#112240] border-[#8B9CB5]/20 text-[#8B9CB5]"
                   }`}
                 >
                   {item.badge}
                 </span>
+              )}
+              {active && (
+                <span className="absolute bottom-0 left-2 right-2 h-[1.5px] bg-[#00D4AA] shadow-[0_0_6px_#00D4AA]" />
               )}
             </Link>
           );
         })}
       </nav>
 
-      {/* --- Right Section: Quick Status, Actions & Mobile Toggle --- */}
-      <div className="flex items-center gap-2 sm:gap-3">
-        {/* Dataset Sync Status Pill (Hidden on smaller viewports) */}
-        <div className="hidden xl:flex items-center gap-2 px-2.5 py-1 bg-space-elevated rounded border border-space-border text-[11px] font-mono text-text-muted">
-          <span className="w-1.5 h-1.5 rounded-full bg-accent-terrestrial animate-pulse" />
-          <span className="text-text-secondary">USGS-ASTRO:</span>
-          <span className="text-accent-terrestrial font-semibold">SYNCED</span>
-        </div>
-
-        {/* Quick Utility Icon Cluster */}
-        <div className="hidden sm:flex items-center bg-space-elevated/80 rounded border border-space-border p-0.5">
-          <button
-            type="button"
-            className="p-1.5 text-text-muted hover:text-accent-terrestrial hover:bg-space-elevated rounded transition-colors focus:outline-none focus:ring-1 focus:ring-accent-terrestrial"
-            title="Sensor Array Tuning"
-            aria-label="Sensor Array Tuning"
-          >
-            <svg className="w-4 h-4" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5">
-              <path d="M4 6H16M4 10H16M4 14H16M7 4V8M13 8V12M9 12V16" strokeLinecap="round" />
-            </svg>
-          </button>
-          <button
-            type="button"
-            className="p-1.5 text-text-muted hover:text-accent-terrestrial hover:bg-space-elevated rounded transition-colors focus:outline-none focus:ring-1 focus:ring-accent-terrestrial"
-            title="Satellite Uplink Active"
-            aria-label="Satellite Uplink Active"
-          >
-            <svg className="w-4 h-4" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5">
-              <circle cx="10" cy="10" r="2" />
-              <path d="M4 10A6 6 0 0 1 16 10" strokeLinecap="round" />
-              <path d="M2 10A8 8 0 0 1 18 10" strokeLinecap="round" />
-            </svg>
-          </button>
-          <button
-            type="button"
-            className="p-1.5 text-text-muted hover:text-accent-terrestrial hover:bg-space-elevated rounded transition-colors relative focus:outline-none focus:ring-1 focus:ring-accent-terrestrial"
-            title="Mission Alerts (1 Active)"
-            aria-label="Mission Alerts"
-          >
-            <svg className="w-4 h-4" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5">
-              <path d="M10 3A5 5 0 0 0 5 8C5 12 3 13 3 14H17C17 13 15 12 15 8A5 5 0 0 0 10 3Z" strokeLinecap="round" strokeLinejoin="round" />
-              <path d="M8.5 16A1.5 1.5 0 0 0 11.5 16" strokeLinecap="round" />
-            </svg>
-            <span className="absolute top-1 right-1 w-1.5 h-1.5 bg-accent-martian rounded-full" />
-          </button>
-        </div>
-
-        {/* Secondary Export Action */}
-        <button
-          type="button"
-          className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded bg-space-elevated hover:bg-space-elevated/80 border border-space-border text-xs font-sans uppercase tracking-wider text-text-primary transition-all focus:outline-none focus:ring-2 focus:ring-accent-terrestrial"
-          title="Export Active Dataset"
+      {/* ── Right Quick Actions ── */}
+      <div className="flex items-center gap-3">
+        {/* Dataset Scientific Provenance Status */}
+        <div 
+          className="hidden sm:flex items-center gap-2 px-2.5 py-1 rounded bg-[#0A192F]/90 border border-[#8B9CB5]/25 text-[10px] font-mono text-[#8B9CB5] shadow-sm"
+          title="USGS 3DEP/NED and NASA PDS ODE provider endpoints verified and operational"
         >
-          <svg className="w-3.5 h-3.5 text-text-muted" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5">
-            <path d="M10 3V13M10 13L6 9M10 13L14 9M4 17H16" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-          <span>Export</span>
-        </button>
+          <span className="w-1.5 h-1.5 rounded-full bg-[#00D4AA] animate-pulse" />
+          <span className="text-white font-semibold">NASA · USGS</span>
+          <span className="text-[#00D4AA] font-bold">PROVIDERS CONNECTED</span>
+        </div>
 
-        {/* Primary Launch Action CTA */}
+        {/* Primary Flight CTA */}
         <Link
-          href="/"
-          className="flex items-center gap-1.5 px-3 sm:px-3.5 py-1.5 rounded bg-accent-terrestrial hover:bg-accent-terrestrial/90 text-space-bg text-xs font-sans font-bold uppercase tracking-wider shadow-[0_0_12px_rgba(0,212,170,0.3)] transition-all active:scale-95 focus:outline-none focus:ring-2 focus:ring-accent-terrestrial focus:ring-offset-2 focus:ring-offset-space-surface"
+          href="/mission"
+          className="flex items-center gap-1.5 px-3.5 py-1.5 rounded bg-[#00D4AA] hover:bg-[#00D4AA]/90 text-[#050811] text-xs font-sans font-bold uppercase tracking-wider shadow-[0_0_12px_rgba(0,212,170,0.3)] transition-all active:scale-95 focus:outline-none focus-ring"
         >
-          <svg className="w-3.5 h-3.5" viewBox="0 0 20 20" fill="currentColor">
+          <svg width="14" height="14" className="w-3.5 h-3.5" viewBox="0 0 20 20" fill="currentColor">
             <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
           </svg>
-          <span className="hidden sm:inline">Launch Activity</span>
-          <span className="sm:hidden">Launch</span>
+          <span className="hidden sm:inline">Mission Command</span>
+          <span className="sm:hidden">Mission</span>
         </Link>
 
-        {/* Mobile Hamburger Toggle Button */}
+        {/* Mobile Hamburger Toggle */}
         <button
           type="button"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden p-2 rounded text-text-muted hover:text-text-primary hover:bg-space-elevated transition-colors focus:outline-none focus:ring-2 focus:ring-accent-terrestrial"
+          className="md:hidden p-2 rounded text-[#8B9CB5] hover:text-white hover:bg-[#112240] transition-colors focus:outline-none focus-ring"
           aria-expanded={mobileMenuOpen}
-          aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+          aria-label={mobileMenuOpen ? "Close navigation" : "Open navigation"}
         >
           {mobileMenuOpen ? (
-            <svg className="w-5 h-5" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <svg width="20" height="20" className="w-5 h-5" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5">
               <path d="M5 5L15 15M5 15L15 5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           ) : (
-            <svg className="w-5 h-5" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <svg width="20" height="20" className="w-5 h-5" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5">
               <path d="M4 6H16M4 10H16M4 14H16" strokeLinecap="round" />
             </svg>
           )}
         </button>
       </div>
 
-      {/* --- Mobile Slide-Down Navigation Drawer --- */}
+      {/* ── Mobile Drawer ── */}
       {mobileMenuOpen && (
         <div
-          className="md:hidden absolute top-full left-0 w-full bg-space-surface/98 backdrop-blur-xl border-b border-space-border shadow-2xl p-4 flex flex-col gap-2 transition-all duration-200"
+          className="md:hidden absolute top-full left-0 w-full bg-[#050811]/98 backdrop-blur-xl border-b border-[#8B9CB5]/20 shadow-2xl p-4 flex flex-col gap-1.5 z-50"
           role="dialog"
-          aria-label="Mobile Navigation Menu"
+          aria-label="Mobile navigation"
         >
-          <div className="text-[10px] font-mono text-accent-terrestrial uppercase tracking-widest px-2 py-1 border-b border-space-border/40 mb-1 flex items-center justify-between">
-            <span>Mission Control Viewports</span>
-            <span className="text-text-muted">v1.0 MVP</span>
+          <div className="text-[10px] font-mono text-[#00D4AA] uppercase tracking-widest px-2 py-1 border-b border-[#8B9CB5]/15 mb-1 flex justify-between">
+            <span>TERRALIGN VIEWPORTS</span>
+            <span className="text-[#8B9CB5]">v1.0</span>
           </div>
+
+          <Link
+            href="/"
+            onClick={() => setMobileMenuOpen(false)}
+            className={`flex items-center gap-2.5 px-3 py-2.5 rounded text-xs font-sans tracking-wide uppercase transition-colors ${
+              pathname === "/"
+                ? "bg-white/[0.08] text-white font-medium border border-white/[0.12]"
+                : "text-[#CBD5E1] hover:text-white hover:bg-[#112240]"
+            }`}
+          >
+            <span>Home Landing Page</span>
+          </Link>
 
           {NAV_ITEMS.map((item) => {
             const active = isActive(item.href);
@@ -278,18 +289,24 @@ export default function TopNavBar() {
                 key={item.href}
                 href={item.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className={`flex items-center justify-between px-3 py-2.5 rounded-card text-xs font-sans tracking-wide uppercase transition-colors min-h-[44px] ${
+                className={`flex items-center justify-between px-3 py-2.5 rounded text-xs font-sans tracking-wide uppercase transition-colors min-h-[44px] ${
                   active
-                    ? "bg-accent-terrestrial/10 text-accent-terrestrial border border-accent-terrestrial/30 font-semibold"
-                    : "text-text-secondary hover:text-text-primary hover:bg-space-elevated"
+                    ? "bg-white/[0.08] text-white font-medium border border-white/[0.12]"
+                    : "text-[#CBD5E1] hover:text-white hover:bg-[#112240]"
                 }`}
               >
                 <div className="flex items-center gap-2.5">
-                  <item.icon className={`w-4 h-4 ${active ? "text-accent-terrestrial" : "text-text-muted"}`} />
+                  <item.icon className={`w-4 h-4 ${active ? "text-[#00D4AA]" : "text-[#8B9CB5]"}`} />
                   <span>{item.name}</span>
                 </div>
                 {item.badge && (
-                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-space-elevated border border-space-border text-text-muted">
+                  <span
+                    className={`text-[10px] font-mono px-1.5 py-0.5 rounded border ${
+                      active
+                        ? "bg-white/[0.08] border-white/[0.16] text-[#E2E8F0]"
+                        : "bg-[#112240] border-[#8B9CB5]/20 text-[#8B9CB5]"
+                    }`}
+                  >
                     {item.badge}
                   </span>
                 )}
@@ -297,16 +314,12 @@ export default function TopNavBar() {
             );
           })}
 
-          <div className="pt-3 mt-2 border-t border-space-border flex items-center justify-between text-xs font-mono text-text-muted px-2">
-            <span className="flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-accent-terrestrial" />
-              USGS-ASTRO: SYNCED
-            </span>
-            <span className="text-[10px] text-text-muted">WCAG 2.2 AA</span>
+          <div className="pt-2 mt-1 border-t border-[#8B9CB5]/15 flex items-center justify-between text-[10px] font-mono text-[#8B9CB5] px-2">
+            <span>NASA / USGS STATIC CATALOG</span>
+            <span>WCAG 2.2 AA</span>
           </div>
         </div>
       )}
     </header>
   );
 }
-

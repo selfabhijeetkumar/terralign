@@ -6,21 +6,32 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "start:server": "tsx server/index.ts",
     "lint": "next lint"
   },
   "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.3.0",
+    "geotiff": "^3.0.5",
+    "multer": "^2.5.0",
     "next": "^15.2.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "three": "^0.187.0",
+    "tsx": "^4.23.15",
+    "xlsx": "^0.18.5",
     "zustand": "^5.1.0"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/multer": "^2.3.0",
     "@types/node": "^20.14.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@types/three": "^0.187.0",
     "autoprefixer": "^10.4.20",
+    "playwright": "^1.65.1",
     "postcss": "^8.4.49",
     "tailwindcss": "^3.4.17",
     "typescript": "^5.7.0"

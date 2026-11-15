@@ -12,6 +12,7 @@ export interface MissionDossierData {
   generatedAt: string;
   exportFormatVersion: string;
   classification: string;
+  provenanceDisclaimer?: string;
   governance: {
     authorization: string;
     methodology: string;
@@ -63,6 +64,8 @@ export function generateMissionDossier(
     generatedAt: new Date().toISOString(),
     exportFormatVersion: '1.0.0-MVP',
     classification: 'UNCLASSIFIED / SCIENTIFIC BENCHMARK',
+    provenanceDisclaimer:
+      'Analog site DEM specifications reference published institutional datasets (USGS 3DEP LiDAR, Copernicus GLO-30, NASA LOLA). Visual 3D representations are procedural morphometric models parameterized from published profiles rather than raw DEM rasters.',
     governance: {
       authorization: 'TERRALIGN-GOV-AUTH-002',
       methodology: 'GSD v1.6.0',

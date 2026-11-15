@@ -1,0 +1,258 @@
+/**
+ * TERRALIGN 2.0 — COSMIC ASCENSION
+ * Universal Cosmic & Luminous Design Tokens
+ *
+ * Defines color triplets, surface elevations, edge-lighting hierarchies,
+ * accessible focus states, and fallback-safe borders.
+ */
+
+:root {
+  /* Glow color channel triplets for alpha composition */
+  --glow-cyan: 0, 212, 170;       /* #00D4AA - Primary terrestrial/tech */
+  --glow-blue: 30, 144, 255;      /* #1E90FF - Primary lunar/deep space */
+  --glow-amber: 255, 184, 0;      /* #FFB800 - Solar/warning */
+  --glow-orange: 255, 107, 53;    /* #FF6B35 - Martian/geologic */
+  --glow-violet: 147, 51, 234;    /* #9333EA - Minor energy accent only */
+  --glow-white: 248, 250, 252;    /* #F8FAFC - Celestial star highlight */
+
+  /* Surface elevations */
+  --surface-void: rgba(5, 8, 17, 0.98);
+  --surface-0: rgba(10, 25, 47, 0.60);
+  --surface-1: rgba(10, 25, 47, 0.75);
+  --surface-2: rgba(17, 34, 64, 0.85);
+  --surface-3: rgba(22, 42, 77, 0.95);
+
+  /* Border illumination alphas */
+  --border-alpha-ambient: 0.18;
+  --border-alpha-hover: 0.65;
+  --border-alpha-active: 0.85;
+
+  /* Outer glow alphas */
+  --shadow-alpha-ambient: 0.15;
+  --shadow-alpha-hover: 0.35;
+
+  /* Motion & timing */
+  --ease-cosmic: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --duration-fast: 120ms;
+  --duration-base: 220ms;
+  --duration-slow: 420ms;
+  --loop-ambient: 14s;
+
+  /* Feature accent overrides (modified via [data-feature="..."]) */
+  --feature-accent: var(--glow-cyan);
+}
+
+/* Feature profile accent mappings */
+[data-feature="mission"] {
+  --feature-accent: var(--glow-cyan);
+}
+[data-feature="terrain"] {
+  --feature-accent: var(--glow-blue);
+}
+[data-feature="reality-gap"] {
+  --feature-accent: var(--glow-blue);
+}
+[data-feature="portfolio"] {
+  --feature-accent: var(--glow-cyan);
+}
+[data-feature="live-data"] {
+  --feature-accent: var(--glow-blue);
+}
+[data-feature="datasets"] {
+  --feature-accent: var(--glow-cyan);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   UNIVERSAL LUMINOUS SURFACE TREATMENT
+   Connected 4-sided gradient edge with fallback solid border
+───────────────────────────────────────────────────────────── */
+
+.luminous-surface {
+  position: relative;
+  background-color: var(--surface-1);
+  border: 1px solid rgba(139, 156, 181, var(--border-alpha-ambient));
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(5, 8, 17, 0.5), 0 0 12px rgba(var(--feature-accent), var(--shadow-alpha-ambient));
+  transition: border-color var(--duration-base) var(--ease-cosmic),
+              box-shadow var(--duration-base) var(--ease-cosmic);
+}
+
+@supports (mask-composite: exclude) or (-webkit-mask-composite: xor) {
+  .luminous-surface::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      180deg,
+      rgba(var(--feature-accent), var(--border-alpha-ambient) * 2) 0%,
+      rgba(var(--feature-accent), var(--border-alpha-ambient)) 40%,
+      rgba(139, 156, 181, var(--border-alpha-ambient) * 0.5) 100%
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
+    z-index: 1;
+    transition: background var(--duration-base) var(--ease-cosmic);
+  }
+}
+
+/* Hover state on fine-pointer devices */
+@media (hover: hover) and (pointer: fine) {
+  .luminous-surface:hover {
+    border-color: rgba(var(--feature-accent), var(--border-alpha-hover));
+    box-shadow: 0 6px 28px rgba(5, 8, 17, 0.6), 0 0 20px rgba(var(--feature-accent), var(--shadow-alpha-hover));
+  }
+
+  @supports (mask-composite: exclude) or (-webkit-mask-composite: xor) {
+    .luminous-surface:hover::before {
+      background: linear-gradient(
+        180deg,
+        rgba(var(--feature-accent), 0.9) 0%,
+        rgba(var(--feature-accent), 0.5) 50%,
+        rgba(var(--feature-accent), 0.2) 100%
+      );
+    }
+  }
+}
+
+/* Selected state */
+.luminous-surface[aria-selected="true"],
+.luminous-surface[data-state="active"] {
+  border-color: rgba(var(--feature-accent), var(--border-alpha-active));
+  box-shadow: 0 0 24px rgba(var(--feature-accent), 0.4);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   LUMINOUS SURFACE HIERARCHY VARIANTS
+───────────────────────────────────────────────────────────── */
+
+/* Prominent variant: Feature cards, analytical panels */
+.luminous-surface-prominent {
+  position: relative;
+  background-color: var(--surface-2);
+  border: 1px solid rgba(139, 156, 181, 0.22);
+  border-radius: 14px;
+  box-shadow: 0 8px 32px rgba(5, 8, 17, 0.6), 0 0 16px rgba(var(--feature-accent), 0.2);
+  transition: all var(--duration-base) var(--ease-cosmic);
+}
+
+@supports (mask-composite: exclude) or (-webkit-mask-composite: xor) {
+  .luminous-surface-prominent::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      180deg,
+      rgba(var(--feature-accent), 0.7) 0%,
+      rgba(var(--feature-accent), 0.25) 35%,
+      rgba(139, 156, 181, 0.1) 100%
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
+    z-index: 1;
+    transition: background var(--duration-base) var(--ease-cosmic);
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .luminous-surface-prominent:hover {
+    border-color: rgba(var(--feature-accent), 0.8);
+    box-shadow: 0 12px 40px rgba(5, 8, 17, 0.7), 0 0 24px rgba(var(--feature-accent), 0.35);
+  }
+
+  @supports (mask-composite: exclude) or (-webkit-mask-composite: xor) {
+    .luminous-surface-prominent:hover::before {
+      background: linear-gradient(
+        180deg,
+        rgba(var(--feature-accent), 1.0) 0%,
+        rgba(var(--feature-accent), 0.6) 50%,
+        rgba(var(--feature-accent), 0.25) 100%
+      );
+    }
+  }
+}
+
+/* Luminous Metric Readout: Tabular numerals with soft ambient drop */
+.luminous-metric {
+  font-family: "Space Mono", monospace;
+  font-variant-numeric: tabular-nums;
+  color: #F8FAFC;
+  text-shadow: 0 0 12px rgba(var(--feature-accent), 0.45);
+}
+
+/* Luminous Table Container */
+.luminous-table-container {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(139, 156, 181, 0.2);
+  box-shadow: 0 4px 24px rgba(5, 8, 17, 0.6);
+}
+
+.luminous-table-container thead {
+  border-bottom: 1px solid rgba(var(--feature-accent), 0.3);
+  box-shadow: 0 1px 8px rgba(var(--feature-accent), 0.15);
+}
+
+.luminous-table-container tbody tr:hover {
+  background-color: rgba(var(--feature-accent), 0.06);
+}
+
+/* Reduced motion fallback: disable all animation, retain clear static borders */
+@media (prefers-reduced-motion: reduce) {
+  .luminous-surface {
+    transition: none !important;
+  }
+  .luminous-surface::before {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* Forced colors / high contrast mode fallback */
+@media (forced-colors: active) {
+  .luminous-surface {
+    border: 2px solid CanvasText !important;
+    box-shadow: none !important;
+  }
+  .luminous-surface::before {
+    display: none !important;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   CELESTIAL DRAGON CURSOR ENGINE — NATIVE CURSOR RULES
+   Hide default cursor only when dragon is active on fine pointer.
+   Preserve native cursors on text, inputs, textareas, controls.
+───────────────────────────────────────────────────────────── */
+
+html.cc-on,
+html.cc-on * {
+  cursor: none !important;
+}
+
+html.cc-on input,
+html.cc-on textarea,
+html.cc-on select,
+html.cc-on [contenteditable],
+html.cc-on [data-cursor="native"],
+html.cc-on [data-cursor="text"] {
+  cursor: auto !important;
+}
+
+/* Accessibility overrides: touch & reduced motion always retain native cursor */
+@media (hover: none) or (pointer: coarse), (prefers-reduced-motion: reduce) {
+  html.cc-on,
+  html.cc-on * {
+    cursor: auto !important;
+  }
+}

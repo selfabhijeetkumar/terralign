@@ -1,6 +1,7 @@
 /**
  * TERRALIGN — 3D Terrain Studio Dual Viewport View Composite
- * Standards: GSD v1.6.0 · Ponytail FULL (REUSE -> SIMPLIFY -> IMPLEMENT)
+ * Cinematic Design Overhaul · GOV-AUTH-003
+ * Standards: GSD v1.6.0 · Ponytail FULL (REUSE → SIMPLIFY → IMPLEMENT)
  * Canonical Reference: docs/design/screen-02-terrain-comparison.md
  */
 
@@ -9,7 +10,7 @@
 import React from 'react';
 import { TerrainCanvas } from './TerrainCanvas';
 import { TerrainControls } from './TerrainControls';
-import { useMissionStore, useSelectedSiteId } from '@/store/useMissionStore';
+import { useSelectedSiteId } from '@/store/useMissionStore';
 import { getAnalogById } from '@/lib/analogs';
 
 export function TerrainStudioView() {
@@ -22,57 +23,63 @@ export function TerrainStudioView() {
     : '35.3071°N, 111.5049°W · Elev 2050m';
 
   return (
-    <div className="flex-1 flex flex-col w-full h-[calc(100vh-4rem)] overflow-hidden select-none bg-[#050811]">
-      {/* Top Studio Synchronized Header Bar */}
-      <div className="px-5 py-2.5 bg-[#0A192F]/90 border-b border-[#8B9CB5]/15 flex items-center justify-between text-xs font-mono shrink-0">
+    <div className="flex-1 flex flex-col w-full h-[calc(100vh-3rem)] overflow-hidden select-none bg-transparent">
+
+      {/* ── Cinematic Studio Header ── */}
+      <div className="px-5 py-3 bg-space-bg/95 backdrop-blur-md border-b border-space-border flex items-center justify-between shrink-0">
+        {/* Left — mode label */}
         <div className="flex items-center gap-3">
-          <span className="flex items-center gap-1.5 text-[#00D4AA] font-bold">
-            <span className="w-2 h-2 rounded-full bg-[#00D4AA] animate-pulse" />
-            SYNCHRONIZED DUAL 3D VIEWPORT
-          </span>
-          <span className="hidden sm:inline text-[#8B9CB5]/40">|</span>
-          <span className="hidden sm:inline text-[#8B9CB5]">
-            LOCK 1:1 SCALE · EXTREME LOW-ANGLE LIGHTING
-          </span>
+          <div className="flex items-center gap-2 text-xs font-mono">
+            <span className="w-1.5 h-1.5 rounded-full bg-accent-terrestrial flex-shrink-0" />
+            <span className="text-accent-terrestrial font-bold tracking-widest uppercase text-[10px]">Screen 02</span>
+            <span className="text-space-border hidden sm:inline">//</span>
+            <span className="text-text-muted hidden sm:inline">3D Terrain Studio</span>
+          </div>
         </div>
 
-        <div className="flex items-center gap-4 text-[11px] text-[#8B9CB5]">
-          <span>
-            TERRESTRIAL: <span className="text-white font-semibold">{site?.shortName ?? 'Cinder Lake'}</span>
-          </span>
-          <span className="text-[#8B9CB5]/40">↔</span>
-          <span>
-            LUNAR: <span className="text-[#1E90FF] font-semibold">Shackleton Rim (89.9°S)</span>
+        {/* Center — site pair */}
+        <div className="hidden md:flex items-center gap-3 text-[11px] font-mono">
+          <span className="text-text-muted">TERRESTRIAL:</span>
+          <span className="text-text-primary font-semibold">{site?.shortName ?? 'Cinder Lake'}</span>
+          <span className="text-space-border px-1">↔</span>
+          <span className="text-text-muted">LUNAR:</span>
+          <span className="text-accent-lunar font-semibold">Shackleton Rim</span>
+        </div>
+
+        {/* Right — sync indicator */}
+        <div className="flex items-center gap-2 text-[10px] font-mono text-text-muted">
+          <span className="hidden sm:inline">LOCK 1:1</span>
+          <span className="px-1.5 py-0.5 rounded bg-space-elevated border border-space-border text-accent-terrestrial font-bold">
+            SYNC
           </span>
         </div>
       </div>
 
-      {/* Main Content Area: Dual 3D Viewports (Left 75-80%) + Controls (Right 20-25%) */}
-      <div className="flex-1 flex flex-col lg:flex-row w-full overflow-hidden relative">
-        {/* Dual Canvas Grid Container */}
-        <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-3 p-3 h-full overflow-hidden">
-          {/* Viewport 1: Terrestrial Analog */}
+      {/* ── Main Content: Dual Viewports + Controls ── */}
+      <div className="flex-1 flex flex-col lg:flex-row w-full overflow-y-auto lg:overflow-hidden relative">
+
+        {/* Dual canvas grid */}
+        <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-2 p-2 min-h-[600px] lg:min-h-0 lg:h-full">
           <TerrainCanvas
             mode="terrestrial"
             siteName={siteName}
             locationDetails={siteCoords}
-            datasetName="USGS 3DEP LiDAR"
-            resolutionText="1.0m Grid Spacing"
+            referenceDataset="USGS 3DEP LiDAR (1.0m Published Standard)"
+            modelDescription="Procedural morphometric terrain — parameterized from USGS 3DEP profiles"
           />
-
-          {/* Viewport 2: Lunar Reference */}
           <TerrainCanvas
             mode="lunar"
             siteName="Shackleton Crater Rim — South Pole"
             locationDetails="89.9000°S, 0.0000°E · Peak of Eternal Light"
-            datasetName="NASA LRO LOLA (LDEM_875S_5M)"
-            resolutionText="5.0m Polar Interpolated DEM"
+            referenceDataset="NASA LOLA LDEM_875S (5.0m Published Standard)"
+            modelDescription="Procedural lunar terrain visualization — parameterized from NASA LOLA profiles"
           />
         </div>
 
-        {/* Right Controls Sidebar */}
+        {/* Controls sidebar */}
         <TerrainControls />
       </div>
+
     </div>
   );
 }

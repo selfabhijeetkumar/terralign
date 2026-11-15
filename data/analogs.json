@@ -72,7 +72,7 @@
       "radiationFluxMSvPerYear": 380.0,
       "regolithCohesionKPa": 1.2
     },
-    "classification": "VERIFIED SOURCE DATA"
+    "classification": "PUBLISHED SOURCE REFERENCE"
   },
   {
     "id": "askja-caldera",
@@ -147,7 +147,7 @@
       "radiationFluxMSvPerYear": 380.0,
       "regolithCohesionKPa": 1.8
     },
-    "classification": "VERIFIED SOURCE DATA"
+    "classification": "PUBLISHED SOURCE REFERENCE"
   },
   {
     "id": "atacama-desert",
@@ -222,7 +222,7 @@
       "radiationFluxMSvPerYear": 240.0,
       "regolithCohesionKPa": 0.8
     },
-    "classification": "VERIFIED SOURCE DATA"
+    "classification": "PUBLISHED SOURCE REFERENCE"
   },
   {
     "id": "mcmurdo-dry-valleys",
@@ -297,7 +297,7 @@
       "radiationFluxMSvPerYear": 220.0,
       "regolithCohesionKPa": 3.5
     },
-    "classification": "VERIFIED SOURCE DATA"
+    "classification": "PUBLISHED SOURCE REFERENCE"
   },
   {
     "id": "hawaii-mauna-kea",
@@ -372,7 +372,7 @@
       "radiationFluxMSvPerYear": 380.0,
       "regolithCohesionKPa": 1.5
     },
-    "classification": "VERIFIED SOURCE DATA"
+    "classification": "PUBLISHED SOURCE REFERENCE"
   },
   {
     "id": "utah-san-rafael",
@@ -447,7 +447,7 @@
       "radiationFluxMSvPerYear": 240.0,
       "regolithCohesionKPa": 2.2
     },
-    "classification": "VERIFIED SOURCE DATA"
+    "classification": "PUBLISHED SOURCE REFERENCE"
   },
   {
     "id": "haughton-crater",
@@ -522,6 +522,6 @@
       "radiationFluxMSvPerYear": 380.0,
       "regolithCohesionKPa": 2.0
     },
-    "classification": "VERIFIED SOURCE DATA"
+    "classification": "PUBLISHED SOURCE REFERENCE"
   }
 ]

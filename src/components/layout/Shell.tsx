@@ -1,5 +1,7 @@
 import React from "react";
 import TopNavBar from "./TopNavBar";
+import AIResearchAssistant from "@/components/ai/AIResearchAssistant";
+import CosmicExperience from "@/components/cosmic/CosmicExperience";
 
 export interface ShellProps {
   children: React.ReactNode;
@@ -7,7 +9,7 @@ export interface ShellProps {
 
 export default function ApplicationShell({ children }: ShellProps) {
   return (
-    <div className="min-h-screen h-screen flex flex-col bg-space-bg text-text-primary antialiased selection:bg-accent-terrestrial selection:text-space-bg overflow-hidden">
+    <div className="min-h-screen h-screen flex flex-col bg-transparent text-text-primary antialiased selection:bg-accent-terrestrial selection:text-space-bg overflow-hidden relative">
       {/* WCAG 2.2 AA Accessible Skip Link */}
       <a
         href="#main-content"
@@ -16,17 +18,22 @@ export default function ApplicationShell({ children }: ShellProps) {
         Skip to main content
       </a>
 
+      {/* Persistent Cosmic Environment (3D WebGL + CSS fallback) */}
+      <CosmicExperience />
+
       {/* Global Top App Bar */}
       <TopNavBar />
 
       {/* Active Viewport Canvas */}
       <main
         id="main-content"
-        className="flex-1 flex flex-col overflow-y-auto overflow-x-hidden relative"
+        className="flex-1 flex flex-col overflow-y-auto overflow-x-hidden relative z-10"
       >
         {children}
       </main>
+
+      {/* Global AI Research Assistant */}
+      <AIResearchAssistant />
     </div>
   );
 }
-

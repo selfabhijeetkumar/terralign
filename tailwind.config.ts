@@ -46,6 +46,13 @@ const config: Config = {
         glow: "0 0 16px rgba(0, 212, 170, 0.2)",
         "glow-lunar": "0 0 16px rgba(30, 144, 255, 0.2)",
         "glow-martian": "0 0 16px rgba(255, 107, 53, 0.2)",
+        "glow-sm": "0 0 8px rgba(0, 212, 170, 0.25)",
+        "depth": "0 4px 24px rgba(5, 8, 17, 0.6), 0 1px 4px rgba(5, 8, 17, 0.4)",
+        "card": "0 2px 12px rgba(5, 8, 17, 0.5)",
+      },
+      animation: {
+        "spin-slow": "spin 12s linear infinite",
+        "pulse-slow": "pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite",
       },
     },
   },
