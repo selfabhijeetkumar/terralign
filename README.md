@@ -403,7 +403,7 @@ TERRALIGN references open planetary and terrestrial data products and documentat
 
 ---
 
-**TERRALIGN 2.0 · NEXARC**  
+**TERRALIGN  · NEXARC**  
 *Where Earth Meets Other Worlds.*
 
 [Launch the application](https://terralign-green.vercel.app) · [Explore the source](https://github.com/selfabhijeetkumar/terralign)
