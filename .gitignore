@@ -110,3 +110,6 @@ $RECYCLE.BIN/
 !.vscode/extensions.json
 !.vscode/launch.json
 
+
+.vercel
+.env*

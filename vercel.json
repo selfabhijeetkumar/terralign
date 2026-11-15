@@ -1,0 +1,19 @@
+{
+  "name": "terralign",
+  "services": {
+    "terralign-backend": {
+      "root": ".",
+      "framework": "nextjs",
+      "buildCommand": "pnpm build"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": {
+        "type": "service",
+        "service": "terralign-backend"
+      }
+    }
+  ]
+}
